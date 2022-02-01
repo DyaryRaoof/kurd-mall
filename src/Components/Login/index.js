@@ -1,15 +1,9 @@
 import { useState } from 'react';
 import signUP from '../../images/design/sign-up.png';
 import Field from '../Shared/Field';
-import './SignUp.css';
 
-const SignUp = () => {
+const Login = () => {
   const [submitted, setSubmitted] = useState(false);
-  const [password, setPassword] = useState('');
-
-  const getPassword = (passwordFromChild) => {
-    setPassword(passwordFromChild);
-  };
 
   return (
     <main className="container sign-up-main">
@@ -20,19 +14,16 @@ const SignUp = () => {
         <div className="col-md-6">
           <h1 className="orange text-center sign-up-header">Hi</h1>
           <p className="text-center">
-            Already a member?
-            <a className="orange" href="/log-in"> Login</a>
+            Not a member?
+            <a className="orange" href="/sign-up"> Sign Up</a>
           </p>
           <form onSubmit={(e) => {
             e.preventDefault();
             setSubmitted(true);
           }}
           >
-            <Field placeholder="Name" type="text" submitted={submitted} />
             <Field placeholder="Email" type="email" submitted={submitted} />
-            <Field placeholder="Phone number" type="tel" submitted={submitted} />
-            <Field placeholder="Password" type="password" submitted={submitted} getPassword={getPassword} name="password" />
-            <Field placeholder="Confirm Password" type="password" submitted={submitted} passwordFromParent={password} name="password-confirmation" />
+            <Field placeholder="Password" type="password" submitted={submitted} />
             <button type="submit" className="form-control orange p-3 m-3">Sign Up</button>
           </form>
         </div>
@@ -41,4 +32,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
