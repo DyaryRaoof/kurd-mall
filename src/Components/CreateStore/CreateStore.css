@@ -15,3 +15,11 @@
 .store-images {
     width: 100px;
 }
+
+.radius-100 {
+    border-radius: 100px;
+}
+
+.no-border {
+    border: none
+}
