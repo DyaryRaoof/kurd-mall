@@ -33,7 +33,7 @@ const SignUp = () => {
             <Field placeholder="Phone number" type="tel" submitted={submitted} />
             <Field placeholder="Password" type="password" submitted={submitted} getPassword={getPassword} name="password" />
             <Field placeholder="Confirm Password" type="password" submitted={submitted} passwordFromParent={password} name="password-confirmation" />
-            <button type="submit" className="form-control orange p-3 m-3">Sign Up</button>
+            <button type="submit" className="form-control orange p-3 my-3">Sign Up</button>
           </form>
         </div>
       </div>

@@ -24,7 +24,7 @@ const Login = () => {
           >
             <Field placeholder="Email" type="email" submitted={submitted} />
             <Field placeholder="Password" type="password" submitted={submitted} />
-            <button type="submit" className="form-control orange p-3 m-3">Sign Up</button>
+            <button type="submit" className="form-control orange p-3 my-3">Sign Up</button>
           </form>
         </div>
       </div>
