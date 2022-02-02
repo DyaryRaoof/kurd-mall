@@ -20,7 +20,7 @@ const Field = ({
 Field.propTypes = {
   placeholder: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  submitted: PropTypes.bool.isRequired,
+  submitted: PropTypes.bool,
   passwordFromParent: PropTypes.string,
   name: PropTypes.string,
   getPassword: PropTypes.func,
@@ -30,6 +30,7 @@ Field.defaultProps = {
   passwordFromParent: '',
   name: '',
   getPassword: () => { },
+  submitted: false,
 };
 
 export default Field;

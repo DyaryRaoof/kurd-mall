@@ -27,9 +27,9 @@ const Header = () => {
           </li>
           <li>
             <div className="icon-text-pair me-2">
-              <li>
+              <span>
                 <MaterialIcon onClick="do something" orange text="shopping_cart" />
-              </li>
+              </span>
               {' '}
               <span>Cart</span>
             </div>

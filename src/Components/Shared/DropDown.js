@@ -45,8 +45,12 @@ DropDown.protoTypes = {
 DropDown.propTypes = {
   categoryName: PropTypes.string.isRequired,
   dropdownValues: PropTypes.instanceOf(Array).isRequired,
-  setSelectedCategory: PropTypes.func.isRequired,
+  setSelectedCategory: PropTypes.func,
   submitted: PropTypes.bool.isRequired,
+};
+
+DropDown.defaultProps = {
+  setSelectedCategory: () => { },
 };
 
 export default DropDown;
