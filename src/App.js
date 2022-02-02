@@ -5,6 +5,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Login from './Components/Login';
 import CreateStore from './Components/CreateStore';
+import CreateItem from './Components/CreateItem';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/sign-up" exact element={<SignUp />} />
           <Route path="/log-in" exact element={<Login />} />
           <Route path="create-store" exact element={<CreateStore />} />
+          <Route path="create-item" exact element={<CreateItem />} />
         </Routes>
       </Router>
       <Footer />
