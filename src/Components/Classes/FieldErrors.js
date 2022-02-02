@@ -1,4 +1,6 @@
-class Errors {
+import ErrorMessages from './ErrorMessages';
+
+class FieldErrors {
   constructor(value, submitted, type, name, passwordFromParent) {
     this.value = value;
     this.submitted = submitted;
@@ -10,29 +12,31 @@ class Errors {
   emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   validate() {
+    const errorMessages = new ErrorMessages();
+
     let errors = [];
     if (this.value === '' && this.submitted) {
-      errors = [...errors, 'This field is required. '];
+      errors = [...errors, errorMessages.messages.fields.required];
     }
 
     if (this.type === 'email' && !this.value.toLocaleLowerCase().match(this.emailRegex) && this.submitted) {
-      errors = [...errors, 'You need an actual email address. '];
+      errors = [...errors, errorMessages.messages.fields.email.actual];
     }
 
     if (this.type === 'password' && this.value.length < 8 && this.submitted) {
-      errors = [...errors, 'Password must be at least 8 characters. '];
+      errors = [...errors, errorMessages.messages.fields.password.minlength];
     }
 
     if (this.type === 'tel' && this.value.length < 11 && this.submitted) {
-      errors = [...errors, 'Phone number must be at least 11 characters. '];
+      errors = [...errors, errorMessages.messages.fields.phone.minlength];
     }
 
     if (this.type === 'password' && this.passwordFromParent !== '' && this.value !== this.passwordFromParent && this.submitted && this.name === 'password-confirmation') {
-      errors = [...errors, 'Passwords do not match. '];
+      errors = [...errors, errorMessages.messages.fields.passwordConfirmation.equalTo];
     }
 
     return errors;
   }
 }
 
-export default Errors;
+export default FieldErrors;

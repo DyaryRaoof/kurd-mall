@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import Errors from '../Classes/Errors';
+import FieldErrors from '../Classes/FieldErrors';
 
 const Field = ({
   placeholder, type, submitted, passwordFromParent, name, getPassword,
 }) => {
   const [value, setValue] = useState('');
-  const errorsClass = new Errors(value, submitted, type, name, passwordFromParent);
+  const errorsClass = new FieldErrors(value, submitted, type, name, passwordFromParent);
   const errors = errorsClass.validate();
 
   return (

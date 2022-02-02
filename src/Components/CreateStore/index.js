@@ -7,6 +7,7 @@ import categories from '../mock-data/categories';
 import cities from '../mock-data/cities';
 import ImageSelector from '../Shared/ImageSelector';
 import SubmitButton from '../Shared/SubmitButton';
+import ErrorMessages from '../Classes/ErrorMessages';
 
 const CreateStore = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -48,7 +49,7 @@ const CreateStore = () => {
               <DropDown dropdownValues={cities} categoryName="City" submitted={submitted} />
               <ImageSelector numberOfImages={5} setImages={setImagesNow} />
               {images.urls && images.urls.length > 0 && (<div className="d-flex orange-border">{images.urls && images.urls.map((i) => <img className="p-2 m-2 store-images" key={i.name} src={i} alt="Store" />)}</div>)}
-              {submitted && images.urls.length < 1 && (<div className="text-danger text-center">You should select at least one image</div>)}
+              {submitted && images.urls.length < 1 && (<div className="text-danger text-center">{(new ErrorMessages()).messages.images.required}</div>)}
               <div className="mt-5">
                 <SubmitButton name="Create" />
               </div>
