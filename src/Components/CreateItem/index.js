@@ -43,11 +43,11 @@ const CreateItem = () => {
 
   return (
     <main className="container">
-      <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
+      <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); console.log(item); }}>
         <div className="item-input-section gray-background">
           <div> Create Item </div>
-          <Field placeholder="Name" type="text" setParentValue={(value) => { setItem({ ...item, name: value }); }} submitted={submitted} />
-          <Field placeholder="Description" type="text" textarea setParentValue={(value) => { setItem({ ...item, description: value }); }} submitted={submitted} />
+          <Field placeholder="Name" type="text" setParentValue={(value) => { setItem({ ...item, name: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} submitted={submitted} />
+          <Field placeholder="Description" type="text" textarea setParentValue={(value) => { setItem({ ...item, description: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} submitted={submitted} />
         </div>
 
         <div className="item-input-section gray-background">
@@ -70,24 +70,24 @@ const CreateItem = () => {
 
         <div className="item-input-section gray-background">
           <div> Pricing </div>
-          <Field placeholder="Price in IQD: eg. 100000" type="number" setParentValue={(value) => { setItem({ ...item, price: value }); }} submitted={submitted} />
-          <Field placeholder="Cost in IQD eg. 50000" type="number" setParentValue={(value) => { setItem({ ...item, price: value }); }} submitted={submitted} />
+          <Field placeholder="Price in IQD: eg. 100000" type="number" setParentValue={(value) => { setItem({ ...item, price: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} submitted={submitted} />
+          <Field placeholder="Cost in IQD eg. 50000" type="number" setParentValue={(value) => { setItem({ ...item, price: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} submitted={submitted} />
           <div className="text-muted text-end">
             Profit :
             {item.price - item.cost}
           </div>
           <div className="text-danger text-end">Users will not see this</div>
-          <Field placeholder="Numbers available eg. 10" type="number" setParentValue={(value) => { setItem({ ...item, numbersAvailabel: value }); }} submitted={submitted} />
+          <Field placeholder="Numbers available eg. 10" type="number" setParentValue={(value) => { setItem({ ...item, numbersAvailabel: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} submitted={submitted} />
         </div>
 
         <div className="item-input-section gray-background">
           <div> Tags </div>
-          <Field placeholder="Tags. eg. winter, cotton, wool" type="text" setParentValue={(value) => { setItem({ ...item, tags: value }); }} submitted={submitted} />
+          <Field placeholder="Tags. eg. winter, cotton, wool" type="text" setParentValue={(value) => { setItem({ ...item, tags: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} submitted={submitted} />
         </div>
 
         <div className="item-input-section gray-background">
           <div> Shipping </div>
-          <Field placeholder="Item Weight in Kg. eg: 0.1 kg" type="number" setParentValue={(value) => { setItem({ ...item, shippingWeight: value }); }} submitted={submitted} />
+          <Field placeholder="Item Weight in Kg. eg: 0.1 kg" type="number" setParentValue={(value) => { setItem({ ...item, shippingWeight: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} submitted={submitted} />
         </div>
 
         <div className="item-input-section gray-background">
@@ -109,7 +109,7 @@ const CreateItem = () => {
                     setParentValue={(value) => { setVariantName(value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'name' }); }}
                     setChildValue={item.variants[indexOfVariant].name}
                     submitted={submitted}
-                    autoFocus={!!(currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'name')}
+                    autoFocus={currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'name'}
                   />
                   <Field
                     placeholder="Variant Values eg. Small, Medium, Large"
@@ -117,12 +117,17 @@ const CreateItem = () => {
                     setParentValue={(value) => { setVariantPrice(value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'price' }); }}
                     setChildValue={item.variants[indexOfVariant].price}
                     submitted={submitted}
-                    autoFocus={!!(currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'price')}
+                    autoFocus={currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'price'}
                   />
                   <div>select image</div>
                   <div className="rounded">
                     {selectedImages.urls.map((url, index) => (
-                      <button type="button" key={makeid(10)} onClick={() => { setVariantImageIndex(index, indexOfVariant); }} className={`icon-button ${item.variants && item.variants[indexOfVariant] && item.variants[indexOfVariant].imageIndex === index ? 'border border-3 border-danger' : ''}`}>
+                      <button
+                        type="button"
+                        key={makeid(10)}
+                        onClick={() => { setVariantImageIndex(index, indexOfVariant); }}
+                        className={`icon-button ${item.variants && item.variants[indexOfVariant] && item.variants[indexOfVariant].imageIndex === index ? 'border border-3 border-danger' : ''}`}
+                      >
                         <img className="create-item-images" src={url} alt="item" />
                       </button>
                     ))}

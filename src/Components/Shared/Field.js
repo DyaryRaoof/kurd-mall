@@ -19,7 +19,7 @@ const Field = ({
           onChange={(e) => { setParentValue(e.target.value); if (name === 'password') { getPassword(e.target.value); } }}
           value={setChildValue}
           /* eslint-disable  jsx-a11y/no-autofocus */
-          autoFocus={autoFocus}
+          autoFocus={autoFocus != null ? autoFocus : false}
         />
       )
         : (
@@ -30,7 +30,7 @@ const Field = ({
             onChange={(e) => { setParentValue(e.target.value); if (name === 'password') { getPassword(e.target.value); } }}
             value={setChildValue}
             /* eslint-disable jsx-a11y/no-autofocus */
-            autoFocus={autoFocus}
+            autoFocus={autoFocus != null ? autoFocus : false}
           />
         )}
       {submitted && errors && <div className="text-danger text-center">{errors}</div>}
