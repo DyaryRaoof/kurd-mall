@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import FieldErrors from '../Classes/FieldErrors';
+import FieldErrors from './Classes/FieldErrors';
 
 const Field = ({
   placeholder, type, submitted, passwordFromParent,

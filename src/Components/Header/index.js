@@ -18,17 +18,17 @@ const Header = () => {
           <li className="width-100">Kurd Mall</li>
           <li className="w-100 mx-auto d-sm-block d-none"><Search /></li>
           <li className="ms-auto">
-            <div className="icon-text-pair" tabIndex={0} role="button" onClick="do something" onKeyDown="do something">
+            <div className="icon-text-pair" tabIndex={0} role="button" onClick={() => { }} onKeyDown={() => { }}>
               <span className="d-flex justify-content-end width-100">Sign In</span>
               <div>
-                <MaterialIcon onClick="do something" orange text="person" />
+                <MaterialIcon onClick={() => { }} orange text="person" />
               </div>
             </div>
           </li>
           <li>
             <div className="icon-text-pair me-2">
               <span>
-                <MaterialIcon onClick="do something" orange text="shopping_cart" />
+                <MaterialIcon onClick={() => { }} orange text="shopping_cart" />
               </span>
               {' '}
               <span>Cart</span>

@@ -7,7 +7,7 @@ import categories from '../mock-data/categories';
 import cities from '../mock-data/cities';
 import ImageSelector from '../Shared/ImageSelector';
 import SubmitButton from '../Shared/SubmitButton';
-import ErrorMessages from '../Classes/ErrorMessages';
+import ErrorMessages from '../Shared/Classes/ErrorMessages';
 
 const CreateStore = () => {
   const [submitted, setSubmitted] = useState(false);

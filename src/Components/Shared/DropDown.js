@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './DropDown.css';
 
 const DropDown = ({
-  categoryName, dropdownValues, setSelectedCategory, submitted, bgColorClass,
+  categoryName, dropdownValues, setSelectedCategory, submitted, bgColorClass, setParentValue,
 }) => {
   const [currentCategory, setCurrentCategory] = useState(null);
 
@@ -31,6 +31,7 @@ const DropDown = ({
                     setSelectedCategory(value);
                   }
                   setCurrentCategory(value);
+                  setParentValue(value);
                 }}
               >
                 {value.name}
@@ -53,11 +54,13 @@ DropDown.propTypes = {
   setSelectedCategory: PropTypes.func,
   submitted: PropTypes.bool.isRequired,
   bgColorClass: PropTypes.string,
+  setParentValue: PropTypes.func,
 };
 
 DropDown.defaultProps = {
   setSelectedCategory: () => { },
   bgColorClass: '',
+  setParentValue: () => { },
 };
 
 export default DropDown;
