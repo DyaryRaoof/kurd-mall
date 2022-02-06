@@ -5,7 +5,7 @@ const Field = ({
   placeholder, type, submitted, passwordFromParent,
   name, getPassword, textarea, setParentValue, setChildValue, autoFocus,
 }) => {
-  const errorsClass = new FieldErrors(setChildValue, submitted, type, name, passwordFromParent);
+  const errorsClass = new FieldErrors(setChildValue || '', submitted, type, name, passwordFromParent);
   const errors = errorsClass.validate();
 
   return (

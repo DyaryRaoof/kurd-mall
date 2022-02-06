@@ -10,7 +10,9 @@ import makeid from '../Shared/methods/makeid';
 const CreateItem = () => {
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [selectedImages, setSelectedImages] = useState({ urls: [], files: [] });
-  const [item, setItem] = useState({ categoryId: 0, variants: [] });
+  const [item, setItem] = useState({
+    categoryId: 0, variants: [], name: '', description: '', price: 0, quantity: 0, images: [],
+  });
   const [submitted, setSubmitted] = useState(false);
   const [currentFieldIndex, setCurrentFieldIndex] = useState({ index: 0, field: 'name' });
 
@@ -43,7 +45,7 @@ const CreateItem = () => {
 
   return (
     <main className="container">
-      <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); console.log(item); }}>
+      <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
         <div className="item-input-section gray-background">
           <div> Create Item </div>
           <Field placeholder="Name" type="text" setParentValue={(value) => { setItem({ ...item, name: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} submitted={submitted} />
@@ -131,6 +133,19 @@ const CreateItem = () => {
                         <img className="create-item-images" src={url} alt="item" />
                       </button>
                     ))}
+                  </div>
+                  <div className="text-end">
+                    <button
+                      type="button"
+                      className="icon-button"
+                      onClick={() => {
+                        const newVariants = [...item.variants];
+                        newVariants.splice(indexOfVariant, 1);
+                        setItem({ ...item, variants: newVariants });
+                      }}
+                    >
+                      <u><div className="text-danger">Remove Variant</div></u>
+                    </button>
                   </div>
                   <hr />
                 </div>
