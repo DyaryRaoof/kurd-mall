@@ -8,52 +8,28 @@ import SubmitButton from '../Shared/SubmitButton';
 import makeid from '../Shared/methods/makeid';
 
 const CreateItem = () => {
-  const [variantNumber, setVariantNumber] = useState(0);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [selectedImages, setSelectedImages] = useState({ urls: [], files: [] });
-  const [item, setItem] = useState({ categoryId: 0 });
+  const [item, setItem] = useState({ categoryId: 0, variants: [] });
   const [submitted, setSubmitted] = useState(false);
+  const [currentFieldIndex, setCurrentFieldIndex] = useState({ index: 0, field: 'name' });
+
+  const setVariantValues = (objectKey, value, variantIndex) => {
+    const newVariants = [...item.variants];
+    newVariants[variantIndex][objectKey] = value;
+    setItem({ ...item, variants: newVariants });
+  };
 
   const setVariantName = (name, variantIndex) => {
-    if (!item.variants) {
-      item.variants = [];
-    }
-    const newVariants = [...item.variants];
-    if (newVariants[variantIndex]) {
-      newVariants[variantIndex].name = name;
-    } else {
-      newVariants.push({ name });
-    }
-    setItem({ ...item, variants: newVariants });
+    setVariantValues('name', name, variantIndex);
   };
 
   const setVariantPrice = (price, variantIndex) => {
-    if (!item.variants) {
-      item.variants = [];
-    }
-    const newVariants = [...item.variants];
-    if (newVariants[variantIndex]) {
-      newVariants[variantIndex].price = price;
-    } else {
-      newVariants.push({ price });
-    }
-    newVariants[variantIndex].price = price;
-    setItem({ ...item, variants: newVariants });
+    setVariantValues('price', price, variantIndex);
   };
 
   const setVariantImageIndex = (imageIndex, variantIndex) => {
-    if (!item.variants) {
-      item.variants = [];
-    }
-
-    const newVariants = [...item.variants];
-    if (newVariants[variantIndex]) {
-      newVariants[variantIndex].imageIndex = imageIndex;
-    } else {
-      newVariants.push({ imageIndex });
-    }
-    newVariants[variantIndex].imageIndex = imageIndex;
-    setItem({ ...item, variants: newVariants });
+    setVariantValues('imageIndex', imageIndex, variantIndex);
   };
 
   const setSelectedCategoryNow = (category) => {
@@ -67,7 +43,7 @@ const CreateItem = () => {
 
   return (
     <main className="container">
-      <form onSubmit={(e) => { e.preventDefault(); console.log(item); setSubmitted(true); }}>
+      <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
         <div className="item-input-section gray-background">
           <div> Create Item </div>
           <Field placeholder="Name" type="text" setParentValue={(value) => { setItem({ ...item, name: value }); }} submitted={submitted} />
@@ -123,12 +99,26 @@ const CreateItem = () => {
             </span>
           </div>
           <div className={`${checkboxChecked ? 'd-block' : 'd-none'}`}>
-            {variantNumber > 0
-              && variantNumber < 15
-              && Array(variantNumber).fill(0).map((_, indexOfVariant) => (
+            {item.variants.length > 0
+              && item.variants.length < 15
+              && Array(item.variants.length).fill(0).map((_, indexOfVariant) => (
                 <div key={makeid(10)}>
-                  <Field placeholder="Variant Name eg. Size" type="text" setParentValue={(value) => { setVariantName(value, indexOfVariant); }} submitted={submitted} />
-                  <Field placeholder="Variant Values eg. Small, Medium, Large" type="text" setParentValue={(value) => { setVariantPrice(value, indexOfVariant); }} submitted={submitted} />
+                  <Field
+                    placeholder="Variant Name eg. Size"
+                    type="text"
+                    setParentValue={(value) => { setVariantName(value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'name' }); }}
+                    setChildValue={item.variants[indexOfVariant].name}
+                    submitted={submitted}
+                    autoFocus={!!(currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'name')}
+                  />
+                  <Field
+                    placeholder="Variant Values eg. Small, Medium, Large"
+                    type="number"
+                    setParentValue={(value) => { setVariantPrice(value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'price' }); }}
+                    setChildValue={item.variants[indexOfVariant].price}
+                    submitted={submitted}
+                    autoFocus={!!(currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'price')}
+                  />
                   <div>select image</div>
                   <div className="rounded">
                     {selectedImages.urls.map((url, index) => (
@@ -140,7 +130,19 @@ const CreateItem = () => {
                   <hr />
                 </div>
               ))}
-            <button type="button" className="icon-button" onClick={() => { setVariantNumber(variantNumber + 1); }}>
+            <button
+              type="button"
+              className="icon-button"
+              onClick={() => {
+                const newVariants = [...item.variants];
+                newVariants.push({
+                  name: '',
+                  price: '',
+                  imageIndex: '',
+                });
+                setItem({ ...item, variants: newVariants });
+              }}
+            >
               <u><div>Add Variant</div></u>
             </button>
           </div>

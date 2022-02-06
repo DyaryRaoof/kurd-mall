@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import FieldErrors from './Classes/FieldErrors';
 
 const Field = ({
   placeholder, type, submitted, passwordFromParent,
-  name, getPassword, textarea, setParentValue,
+  name, getPassword, textarea, setParentValue, setChildValue, autoFocus,
 }) => {
-  const [value, setValue] = useState('');
-  const errorsClass = new FieldErrors(value, submitted, type, name, passwordFromParent);
+  const errorsClass = new FieldErrors(setChildValue, submitted, type, name, passwordFromParent);
   const errors = errorsClass.validate();
 
   return (
@@ -18,8 +16,10 @@ const Field = ({
           className="form-control p-3 my-3"
           type={type}
           placeholder={placeholder}
-          onChange={(e) => { setValue(e.target.value); setParentValue(e.target.value); if (name === 'password') { getPassword(e.target.value); } }}
-          value={value}
+          onChange={(e) => { setParentValue(e.target.value); if (name === 'password') { getPassword(e.target.value); } }}
+          value={setChildValue}
+          /* eslint-disable  jsx-a11y/no-autofocus */
+          autoFocus={autoFocus}
         />
       )
         : (
@@ -27,8 +27,10 @@ const Field = ({
             className="form-control p-3 my-3"
             type={type}
             placeholder={placeholder}
-            onChange={(e) => { setValue(e.target.value); setParentValue(e.target.value); if (name === 'password') { getPassword(e.target.value); } }}
-            value={value}
+            onChange={(e) => { setParentValue(e.target.value); if (name === 'password') { getPassword(e.target.value); } }}
+            value={setChildValue}
+            /* eslint-disable jsx-a11y/no-autofocus */
+            autoFocus={autoFocus}
           />
         )}
       {submitted && errors && <div className="text-danger text-center">{errors}</div>}
@@ -45,6 +47,8 @@ Field.propTypes = {
   getPassword: PropTypes.func,
   textarea: PropTypes.bool,
   setParentValue: PropTypes.func,
+  setChildValue: PropTypes.string.isRequired,
+  autoFocus: PropTypes.bool.isRequired,
 };
 
 Field.defaultProps = {
