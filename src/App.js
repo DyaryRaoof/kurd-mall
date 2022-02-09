@@ -6,6 +6,8 @@ import Footer from './Components/Footer';
 import Login from './Components/Login';
 import CreateStore from './Components/CreateStore';
 import CreateItem from './Components/CreateItem';
+import StoreDetail from './Components/StoreDetailPage';
+import store from './Components/mock-data/store';
 
 function App() {
   return (
@@ -16,8 +18,9 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/sign-up" exact element={<SignUp />} />
           <Route path="/log-in" exact element={<Login />} />
-          <Route path="create-store" exact element={<CreateStore />} />
-          <Route path="create-item" exact element={<CreateItem />} />
+          <Route path="/create-store" exact element={<CreateStore />} />
+          <Route path="/create-item" exact element={<CreateItem />} />
+          <Route path="/store-detail" exact element={<StoreDetail store={store} />} />
         </Routes>
       </Router>
       <Footer />
