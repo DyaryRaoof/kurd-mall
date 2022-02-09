@@ -8,6 +8,8 @@ import CreateStore from './Components/CreateStore';
 import CreateItem from './Components/CreateItem';
 import StoreDetail from './Components/StoreDetailPage';
 import store from './Components/mock-data/store';
+import item from './Components/mock-data/items';
+import ItemDetail from './Components/ItemDetail';
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
           <Route path="/create-store" exact element={<CreateStore />} />
           <Route path="/create-item" exact element={<CreateItem />} />
           <Route path="/store-detail" exact element={<StoreDetail store={store} />} />
+          <Route path="/item-detail" exact element={<ItemDetail item={item[0]} />} />
         </Routes>
       </Router>
       <Footer />

@@ -3,6 +3,8 @@ import Carousel from './Carousel';
 import image from '../../images/mocks/image-placeholder.png';
 import StoreInfoItem from './StoreInfoItem';
 import './StoreDetail.css';
+import categories from '../mock-data/categories';
+import ItemsCarousel from '../Shared/ItemsCarousel';
 
 const StoreDetail = (
   { store },
@@ -17,7 +19,7 @@ const StoreDetail = (
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-7">
+        <div className="col-md-7 mt-5">
           <Carousel images={[image, image, image, image, image, image]} />
         </div>
         <div className="col-md-5 mt-5">
@@ -36,6 +38,17 @@ const StoreDetail = (
           </div>
         </div>
       </div>
+      {
+        categories.map(
+          (c) => c.subcategories.map((sub) => (
+            <div className="my-5" key={sub.id}>
+              <ItemsCarousel
+                subcategoryName={sub.name}
+              />
+            </div>
+          )),
+        )
+      }
     </div>
   );
 };
