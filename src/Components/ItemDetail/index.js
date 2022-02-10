@@ -5,6 +5,10 @@ import Carousel from '../StoreDetailPage/Carousel';
 import './ItemDetail.css';
 import Stars from '../Shared/Stars';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
+import makeid from '../Shared/methods/makeid';
+import Comment from '../Shared/Comment';
+import comment from '../mock-data/comment';
+import ItemsCarousel from '../Shared/ItemsCarousel';
 
 const ItemDetail = ({ item }) => {
   const [selectedVariant, setSelectedVariant] = useState(item.variants[0]);
@@ -46,7 +50,7 @@ const ItemDetail = ({ item }) => {
             </div>
 
             <div className="col-md-6 mt-3">
-              <div className="gray-background item-detail-variants-wrapper p-3 mx-2">
+              <div className="gray-background item-detail-variants-wrapper p-3 mx-2 rounded">
                 {item.variants.map((variant) => (
                   <button key={variant.id} type="button" className={`icon-button ${selectedVariant === variant ? 'border border-danger border-2' : ''}`} onClick={() => setSelectedVariant(variant)}>
                     <div className="item-detail-variants">
@@ -72,6 +76,25 @@ const ItemDetail = ({ item }) => {
             <RoundOrangeIconButton buttonText="Message Seller" iconName="mode_comment" />
           </button>
         </div>
+
+        <div>
+          <h3 className="orange">Comments</h3>
+          {Array(5).fill(0).map(() => (
+            <Comment key={makeid(10)} comment={comment} />
+          ))}
+          <p className="orange text-end"><u>See All Comments</u></p>
+        </div>
+
+        <div>
+          <h3 className="orange">Related Items</h3>
+          {Array(5).fill(0).map(() => (
+            <ItemsCarousel
+              key={makeid(10)}
+              subcategoryName="Electronics"
+            />
+          ))}
+        </div>
+
       </div>
     </div>
   );
@@ -108,6 +131,8 @@ ItemDetail.propTypes = {
       imageIndex: PropTypes.number.isRequired,
     })).isRequired,
     images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    categoryId: PropTypes.number.isRequired,
+    subcategoryId: PropTypes.number.isRequired,
   }).isRequired,
 };
 
