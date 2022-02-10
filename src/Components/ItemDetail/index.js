@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MaterialIcon from '../Shared/MateriaIcon';
 import Carousel from '../StoreDetailPage/Carousel';
@@ -12,6 +13,7 @@ import ItemsCarousel from '../Shared/ItemsCarousel';
 
 const ItemDetail = ({ item }) => {
   const [selectedVariant, setSelectedVariant] = useState(item.variants[0]);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -82,7 +84,12 @@ const ItemDetail = ({ item }) => {
           {Array(5).fill(0).map(() => (
             <Comment key={makeid(10)} comment={comment} />
           ))}
-          <p className="orange text-end"><u>See All Comments</u></p>
+          <div className="d-flex justify-content-end">
+            <button type="button" className="icon-button" onClick={() => navigate('/see-all-comments', { state: { itemId: item.id } })}>
+              <p className="orange"><u>See All Comments</u></p>
+            </button>
+          </div>
+
         </div>
 
         <div>
@@ -133,6 +140,7 @@ ItemDetail.propTypes = {
     images: PropTypes.arrayOf(PropTypes.string).isRequired,
     categoryId: PropTypes.number.isRequired,
     subcategoryId: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
 };
 
