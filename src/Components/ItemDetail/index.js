@@ -3,6 +3,7 @@ import MaterialIcon from '../Shared/MateriaIcon';
 import Carousel from '../StoreDetailPage/Carousel';
 import './ItemDetail.css';
 import Stars from '../Shared/Stars';
+import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 
 const ItemDetail = ({ item }) => (
   <div>
@@ -58,6 +59,14 @@ const ItemDetail = ({ item }) => (
             </div>
           </div>
         </div>
+      </div>
+      <div className="d-flex justify-content-center align-items-center flex-column mt-5">
+        <button className="icon-button" type="button">
+          <RoundOrangeIconButton buttonText="Add to cart" iconName="add_shopping_cart" />
+        </button>
+        <button type="button" className="icon-button mt-3">
+          <RoundOrangeIconButton buttonText="Message Seller" iconName="mode_comment" />
+        </button>
       </div>
     </div>
   </div>
