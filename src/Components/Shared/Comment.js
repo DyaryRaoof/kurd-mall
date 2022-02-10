@@ -2,14 +2,19 @@ import PropTypes from 'prop-types';
 import './Comment.css';
 
 const Comment = ({ comment }) => (
-  <div className="d-flex p-2 m-2">
-    <img className="rounded-circle commenter-image me-2" src={comment.user.image} alt="comment" />
+  <div className="d-flex p-2 m-2 my-2 flex-column">
+    <div className="d-flex align-items-center">
+      <img className="rounded-circle commenter-image my-2" src={comment.user.image} alt="comment" />
+      <span className="text-bold ms-2">John Doe</span>
+    </div>
     <div className="comments-text gray-background rounded p-3">
       <div className="comments-name">
-        <span>John Doe</span>
         <span className="comments-date">
           {comment.description}
-          {comment.date}
+          <span className="orange">
+            At
+            {comment.date}
+          </span>
         </span>
       </div>
     </div>
