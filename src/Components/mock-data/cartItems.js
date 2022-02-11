@@ -5,12 +5,25 @@ const cartItems = [
     supplierName: 'Supplier 1',
     name: 'Product 1',
     price: 100,
-    optionName: 'Option 1',
-    optionPrice: 10,
-    optionValue: 'Value 1',
+    currency: 'IQD',
+    variantOptions: [
+      {
+        name: 'Color',
+        value: 'Red',
+        price: 100,
+        currency: 'IQD',
+      },
+      {
+        name: 'Size',
+        value: '20',
+        price: 100,
+        currency: 'IQD',
+      },
+
+    ],
     shippingWeight: 1,
     quantity: 1,
-    totalPrice: 110,
+    totalPrice: 0,
     totalWeight: 1,
   },
   {
@@ -19,11 +32,24 @@ const cartItems = [
     supplierName: 'Supplier 1',
     name: 'Product 2',
     price: 200,
-    optionName: 'Option 2',
-    optionPrice: 20,
-    optionValue: 'Value 2',
+    currency: 'IQD',
+    variantOptions: [
+      {
+        name: 'Color',
+        value: 'Red',
+        price: 100,
+        currency: 'IQD',
+      },
+      {
+        name: 'Size',
+        value: '20',
+        price: 100,
+        currency: 'IQD',
+      },
+
+    ],
     shippingWeight: 2,
-    quantity: 2,
+    quantity: 1,
     totalPrice: 400,
     totalWeight: 2,
   },
@@ -34,12 +60,24 @@ const cartItems = [
     supplierName: 'Supplier 2',
     name: 'Product 3',
     price: 300,
-    optionName: 'Option 3',
+    currency: 'IQD',
+    variantOptions: [
+      {
+        name: 'Color',
+        value: 'Red',
+        price: 100,
+        currency: 'IQD',
+      },
+      {
+        name: 'Size',
+        value: '20',
+        price: 100,
+        currency: 'IQD',
+      },
 
-    optionPrice: 30,
-    optionValue: 'Value 3',
+    ],
     shippingWeight: 3,
-    quantity: 3,
+    quantity: 1,
     totalPrice: 900,
 
     totalWeight: 3,
