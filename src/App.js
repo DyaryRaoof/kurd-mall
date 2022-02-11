@@ -13,6 +13,7 @@ import ItemDetail from './Components/ItemDetail';
 import Comments from './Components/Comments';
 import Cart from './Components/Cart';
 import Chat from './Components/Chat';
+import ChatList from './Components/ChatList';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/see-all-comments" exact element={<Comments />} />
           <Route path="/cart" exact element={<Cart />} />
           <Route path="/chat" exact element={<Chat />} />
+          <Route path="/chat-list" exact element={<ChatList />} />
 
         </Routes>
       </Router>
