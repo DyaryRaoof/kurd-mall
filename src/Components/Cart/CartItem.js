@@ -2,9 +2,10 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import makeid from '../Shared/methods/makeid';
 import './CartItem.css';
+import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 
 const CartItem = ({
-  item, setParentQuantity, priceForItem, shippingPrice, totalPrice,
+  item, setParentQuantity, priceForItem, shippingPrice, totalPrice, onRemove,
 }) => {
   const [numberOfItems, setNumberOfItems] = useState(1);
 
@@ -52,6 +53,18 @@ const CartItem = ({
           </div>
         </div>
       </div>
+      <RoundOrangeIconButton
+        buttonText="Message Supplier"
+        onPressed={() => { }}
+        width="200px"
+        padding="5px"
+        iconName="chat_bubble_outline"
+      />
+      <div className="d-flex justify-content-end">
+        <button type="button" className="icon-button" onClick={() => { onRemove(); }}>
+          <div className="text-danger"><u>Remove Item</u></div>
+        </button>
+      </div>
     </div>
   );
 };
@@ -71,6 +84,7 @@ CartItem.propTypes = {
   priceForItem: PropTypes.func.isRequired,
   shippingPrice: PropTypes.func.isRequired,
   totalPrice: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default CartItem;

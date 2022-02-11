@@ -56,13 +56,12 @@ const Cart = () => {
           <CartItem
             key={item.id}
             item={item}
-            onRemove={handleRemove}
+            onRemove={() => { handleRemove(item.id); }}
             priceForItem={item.variantOptions.length > 1
               ? item.quantity * item.price : item.quantity * item.variantOptions[0].price}
             shippingPrice={getShippingPrice(item.quantity * item.shippingWeight, item.currency)}
             setParentQuantity={(quantity) => { setTotals(quantity, index); }}
             totalPrice={item.totalPrice}
-
           />
         ))}
       </ul>
