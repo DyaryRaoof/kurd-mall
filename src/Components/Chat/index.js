@@ -5,7 +5,7 @@ import chats from '../mock-data/chats';
 const Chat = () => (
   <main>
     <div>
-      <h2 className="orange">Chat</h2>
+      <h2 className="orange mb-4 ms-2">Chat</h2>
       {chats.map((chat) => (
         <Bubble key={chat.id} chat={chat} />
       ))}
