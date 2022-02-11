@@ -11,6 +11,7 @@ import store from './Components/mock-data/store';
 import item from './Components/mock-data/items';
 import ItemDetail from './Components/ItemDetail';
 import Comments from './Components/Comments';
+import Cart from './Components/Cart';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/store-detail" exact element={<StoreDetail store={store} />} />
           <Route path="/item-detail" exact element={<ItemDetail item={item[0]} />} />
           <Route path="/see-all-comments" exact element={<Comments />} />
+          <Route path="/cart" exact element={<Cart />} />
         </Routes>
       </Router>
       <Footer />
