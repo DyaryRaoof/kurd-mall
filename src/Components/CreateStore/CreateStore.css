@@ -1,25 +1,25 @@
-.create-store-image{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.create-store-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .create-store-heading {
-    margin-bottom: 100px;
+  margin-bottom: 100px;
 }
 
-.create-store-main{
-    margin-bottom: 40vh;
+.create-store-main {
+  margin-bottom: 40vh;
 }
 
 .store-images {
-    width: 100px;
+  width: 100px;
 }
 
 .radius-100 {
-    border-radius: 100px;
+  border-radius: 100px;
 }
 
 .no-border {
-    border: none
+  border: none;
 }

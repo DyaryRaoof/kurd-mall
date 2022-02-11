@@ -1,4 +1,3 @@
-import './HomeBody.css';
 import categories from '../mock-data/categories';
 import ItemsCarousel from '../Shared/ItemsCarousel';
 
