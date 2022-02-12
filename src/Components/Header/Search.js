@@ -1,6 +1,6 @@
 const Search = () => (
   <div className="mx-auto w-75 ">
-    <input type="email" className="form-control w-100" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search" />
+    <input type="text" className="form-control w-100" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search" />
   </div>
 );
 

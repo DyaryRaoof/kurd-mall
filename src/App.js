@@ -18,6 +18,7 @@ import SearchDetail from './Components/SearchDetail';
 import Profile from './Components/Profile';
 import ProfileEdit from './Components/ProfileEdit';
 import Driver from './Components/Driver';
+import Analytics from './Components/Analytics';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/profile" exact element={<Profile />} />
           <Route path="/profile-edit" exact element={<ProfileEdit />} />
           <Route path="/driver" exact element={<Driver />} />
+          <Route path="/analytics" exact element={<Analytics storeId={1} />} />
 
         </Routes>
       </Router>
