@@ -48,9 +48,9 @@ const Item = ({
         </div>
       </div>
     </div>
-    <div className="row">
+    <div className="row mt-3">
 
-      <div className="col-md-4 m-2 d-flex justify-content-center">
+      <div className="col-md-4 d-flex justify-content-center my-2 ">
         <RoundOrangeIconButton
           buttonText="Open Store"
           onPressed={() => { }}
@@ -59,7 +59,7 @@ const Item = ({
           iconName="store"
         />
       </div>
-      <div className="col-md-4 m-2 d-flex justify-content-center">
+      <div className="col-md-4 d-flex justify-content-center my-2">
         <RoundOrangeIconButton
           buttonText="Message Supplier"
           onPressed={() => { }}
@@ -68,15 +68,8 @@ const Item = ({
           iconName="chat_bubble_outline"
         />
       </div>
-      <div className="d-flex flex-column align-items-end justify-content-center">
-        <p>
-          <span> Status: </span>
-          <span className="orange">{item.pickedUp ? 'Picked Up' : 'Waiting'}</span>
-        </p>
 
-      </div>
-
-      <div className="col-md-4 m-2 d-flex justify-content-center">
+      <div className="col-md-4 d-flex justify-content-center my-2">
         <RoundOrangeIconButton
           buttonText={item.pickedUp ? 'Deliver' : 'Pick Up'}
           onPressed={() => { onPickUpChanged(item.id); }}
@@ -85,6 +78,12 @@ const Item = ({
           iconName="local_shipping"
         />
       </div>
+    </div>
+    <div className="d-flex flex-column align-items-end justify-content-center">
+      <p>
+        <span> Status: </span>
+        <span className="orange">{item.pickedUp ? 'Picked Up' : 'Waiting'}</span>
+      </p>
     </div>
   </div>
 );

@@ -15,11 +15,10 @@ const DriverOrders = () => {
       newCartItems = newCartItems.filter((item) => item.id !== id);
     }
     setCartItems(newCartItems);
-    console.log(newCartItems);
   };
 
   return (
-    <div>
+    <main className="container">
       <h3>All Orders</h3>
       <div className="gray-background rounded p-1 my-2">
         {cartItems.map((item) => (
@@ -34,7 +33,7 @@ const DriverOrders = () => {
           />
         ))}
       </div>
-    </div>
+    </main>
   );
 };
 
