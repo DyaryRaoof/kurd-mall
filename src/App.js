@@ -14,6 +14,7 @@ import Comments from './Components/Comments';
 import Cart from './Components/Cart';
 import Chat from './Components/Chat';
 import ChatList from './Components/ChatList';
+import SearchDetail from './Components/SearchDetail';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/cart" exact element={<Cart />} />
           <Route path="/chat" exact element={<Chat />} />
           <Route path="/chat-list" exact element={<ChatList />} />
+          <Route path="/search-detail" exact element={<SearchDetail />} />
 
         </Routes>
       </Router>

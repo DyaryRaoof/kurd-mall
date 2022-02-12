@@ -3,29 +3,39 @@ import Stars from './Stars';
 import './ItemCard.css';
 
 const ItemCard = ({
-  name, stars, price, leftInStock, image,
+  name, stars, price, leftInStock, image, isSearchItem, onPress,
 }) => (
 
-  <div className="container">
-    <div className="card item-card p-2">
-      <img src={image} className="card-img-top item-image" alt="Item" />
-      <div className="card-body">
-        <h5 className="card-title">{name}</h5>
-        <Stars number={stars.count} users={stars.users} />
-        <div>
-          {price.value}
-          {' '}
-          {price.currency}
+  <button onClick={() => { onPress(); }} type="button" className="icon-button">
+    <div className="container">
+      <div className={`${!isSearchItem ? 'card item-card' : ''} p-2`}>
+        <div className="row">
+          <div className={`${isSearchItem ? 'col-md-3' : ''}`}>
+            <img src={image} className="card-img-top item-image" alt="Item" />
+          </div>
+          <div className={`${'col-md-9'}`}>
+            <div className={`card-body ${isSearchItem ? 'col-md-9 d-flex flex-column align-items-start' : ''}`}>
+              <h5 className="card-title">{name}</h5>
+              <Stars number={stars.count} users={stars.users} />
+              <div>
+                {price.value}
+                {' '}
+                {price.currency}
+              </div>
+              <div className="red">
+                {' '}
+                {leftInStock}
+                {' '}
+                are left in stock
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="red">
-          {' '}
-          {leftInStock}
-          {' '}
-          are left in stock
-        </div>
+
       </div>
     </div>
-  </div>
+    {isSearchItem ? <hr /> : null}
+  </button>
 );
 
 ItemCard.propTypes = {
@@ -34,6 +44,12 @@ ItemCard.propTypes = {
   price: PropTypes.number.isRequired,
   leftInStock: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
+  isSearchItem: PropTypes.bool,
+  onPress: PropTypes.func.isRequired,
+};
+
+ItemCard.defaultProps = {
+  isSearchItem: false,
 };
 
 export default ItemCard;
