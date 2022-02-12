@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types';
 import CartTop from '../Shared/CartTop';
-import MaterialIcon from '../Shared/MateriaIcon';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 
 const Item = ({
-  item, priceForItem, shippingPrice, totalPrice, onPickUpChanged,
+  item, priceForItem, shippingPrice, totalPrice, isBuyer,
 }) => (
   <div className="white-background rounded m-2 p-2">
-    <div className="d-flex justify-content-end">
-      <MaterialIcon text="place" isLarge orange />
-    </div>
-
     <CartTop
       item={item}
       priceForItem={priceForItem}
@@ -19,6 +14,20 @@ const Item = ({
     />
     <div className="row mt-3">
 
+      <div className="col-md-4 d-flex justify-content-center my-2 ">
+        {
+          isBuyer ? (
+            <RoundOrangeIconButton
+              buttonText="Open Item"
+              onPressed={() => { }}
+              width="200px"
+              padding="5px"
+              iconName="local_offer"
+            />
+          )
+            : null
+        }
+      </div>
       <div className="col-md-4 d-flex justify-content-center my-2 ">
         <RoundOrangeIconButton
           buttonText="Open Store"
@@ -30,7 +39,7 @@ const Item = ({
       </div>
       <div className="col-md-4 d-flex justify-content-center my-2">
         <RoundOrangeIconButton
-          buttonText="Message Supplier"
+          buttonText={isBuyer ? 'Message Store' : 'Message Driver'}
           onPressed={() => { }}
           width="200px"
           padding="5px"
@@ -38,15 +47,6 @@ const Item = ({
         />
       </div>
 
-      <div className="col-md-4 d-flex justify-content-center my-2">
-        <RoundOrangeIconButton
-          buttonText={item.pickedUp ? 'Deliver' : 'Pick Up'}
-          onPressed={() => { onPickUpChanged(item.id); }}
-          width="200px"
-          padding="5px"
-          iconName="local_shipping"
-        />
-      </div>
     </div>
     <div className="d-flex flex-column align-items-end justify-content-center">
       <p>
@@ -73,7 +73,7 @@ Item.propTypes = {
   priceForItem: PropTypes.func.isRequired,
   shippingPrice: PropTypes.func.isRequired,
   totalPrice: PropTypes.func.isRequired,
-  onPickUpChanged: PropTypes.func.isRequired,
+  isBuyer: PropTypes.bool.isRequired,
 };
 
 export default Item;

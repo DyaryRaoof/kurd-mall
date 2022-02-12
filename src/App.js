@@ -21,6 +21,8 @@ import Driver from './Components/Driver';
 import Analytics from './Components/Analytics';
 import OrdersAll from './Components/OrdersAll';
 import DriverOrders from './Components/DriverOrders';
+import OwnerOrders from './Components/OwnerOrders';
+import BuyerOrders from './Components/BuyerOrders';
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
           <Route path="/analytics" exact element={<Analytics storeId={1} />} />
           <Route path="/orders-all" exact element={<OrdersAll />} />
           <Route path="/driver-orders" exact element={<DriverOrders />} />
+          <Route path="/owner-orders" exact element={<OwnerOrders />} />
+          <Route path="/buyer-orders" exact element={<BuyerOrders />} />
         </Routes>
       </Router>
       <Footer />
