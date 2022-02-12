@@ -25,6 +25,9 @@ const cartItems = [
     quantity: 1,
     totalPrice: 0,
     totalWeight: 1,
+    pickedUp: false,
+    delivered: false,
+    pickedUpByUserId: 1,
   },
   {
     orderNo: 2,
@@ -52,6 +55,10 @@ const cartItems = [
     quantity: 1,
     totalPrice: 400,
     totalWeight: 2,
+    pickedUp: false,
+    delivered: false,
+    pickedUpByUserId: 1,
+
   },
   {
     orderNo: 3,
@@ -81,6 +88,10 @@ const cartItems = [
     totalPrice: 900,
 
     totalWeight: 3,
+    pickedUp: false,
+    delivered: false,
+    pickedUpByUserId: 1,
+
   }];
 
 export default cartItems;

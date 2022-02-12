@@ -20,6 +20,7 @@ import ProfileEdit from './Components/ProfileEdit';
 import Driver from './Components/Driver';
 import Analytics from './Components/Analytics';
 import OrdersAll from './Components/OrdersAll';
+import DriverOrders from './Components/DriverOrders';
 
 function App() {
   return (
@@ -43,8 +44,8 @@ function App() {
           <Route path="/profile-edit" exact element={<ProfileEdit />} />
           <Route path="/driver" exact element={<Driver />} />
           <Route path="/analytics" exact element={<Analytics storeId={1} />} />
-          <Route path="/orders-all" exact element={<OrdersAll storeId={1} />} />
-
+          <Route path="/orders-all" exact element={<OrdersAll />} />
+          <Route path="/driver-orders" exact element={<DriverOrders />} />
         </Routes>
       </Router>
       <Footer />
