@@ -45,7 +45,7 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <RoundOrangeIconButton iconName="local_shipping" buttonText="Become A Driver" isLarge />
+      <RoundOrangeIconButton iconName="local_shipping" buttonText="Become A Driver" isLarge onPressed={() => navigate('/driver')} />
     </div>
   );
 };

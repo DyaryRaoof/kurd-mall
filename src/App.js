@@ -17,6 +17,7 @@ import ChatList from './Components/ChatList';
 import SearchDetail from './Components/SearchDetail';
 import Profile from './Components/Profile';
 import ProfileEdit from './Components/ProfileEdit';
+import Driver from './Components/Driver';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/search-detail" exact element={<SearchDetail />} />
           <Route path="/profile" exact element={<Profile />} />
           <Route path="/profile-edit" exact element={<ProfileEdit />} />
+          <Route path="/driver" exact element={<Driver />} />
 
         </Routes>
       </Router>
