@@ -15,6 +15,7 @@ import Cart from './Components/Cart';
 import Chat from './Components/Chat';
 import ChatList from './Components/ChatList';
 import SearchDetail from './Components/SearchDetail';
+import Profile from './Components/Profile';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/chat" exact element={<Chat />} />
           <Route path="/chat-list" exact element={<ChatList />} />
           <Route path="/search-detail" exact element={<SearchDetail />} />
+          <Route path="/profile" exact element={<Profile />} />
 
         </Routes>
       </Router>
