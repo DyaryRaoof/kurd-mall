@@ -7,7 +7,9 @@ import ImageSelector from '../Shared/ImageSelector';
 const Driver = () => {
   const [driver, setDriver] = useState({ name: '', email: '', phone: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [checked, setChecked] = useState({ 0: false, 1: false, 2: false });
+  const [checked, setChecked] = useState({
+    0: false, 1: false, 2: false, 3: false,
+  });
   const [selectedProfileImage, setSelectedProfileImage] = useState({ urls: [], files: [] });
   const [selectedLicenseImages, setSelectedLicenseImages] = useState({ urls: [], files: [] });
 
@@ -43,7 +45,14 @@ const Driver = () => {
           Please add a high quality picture of your
           National Identity and Personal Identity
         </p>
+
+        <div className="d-flex justify-content-between">
+          <a href="/#"><p className="orange"><u>Terms of working with us</u></p></a>
+          <CheckBox submitted={submitted} text="Agree to the terms" setParentValue={(value) => { setChecked({ ...checked, 3: value }); }} />
+        </div>
+
         {submitted && (!checked[0] || !checked[1] || !checked[2] || !checked[3]) && selectedLicenseImages.files.length < 2 && <div className="alert alert-danger" role="alert">You need to fill in all required fields</div>}
+
         <SubmitButton text="Submit" />
 
       </form>
