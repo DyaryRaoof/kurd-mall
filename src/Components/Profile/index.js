@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import user from '../mock-data/user';
 import MateriaIcon from '../Shared/MateriaIcon';
 import ImageSelector from './ImageSelector';
@@ -6,6 +7,7 @@ import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 import './Profile.css';
 
 const Profile = () => {
+  const navigate = useNavigate();
   const {
     name, email, phone, image,
   } = user;
@@ -37,8 +39,10 @@ const Profile = () => {
           <span className="orange">Phone:</span>
           {phone}
         </p>
-        <div className="d-flex justify-content-end">
-          <MateriaIcon text="create" isLarge orange />
+        <div className=" d-flex justify-content-end ">
+          <button type="button" className="icon-button" onClick={() => navigate('/profile-edit', { state: { user } })}>
+            <MateriaIcon text="create" isLarge orange />
+          </button>
         </div>
       </div>
       <RoundOrangeIconButton iconName="local_shipping" buttonText="Become A Driver" isLarge />
