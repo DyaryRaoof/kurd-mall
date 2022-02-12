@@ -16,7 +16,7 @@ const ImageSelector = ({ numberOfImages, setImages }) => {
           const url = URL.createObjectURL(file);
           urls.push(url);
         });
-        setImages(urls, event.target.values);
+        setImages(urls, event.target.files);
       }
     }
   };
