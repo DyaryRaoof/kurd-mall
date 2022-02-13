@@ -1,6 +1,6 @@
 const SET_NAV_STORE_OR_ITEM = 'kurd-mall/design/SET_NAV_STORE_OR_ITEM';
 
-const initialState = { navStoreOrItem: 'item' };
+const initialState = { navStoreOrItem: 'items' };
 
 export const setNavStoreOrItem = (payload) => ({
   type: SET_NAV_STORE_OR_ITEM,

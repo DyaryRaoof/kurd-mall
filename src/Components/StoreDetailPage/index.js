@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Carousel from './Carousel';
 import image from '../../images/mocks/image-placeholder.png';
@@ -5,6 +6,8 @@ import StoreInfoItem from './StoreInfoItem';
 import './StoreDetail.css';
 import categories from '../mock-data/categories';
 import ItemsCarousel from '../Shared/ItemsCarousel';
+import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
+import MaterialIcon from '../Shared/MateriaIcon';
 
 const StoreDetail = (
   { store },
@@ -15,6 +18,8 @@ const StoreDetail = (
     category, subcategory,
     instagram, facebook, location,
   } = store;
+
+  const navigate = useNavigate();
 
   return (
     <div className="container">
@@ -35,9 +40,15 @@ const StoreDetail = (
             <StoreInfoItem title="Instagram" value={instagram} />
             <StoreInfoItem title="Facebook" value={facebook} />
             <StoreInfoItem title="Location" value={location} />
+            <div className="d-flex justify-content-end">
+              <button type="button" className="icon-button" onClick={() => { navigate('/create-store', { state: store }); }}>
+                <MaterialIcon text="create" orange />
+              </button>
+            </div>
           </div>
         </div>
       </div>
+      <RoundOrangeIconButton buttonText="Add Item" iconName="add_circle" onPressed={() => navigate('/create-item')} />
       {
         categories.map(
           (c) => c.subcategories.map((sub) => (

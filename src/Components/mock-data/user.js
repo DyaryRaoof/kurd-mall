@@ -5,6 +5,7 @@ const user = {
   image: 'https://randomuser.me/api/portraits/men/1.jpg',
   isDriver: false,
   isAdmin: false,
+  hasStore: false,
 };
 
 export default user;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setNavStoreOrItem } from '../../redux/design/design';
 import './Header.css';
 import MaterialIcon from '../Shared/MateriaIcon';
@@ -15,28 +16,30 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <nav className="mt-3">
         <ul className="d-flex upper-nav-ul align-items-center">
-          <li className="width-100">Kurd Mall</li>
+          <li className="width-100"><button type="button" className="icon-button" onClick={() => { navigate('/'); }}>KurdMall</button></li>
           <li className="w-100 mx-auto d-sm-block d-none"><Search /></li>
           <li className="ms-auto">
-            <div className="icon-text-pair" tabIndex={0} role="button" onClick={() => { }} onKeyDown={() => { }}>
+            <button className="icon-text-pair icon-button" type="button" onClick={() => { navigate('/log-in'); }}>
               <span className="d-flex justify-content-end width-100">Sign In</span>
               <div>
                 <MaterialIcon onClick={() => { }} orange text="person" />
               </div>
-            </div>
+            </button>
           </li>
           <li>
-            <div className="icon-text-pair me-2">
+            <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/cart'); }}>
               <span>
                 <MaterialIcon onClick={() => { }} orange text="shopping_cart" />
               </span>
               {' '}
               <span>Cart</span>
-            </div>
+            </button>
           </li>
         </ul>
       </nav>
@@ -59,7 +62,7 @@ const Header = () => {
           <li className="d-flex ms-auto me-2">
             <span className="me-2">Items</span>
             <div className="form-check form-switch">
-              <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" onChange={(e) => { dispatch(setNavStoreOrItem(e.target.checked ? 'shops' : 'items')); }} />
+              <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" onChange={(e) => { dispatch(setNavStoreOrItem(e.target.checked ? 'stores' : 'items')); }} />
             </div>
             {' '}
             Shops
@@ -70,8 +73,8 @@ const Header = () => {
       <nav>
         <ul className="d-flex justify-content-center list-style-none">
           <li className="px-1"><button className="icon-button orange" type="button"><u>Your Collection</u></button></li>
-          <li className="px-1"><button className="icon-button orange" type="button"><u>Create Store</u></button></li>
-          <li className="px-1"><button className="icon-button orange" type="button"><u>Add Item To Store</u></button></li>
+          <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-store'); }}><u>Create Store</u></button></li>
+          <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-item'); }}><u>Add Item To Store</u></button></li>
         </ul>
       </nav>
       <hr className="nav-hr" />

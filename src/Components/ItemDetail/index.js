@@ -44,7 +44,7 @@ const ItemDetail = ({ item }) => {
 
                 </div>
                 <div className="col-6 ">
-                  <Stars number={item.stars.count} users={item.stars.users} />
+                  <Stars number={item.stars.count} users={item.stars.users} isInteractive />
                   <div className="text-danger">{`Only ${item.leftInStock} are left in stock `}</div>
                 </div>
                 <div className="mt-2">{item.description}</div>

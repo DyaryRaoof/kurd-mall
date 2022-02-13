@@ -27,8 +27,8 @@ import BuyerOrders from './Components/BuyerOrders';
 function App() {
   return (
     <div>
-      <Header />
       <Router>
+        <Header />
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/sign-up" exact element={<SignUp />} />
