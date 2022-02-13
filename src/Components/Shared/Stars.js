@@ -12,23 +12,26 @@ const Stars = ({ number, users, isInteractive }) => {
       setCurrentStars({ number: index + 1, users: users + 1 });
     }
   };
+
+  const createStar = (isOrange, index) => {
+    if (isInteractive) {
+      return (
+        <button key={makeid(10)} type="button" className="icon-button" onClick={() => handleClick(index)}>
+          <MaterialIcon text="star" orange={isOrange} />
+        </button>
+      );
+    }
+    return <MaterialIcon key={makeid(10)} text="star" orange />;
+  };
   return (
     <div className="d-flex justify-content-center">
       <div className="d-flex">
 
         {[...Array(5).keys()].map((a, index) => {
           if (a < currentStars.number) {
-            return (
-              <button key={makeid(10)} type="button" className="icon-button" onClick={() => handleClick(index)}>
-                <MaterialIcon text="star" orange />
-              </button>
-            );
+            return createStar(true, index);
           }
-          return (
-            <button key={makeid(10)} type="button" className="icon-button" onClick={() => handleClick(index)}>
-              <MaterialIcon text="star" orange={false} />
-            </button>
-          );
+          return createStar(false, index);
         })}
         {' '}
       </div>

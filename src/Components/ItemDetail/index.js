@@ -113,7 +113,7 @@ const ItemDetail = ({ item }) => {
 ItemDetail.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
     currency: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     stars: PropTypes.number.isRequired,

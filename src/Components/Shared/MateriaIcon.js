@@ -10,7 +10,7 @@ const MaterialIcon = ({
 );
 
 MaterialIcon.propTypes = {
-  orange: PropTypes.bool.isRequired,
+  orange: PropTypes.bool,
   text: PropTypes.string.isRequired,
   isLarge: PropTypes.bool,
   isWhite: PropTypes.bool,
@@ -19,6 +19,7 @@ MaterialIcon.propTypes = {
 MaterialIcon.defaultProps = {
   isLarge: false,
   isWhite: false,
+  orange: true,
 };
 
 export default MaterialIcon;

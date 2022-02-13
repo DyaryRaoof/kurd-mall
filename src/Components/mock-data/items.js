@@ -28,7 +28,8 @@ for (let i = 0; i < 5; i += 1) {
       {
         id: 0,
         name: 'variant1',
-
+        price: 100000,
+        cost: 80000,
         imageIndex: 0,
       },
       {

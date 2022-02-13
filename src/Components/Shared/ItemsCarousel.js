@@ -45,6 +45,7 @@ const ItemsCarousel = ({ subcategoryName, isStore }) => {
               leftInStock={item.leftInStock}
               isStore={isStore}
               reviewers={item.reviewers}
+              id={item.id}
             />
           ))}
         </div>
