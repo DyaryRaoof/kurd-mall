@@ -19,7 +19,7 @@ const Item = ({
           onPressed={() => { onRemove(item.id); }}
           width="200px"
           padding="5px"
-          iconName="chat_bubble_outline"
+          iconName="local_shipping"
         />
       </div>
 
@@ -29,7 +29,7 @@ const Item = ({
           onPressed={() => { }}
           width="200px"
           padding="5px"
-          iconName="chat_bubble_outline"
+          iconName="store"
         />
       </div>
       <div className="col-md-4 d-flex justify-content-center">

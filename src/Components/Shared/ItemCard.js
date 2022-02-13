@@ -3,7 +3,7 @@ import Stars from './Stars';
 import './ItemCard.css';
 
 const ItemCard = ({
-  name, stars, price, leftInStock, image, isSearchItem, onPress,
+  name, stars, price, leftInStock, image, isSearchItem, onPress, isStore,
 }) => (
 
   <button onClick={() => { onPress(); }} type="button" className="icon-button">
@@ -17,17 +17,21 @@ const ItemCard = ({
             <div className={`card-body ${isSearchItem ? 'col-md-9 d-flex flex-column align-items-start' : ''}`}>
               <h5 className="card-title">{name}</h5>
               <Stars number={stars.count} users={stars.users} />
+              {!isStore && (
               <div>
-                {price.value}
-                {' '}
-                {price.currency}
+                <div>
+                  {price.value}
+                  {' '}
+                  {price.currency}
+                </div>
+                <div className="red">
+                  {' '}
+                  {leftInStock}
+                  {' '}
+                  are left in stock
+                </div>
               </div>
-              <div className="red">
-                {' '}
-                {leftInStock}
-                {' '}
-                are left in stock
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -46,10 +50,12 @@ ItemCard.propTypes = {
   image: PropTypes.string.isRequired,
   isSearchItem: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
+  isStore: PropTypes.bool,
 };
 
 ItemCard.defaultProps = {
   isSearchItem: false,
+  isStore: false,
 };
 
 export default ItemCard;

@@ -5,7 +5,7 @@ import items from '../mock-data/items';
 import ItemCard from './ItemCard';
 import './ItemCarousel.css';
 
-const ItemsCarousel = ({ subcategoryName }) => {
+const ItemsCarousel = ({ subcategoryName, isStore }) => {
   const carouselRef = useRef(null);
   const scroll = async (scrollOffset) => {
     carouselRef.current.scrollLeft += scrollOffset;
@@ -37,6 +37,7 @@ const ItemsCarousel = ({ subcategoryName }) => {
               price={item.price}
               image={item.image}
               leftInStock={item.leftInStock}
+              isStore={isStore}
             />
           ))}
         </div>
@@ -47,6 +48,11 @@ const ItemsCarousel = ({ subcategoryName }) => {
 
 ItemsCarousel.propTypes = {
   subcategoryName: PropTypes.string.isRequired,
+  isStore: PropTypes.bool,
+};
+
+ItemsCarousel.defaultProps = {
+  isStore: false,
 };
 
 export default ItemsCarousel;
