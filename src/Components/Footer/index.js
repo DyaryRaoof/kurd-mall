@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   return (
     <footer className="orange">
@@ -15,14 +15,14 @@ const Footer = () => {
           <div className="row">
             <div className="col-md-4">
               <p className="orange">
-                © 2022 Copyright:
+                {t('copyRight')}
                 <a className="orange" href="/#">Kurd Mall</a>
               </p>
               <p>
-                <a className="orange" href="/#">Terms & Conditions</a>
+                <a className="orange" href="/#">{t('termsAndConditions')}</a>
               </p>
               <p>
-                <a className="orange" href="/#">Privacy Policy</a>
+                <a className="orange" href="/#">{t('privacyPolicy')}</a>
               </p>
 
             </div>
@@ -47,22 +47,22 @@ const Footer = () => {
                   localStorage.setItem('language', 'ku');
                 }}
               >
-                <p><a className="orange" href="/#">Kurdish</a></p>
+                <p><a className="orange" href="/#">کوردی</a></p>
               </button>
               <p>
-                <a className="orange" href="/#">Contact Us</a>
+                <a className="orange" href="/#">{t('contactUs')}</a>
               </p>
               <p>
-                <a className="orange" href="/#">About Us</a>
+                <a className="orange" href="/#">{t('aboutUs')}</a>
               </p>
             </div>
             <div className="col-md-4">
-              <p><a className="orange" href="/#">Adds</a></p>
+              <p><a className="orange" href="/#">{t('adds')}</a></p>
               <p>
-                <a className="orange" href="/#">FAQ</a>
+                <a className="orange" href="/#">{t('faq')}</a>
               </p>
               <p>
-                <a className="orange" href="/#">Help</a>
+                <a className="orange" href="/#">{t('help')}</a>
               </p>
             </div>
           </div>

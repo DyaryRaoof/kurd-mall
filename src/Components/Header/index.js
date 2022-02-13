@@ -42,7 +42,7 @@ const Header = () => {
                 <MaterialIcon onClick={() => { }} orange text="manage_accounts" />
               </span>
               {' '}
-              <span>Cart</span>
+              <span>{t('profile')}</span>
             </button>
           </li>
           <li>
@@ -51,7 +51,7 @@ const Header = () => {
                 <MaterialIcon onClick={() => { }} orange text="shopping_cart" />
               </span>
               {' '}
-              <span>Cart</span>
+              <span>{t('cart')}</span>
             </button>
           </li>
         </ul>
@@ -73,21 +73,21 @@ const Header = () => {
           </li>
           <li className="d-block d-sm-none mx-auto"><Search /></li>
           <li className="d-flex ms-auto me-2">
-            <span className="me-2">Items</span>
+            <span className="me-2">{t('items')}</span>
             <div className="form-check form-switch">
               <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" onChange={(e) => { dispatch(setNavStoreOrItem(e.target.checked ? 'stores' : 'items')); }} />
             </div>
             {' '}
-            Shops
+            {t('stores')}
           </li>
         </ul>
       </nav>
       <hr className="nav-hr" />
       <nav>
         <ul className="d-flex justify-content-center list-style-none">
-          <li className="px-1"><button className="icon-button orange" type="button"><u>Your Collection</u></button></li>
-          <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-store'); }}><u>Create Store</u></button></li>
-          <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-item'); }}><u>Add Item To Store</u></button></li>
+          <li className="px-1"><button className="icon-button orange" type="button"><u>{t('yourCollection')}</u></button></li>
+          <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-store'); }}><u>{t('createStore')}</u></button></li>
+          <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-item'); }}><u>{t('addItemToStore')}</u></button></li>
         </ul>
       </nav>
       <hr className="nav-hr" />

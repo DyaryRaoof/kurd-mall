@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import categories from '../mock-data/categories';
@@ -6,6 +7,7 @@ import MaterialIcon from '../Shared/MateriaIcon';
 
 const Sidebar = ({ clicked, changeShowSidebar }) => {
   const [showSubcategories, setShowSubcategories] = useState({ show: false, categoryId: 0 });
+  const { t } = useTranslation();
 
   return (
     <aside className={`side-bar ${clicked ? 'show-side-bar' : ''}`}>
@@ -15,7 +17,7 @@ const Sidebar = ({ clicked, changeShowSidebar }) => {
         </button>
       </div>
       <ul>
-        <li className="side-bar-title orange">Categories</li>
+        <li className="side-bar-title orange">{t('categories')}</li>
         <hr className="orange" />
         {categories.map((c) => (
           <li key={c.id}>

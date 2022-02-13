@@ -1,5 +1,21 @@
 {
     "signUp": "Sign Up",
     "logIn": "Log In",
-    "profile": "Profile"
+    "profile": "Profile",
+    "cart": "Cart",
+    "items": "Items",
+    "stores": "Stores",
+    "yourCollection": "Your Collection",
+    "createStore": "Create Store",
+    "Add Item To Store": "Add Item To Store",
+    "search": "Search",
+    "categories": "Categories",
+    "termsAndConditions": "Terms And Conditions",
+    "privacyPolicy": "Privacy Policy",
+    "contactUs": "Contact Us",
+    "aboutUs": "About Us",
+    "adds": "Adds",
+    "faq": "FAQ",
+    "help": "Help",
+    "copyRight": "© 2022 All Rights Reserved"
 }

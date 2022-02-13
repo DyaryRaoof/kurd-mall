@@ -1,5 +1,22 @@
 {
     "signUp": "تۆمارکردن",
     "logIn": "چوونە ژوورەوە",
-    "profile": "پرۆفایل"
+    "profile": "پرۆفایل",
+    "cart": "کارت",
+    "items": "کاڵا",
+    "stores": "کۆگا",
+    "yourCollection": "کاڵاکانم",
+    "logout": "دەرچوون",
+    "createStore": " کۆگە دروستبکە",
+    "addItemToStore": "کاڵا زیاد بکە",
+    "search": "گەڕان",
+    "categories": "بەشەکان",
+    "termsAndConditions": "مەرجەکانی بەکارهێنان",
+    "privacyPolicy": "سیاسەتی نیهێنیەکان",
+    "contactUs": "پەیوەندیمان پیوە بکە",
+    "aboutUs": "دەربارەی ئێمە",
+    "adds": "ڕیکلام",
+    "faq": "پرسیاری بەکارهێنان",
+    "help": "یارمەتی",
+    "copyRight": "© 2022 هەموو مافێکی پارێزراوە"
 }
