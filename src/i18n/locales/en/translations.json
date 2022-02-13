@@ -31,5 +31,8 @@
     "lowToHigh": "Low to High",
     "price": "Price",
     "to": "To",
-    "stars": "Stars"
+    "stars": "Stars",
+    "hi": "Hi",
+    "notAMember": "Not a member yet?",
+    "signUP": "Sign Up"
 }

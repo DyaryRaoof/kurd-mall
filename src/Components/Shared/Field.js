@@ -1,12 +1,16 @@
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import FieldErrors from './Classes/FieldErrors';
 
 const Field = ({
   placeholder, type, submitted, passwordFromParent,
-  name, getPassword, textarea, setParentValue, setChildValue, autoFocus,
+  name, getPassword, textarea, setParentValue, setChildValue, autoFocus, setParentFormValidity,
 }) => {
   const errorsClass = new FieldErrors(setChildValue || '', submitted, type, name, passwordFromParent);
   const errors = errorsClass.validate();
+  useEffect(() => {
+    setParentFormValidity(errors.length === 0);
+  }, [errors]);
 
   return (
     <div>
@@ -20,6 +24,7 @@ const Field = ({
           value={setChildValue}
           /* eslint-disable  jsx-a11y/no-autofocus */
           autoFocus={autoFocus != null ? autoFocus : false}
+
         />
       )
         : (
@@ -31,6 +36,8 @@ const Field = ({
             value={setChildValue}
             /* eslint-disable jsx-a11y/no-autofocus */
             autoFocus={autoFocus != null ? autoFocus : false}
+            setParentFormValidity={!(errors.length > 0)}
+
           />
         )}
       {submitted && errors && <div className="text-danger text-center">{errors}</div>}
@@ -48,7 +55,9 @@ Field.propTypes = {
   textarea: PropTypes.bool,
   setParentValue: PropTypes.func,
   setChildValue: PropTypes.string.isRequired,
-  autoFocus: PropTypes.bool.isRequired,
+  autoFocus: PropTypes.bool,
+  setParentFormValidity: PropTypes.func,
+
 };
 
 Field.defaultProps = {
@@ -58,6 +67,8 @@ Field.defaultProps = {
   submitted: false,
   textarea: false,
   setParentValue: () => { },
+  autoFocus: false,
+  setParentFormValidity: () => { },
 };
 
 export default Field;
