@@ -24,12 +24,22 @@ const Header = () => {
         <ul className="d-flex upper-nav-ul align-items-center">
           <li className="width-100"><button type="button" className="icon-button" onClick={() => { navigate('/'); }}>KurdMall</button></li>
           <li className="w-100 mx-auto d-sm-block d-none"><Search /></li>
+
           <li className="ms-auto">
             <button className="icon-text-pair icon-button" type="button" onClick={() => { navigate('/log-in'); }}>
               <span className="d-flex justify-content-end width-100">Sign In</span>
               <div>
                 <MaterialIcon onClick={() => { }} orange text="person" />
               </div>
+            </button>
+          </li>
+          <li>
+            <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/profile'); }}>
+              <span>
+                <MaterialIcon onClick={() => { }} orange text="manage_accounts" />
+              </span>
+              {' '}
+              <span>Cart</span>
             </button>
           </li>
           <li>
