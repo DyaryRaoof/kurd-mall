@@ -2,9 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Stars from './Stars';
 import './ItemCard.css';
+import MaterialIcon from './MateriaIcon';
 
 const ItemCard = ({
-  name, stars, price, leftInStock, image, isSearchItem, isStore, id,
+  name, stars, price, leftInStock, image, isSearchItem, isStore, id, currency, reviewers,
 }) => {
   const navigate = useNavigate();
 
@@ -12,40 +13,41 @@ const ItemCard = ({
     if (isStore) {
       navigate('/store-detail', {
         state: {
-          name, stars, price, leftInStock, id,
+          name, stars, price, reviewers, leftInStock, id,
         },
       });
     } else {
       navigate('/item-detail', {
         state: {
-          name, stars, price, leftInStock, id,
+          name, stars, price, reviewers, leftInStock, id,
         },
       });
     }
   };
 
   return (
-    <button
-      onClick={() => handleClick()}
-      type="button"
-      className="icon-button"
-    >
-      <div className="container">
-        <div className={`${!isSearchItem ? 'card item-card' : ''} p-2`}>
+
+    <div className="container">
+      <div className={`${!isSearchItem ? 'card item-card' : ''} p-2`}>
+        <button
+          onClick={() => handleClick()}
+          type="button"
+          className="icon-button"
+        >
           <div className="row">
             <div className={`${isSearchItem ? 'col-md-3' : ''}`}>
               <img src={image} className="card-img-top item-image" alt="Item" />
             </div>
-            <div className={`${'col-md-9'}`}>
+            <div className={`${isSearchItem ? 'col-md-9' : ''}`}>
               <div className={`card-body ${isSearchItem ? 'col-md-9 d-flex flex-column align-items-start' : ''}`}>
                 <h5 className="card-title">{name}</h5>
-                <Stars number={stars.count} users={stars.users} />
+                <Stars number={stars} users={reviewers} />
                 {!isStore && (
                   <div>
                     <div>
-                      {price.value}
+                      {price}
                       {' '}
-                      {price.currency}
+                      {currency}
                     </div>
                     <div className="red">
                       {' '}
@@ -58,23 +60,45 @@ const ItemCard = ({
               </div>
             </div>
           </div>
+        </button>
 
-        </div>
+        {
+          !isStore && (
+            <div className="d-flex justify-content-end">
+
+              <button
+                type="button"
+                className="icon-button"
+                onClick={() => {
+                  navigate('/create-item', {
+                    state: {
+                      name, stars, price, reviewers, leftInStock, id,
+                    },
+                  });
+                }}
+              >
+                <MaterialIcon text="create" orange />
+              </button>
+            </div>
+          )
+        }
       </div>
       {isSearchItem ? <hr /> : null}
-    </button>
+    </div>
   );
 };
 
 ItemCard.propTypes = {
   name: PropTypes.string.isRequired,
   stars: PropTypes.number.isRequired,
+  reviewers: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   leftInStock: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   isSearchItem: PropTypes.bool,
   isStore: PropTypes.bool,
   id: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
 };
 
 ItemCard.defaultProps = {

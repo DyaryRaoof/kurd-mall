@@ -22,7 +22,10 @@ const ItemDetail = ({ item }) => {
 
           <div className="d-flex justify-content-between position relative item-detail-top-icons">
             <MaterialIcon text="share" orange isLarge />
-            <MaterialIcon text="store" orange isLarge />
+
+            <button type="button" className="icon-button" onClick={() => { navigate('/store-detail', { state: item.storeId }); }}>
+              <MaterialIcon text="store" orange isLarge />
+            </button>
           </div>
           <Carousel images={[
             item.image, item.image, item.image,
@@ -36,15 +39,15 @@ const ItemDetail = ({ item }) => {
                 <div className="col-6">
                   <div>
                     <div className="orange">
-                      {`${item.price.value} ${item.price.currency} 
-                  + ${item.shippingPrice.value} ${item.shippingPrice.currency} shipping`}
+                      {`${item.price} ${item.currency} 
+                  + ${item.shippingPrice} ${item.currency} shipping`}
                     </div>
-                    <div className="orange">{`${item.price.value + item.shippingPrice.value} ${item.price.currency} total`}</div>
+                    <div className="orange">{`${item.price + item.shippingPrice} ${item.currency} total`}</div>
                   </div>
 
                 </div>
                 <div className="col-6 ">
-                  <Stars number={item.stars.count} users={item.stars.users} isInteractive />
+                  <Stars number={item.stars} users={item.reviewers} isInteractive />
                   <div className="text-danger">{`Only ${item.leftInStock} are left in stock `}</div>
                 </div>
                 <div className="mt-2">{item.description}</div>
@@ -61,7 +64,7 @@ const ItemDetail = ({ item }) => {
                       </div>
                       <div className="item-detail-variant-name">{variant.name}</div>
                       <div className="item-detail-variant-price">
-                        {`${variant.price.value} ${variant.price.currency}`}
+                        {`${variant.price} ${item.currency}`}
                       </div>
                     </div>
                   </button>
@@ -110,31 +113,21 @@ const ItemDetail = ({ item }) => {
 ItemDetail.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    price: PropTypes.shape({
-      value: PropTypes.number.isRequired,
-      currency: PropTypes.string.isRequired,
-    }).isRequired,
+    price: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    stars: PropTypes.shape({
-      count: PropTypes.number.isRequired,
-      users: PropTypes.number.isRequired,
-    }).isRequired,
+    stars: PropTypes.number.isRequired,
+    reviewers: PropTypes.number.isRequired,
     leftInStock: PropTypes.number.isRequired,
     storeId: PropTypes.number.isRequired,
     shippingKg: PropTypes.number.isRequired,
-    shippingPrice: PropTypes.shape({
-      value: PropTypes.number.isRequired,
-      currency: PropTypes.string.isRequired,
-    }).isRequired,
+    shippingPrice: PropTypes.number.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     description: PropTypes.string.isRequired,
     variants: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      price: PropTypes.shape({
-        value: PropTypes.number.isRequired,
-        currency: PropTypes.string.isRequired,
-      }).isRequired,
+      price: PropTypes.number.isRequired,
       imageIndex: PropTypes.number.isRequired,
     })).isRequired,
     images: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -13,7 +13,7 @@ const Stars = ({ number, users, isInteractive }) => {
     }
   };
   return (
-    <div className="d-flex">
+    <div className="d-flex justify-content-center">
       <div className="d-flex">
 
         {[...Array(5).keys()].map((a, index) => {

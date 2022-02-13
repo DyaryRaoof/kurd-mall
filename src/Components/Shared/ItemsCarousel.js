@@ -1,4 +1,6 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import MaterialIcon from './MateriaIcon';
 import items from '../mock-data/items';
@@ -10,12 +12,15 @@ const ItemsCarousel = ({ subcategoryName, isStore }) => {
   const scroll = async (scrollOffset) => {
     carouselRef.current.scrollLeft += scrollOffset;
   };
+  const navigate = useNavigate();
 
   return (
     <div>
       <div className="d-flex justify-content-between orange mx-2 mb-2">
         <u>{subcategoryName}</u>
-        <u>See All</u>
+        <button type="button" className="icon-button" onClick={() => navigate('/search-detail', { state: { subcategoryId: 1, categoryId: 1 } })}>
+          <u className="orange">See All</u>
+        </button>
       </div>
       <div className="d-flex justify-content-between carousel-button d-block d-lg-none">
         <button type="button" className="icon-button" onClick={() => { scroll(-200); }}>
@@ -35,9 +40,11 @@ const ItemsCarousel = ({ subcategoryName, isStore }) => {
               name={item.name}
               stars={item.stars}
               price={item.price}
+              currency={item.currency}
               image={item.image}
               leftInStock={item.leftInStock}
               isStore={isStore}
+              reviewers={item.reviewers}
             />
           ))}
         </div>
