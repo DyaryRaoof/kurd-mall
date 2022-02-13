@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import Item from './Item';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 import cartItems from '../mock-data/cartItems';
+import Pagination from '../Shared/Pagination';
 
 const OwnerOrders = ({ isBuyer }) => (
   <main className="container">
@@ -19,6 +20,7 @@ const OwnerOrders = ({ isBuyer }) => (
         />
       ))}
     </div>
+    <Pagination onPageChange={() => { }} currentPage={0} totalPages={10} />
   </main>
 );
 

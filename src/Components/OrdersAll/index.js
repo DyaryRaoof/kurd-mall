@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Item from './Item';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 import importedCartItems from '../mock-data/cartItems';
+import Pagination from '../Shared/Pagination';
 
 const OrdersAll = () => {
   const [cartItems, setCartItems] = useState(importedCartItems);
@@ -25,6 +26,8 @@ const OrdersAll = () => {
           />
         ))}
       </div>
+      <Pagination onPageChange={() => { }} currentPage={0} totalPages={10} />
+
     </div>
   );
 };

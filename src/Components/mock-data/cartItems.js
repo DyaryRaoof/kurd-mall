@@ -2,6 +2,9 @@ const cartItems = [
   {
     orderNo: 1,
     id: 0,
+    storeId: 1,
+    itemId: 1,
+    driverId: 1,
     supplierName: 'Supplier 1',
     name: 'Product 1',
     price: 100,
@@ -32,6 +35,9 @@ const cartItems = [
   {
     orderNo: 2,
     id: 1,
+    storeId: 1,
+    itemId: 1,
+    driverId: 1,
     supplierName: 'Supplier 1',
     name: 'Product 2',
     price: 200,
@@ -62,8 +68,10 @@ const cartItems = [
   },
   {
     orderNo: 3,
-
     id: 2,
+    storeId: 1,
+    itemId: 1,
+    driverId: 1,
     supplierName: 'Supplier 2',
     name: 'Product 3',
     price: 300,

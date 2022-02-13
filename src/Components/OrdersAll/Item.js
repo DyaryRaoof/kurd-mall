@@ -1,55 +1,19 @@
 import PropTypes from 'prop-types';
-import makeid from '../Shared/methods/makeid';
+import CartTop from '../Shared/CartTop';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 
 const Item = ({
   item, priceForItem, shippingPrice, totalPrice, onRemove,
 }) => (
   <div className="white-background rounded m-2 p-2">
-    <div>
-      Order No :
-      {item.orderNo}
-    </div>
-    <div className="d-flex justify-content-between">
-      <div className="orange mt-2">
-        <div>{item.supplierName}</div>
-        <div>{item.name}</div>
-        <div>
-          {item.variantOptions.map((vo) => (
-            <div className="d-flex" key={makeid(10)}>
-              <div>
-                {vo.name}
-                :
-                {' '}
-              </div>
-              <div>{vo.value}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div>
-        <div className="d-flex align-items-center">
-          <div>
-            No of Items:
-            {item.quantity}
-          </div>
-        </div>
-        <div>
-          Price:
-          {`${priceForItem} ${item.currency}`}
-        </div>
-        <div>
-          Shipping Price:
-          {`${shippingPrice} ${item.currency}`}
-        </div>
-        <div>
-          Total:
-          {`${totalPrice} ${item.currency}`}
-        </div>
-      </div>
-    </div>
+    <CartTop
+      item={item}
+      priceForItem={priceForItem}
+      shippingPrice={shippingPrice}
+      totalPrice={totalPrice}
+    />
     <div className="row">
-      <div className="col-md-4 m-2 d-flex justify-content-center">
+      <div className="col-md-4  d-flex justify-content-center">
         <RoundOrangeIconButton
           buttonText="Claim Order"
           onPressed={() => { onRemove(item.id); }}
@@ -59,7 +23,7 @@ const Item = ({
         />
       </div>
 
-      <div className="col-md-4 m-2 d-flex justify-content-center">
+      <div className="col-md-4 d-flex justify-content-center">
         <RoundOrangeIconButton
           buttonText="Open Store"
           onPressed={() => { }}
@@ -68,7 +32,7 @@ const Item = ({
           iconName="chat_bubble_outline"
         />
       </div>
-      <div className="col-md-4 m-2 d-flex justify-content-center">
+      <div className="col-md-4 d-flex justify-content-center">
         <RoundOrangeIconButton
           buttonText="Message Supplier"
           onPressed={() => { }}
