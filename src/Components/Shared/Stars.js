@@ -19,13 +19,13 @@ const Stars = ({ number, users, isInteractive }) => {
         {[...Array(5).keys()].map((a, index) => {
           if (a < currentStars.number) {
             return (
-              <button key={makeid} type="button" className="icon-button" onClick={() => handleClick(index)}>
+              <button key={makeid(10)} type="button" className="icon-button" onClick={() => handleClick(index)}>
                 <MaterialIcon text="star" orange />
               </button>
             );
           }
           return (
-            <button key={makeid} type="button" className="icon-button" onClick={() => handleClick(index)}>
+            <button key={makeid(10)} type="button" className="icon-button" onClick={() => handleClick(index)}>
               <MaterialIcon text="star" orange={false} />
             </button>
           );

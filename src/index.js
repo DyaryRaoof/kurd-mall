@@ -7,6 +7,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min';
 import store from './redux/configureStore';
+import './i18n/config';
 
 ReactDOM.render(
   <React.StrictMode>

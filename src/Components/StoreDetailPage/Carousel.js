@@ -6,7 +6,7 @@ const Carousel = ({ images }) => (
     <div className="carousel-indicators">
       {images.map((image, index) => (
         <div
-          key={makeid(5)}
+          key={makeid(10)}
           data-bs-target="#carouselExampleIndicators"
           type="button"
           data-bs-slide-to={index}

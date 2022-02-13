@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +19,8 @@ const Header = () => {
 
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
   return (
     <div>
       <nav className="mt-3">
@@ -27,7 +30,7 @@ const Header = () => {
 
           <li className="ms-auto">
             <button className="icon-text-pair icon-button" type="button" onClick={() => { navigate('/log-in'); }}>
-              <span className="d-flex justify-content-end width-100">Sign In</span>
+              <span className="d-flex justify-content-end width-100">{t('logIn')}</span>
               <div>
                 <MaterialIcon onClick={() => { }} orange text="person" />
               </div>
