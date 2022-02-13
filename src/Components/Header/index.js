@@ -1,5 +1,7 @@
-import './Header.css';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setNavStoreOrItem } from '../../redux/design/design';
+import './Header.css';
 import MaterialIcon from '../Shared/MateriaIcon';
 import Search from './Search';
 import Sidebar from './Sidebar';
@@ -10,6 +12,8 @@ const Header = () => {
   const changeShowSidebar = () => {
     setShowSidebar(!showSidebar);
   };
+
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -55,7 +59,7 @@ const Header = () => {
           <li className="d-flex ms-auto me-2">
             <span className="me-2">Items</span>
             <div className="form-check form-switch">
-              <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" />
+              <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" onChange={(e) => { dispatch(setNavStoreOrItem(e.target.checked ? 'shops' : 'items')); }} />
             </div>
             {' '}
             Shops
