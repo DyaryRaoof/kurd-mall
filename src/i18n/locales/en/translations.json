@@ -17,5 +17,19 @@
     "adds": "Adds",
     "faq": "FAQ",
     "help": "Help",
-    "copyRight": "© 2022 All Rights Reserved"
+    "copyRight": "© 2022 All Rights Reserved",
+    "leftInStock": "Left in stock",
+    "iqd": "IQD",
+    "usd": "USD",
+    "seeAll": "See All",
+    "searchResults": "Search Results",
+    "showing20": "Showing 20 ",
+    "outOf": "out of ",
+    "results": "results ",
+    "orderBy": "Order By",
+    "highToLow": "High to Low",
+    "lowToHigh": "Low to High",
+    "price": "Price",
+    "to": "To",
+    "stars": "Stars"
 }

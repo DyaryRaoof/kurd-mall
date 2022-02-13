@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Stars from './Stars';
@@ -8,6 +9,7 @@ const ItemCard = ({
   name, stars, price, leftInStock, image, isSearchItem, isStore, id, currency, reviewers,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleClick = () => {
     if (isStore) {
@@ -47,13 +49,13 @@ const ItemCard = ({
                     <div>
                       {price}
                       {' '}
-                      {currency}
+                      {currency === 'IQD' ? t('iqd') : t('usd')}
                     </div>
                     <div className="red">
                       {' '}
                       {leftInStock}
                       {' '}
-                      are left in stock
+                      {t('leftInStock')}
                     </div>
                   </div>
                 )}

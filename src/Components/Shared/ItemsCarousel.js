@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import MaterialIcon from './MateriaIcon';
 import items from '../mock-data/items';
@@ -13,13 +13,14 @@ const ItemsCarousel = ({ subcategoryName, isStore }) => {
     carouselRef.current.scrollLeft += scrollOffset;
   };
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div>
       <div className="d-flex justify-content-between orange mx-2 mb-2">
         <u>{subcategoryName}</u>
         <button type="button" className="icon-button" onClick={() => navigate('/search-detail', { state: { subcategoryId: 1, categoryId: 1 } })}>
-          <u className="orange">See All</u>
+          <u className="orange">{t('seeAll')}</u>
         </button>
       </div>
       <div className="d-flex justify-content-between carousel-button d-block d-lg-none">
