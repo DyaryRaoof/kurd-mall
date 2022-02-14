@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import signUP from '../../images/design/sign-up.png';
 import Field from '../Shared/Field';
 import { setUser } from '../../redux/user/user';
@@ -11,6 +12,7 @@ const Login = () => {
   const formValidity = [false, false];
   const [t] = useTranslation();
   const [fieldValues, setFieldValues] = useState(['', '']);
+  const navigate = useNavigate();
 
   const setParentValueNow = (value, index) => {
     const newFieldValues = [...fieldValues];
@@ -39,8 +41,11 @@ const Login = () => {
           <form onSubmit={(e) => {
             e.preventDefault();
             setSubmitted(true);
+            console.log(formValidity);
             if (!formValidity.includes(false)) {
               disptch(setUser(user));
+              localStorage.setItem('user', JSON.stringify(user));
+              navigate('/');
             }
           }}
           >

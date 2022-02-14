@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { setUser } from './redux/user/user';
 import Home from './Components/Home';
 import SignUp from './Components/SignUp';
 import Header from './Components/Header';
@@ -25,6 +28,12 @@ import OwnerOrders from './Components/OwnerOrders';
 import BuyerOrders from './Components/BuyerOrders';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    dispatch(setUser(JSON.parse(user)));
+  });
+
   return (
     <div>
       <Router>

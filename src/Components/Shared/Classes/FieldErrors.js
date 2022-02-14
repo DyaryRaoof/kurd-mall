@@ -1,9 +1,8 @@
 import ErrorMessages from './ErrorMessages';
 
 class FieldErrors {
-  constructor(value, submitted, type, name, passwordFromParent) {
+  constructor(value, type, name, passwordFromParent) {
     this.value = value;
-    this.submitted = submitted;
     this.type = type;
     this.name = name;
     this.passwordFromParent = passwordFromParent;
@@ -15,23 +14,23 @@ class FieldErrors {
     const errorMessages = new ErrorMessages();
 
     let errors = [];
-    if (this.value === '' && this.submitted) {
+    if (this.value === '') {
       errors = [...errors, errorMessages.messages.fields.required];
     }
 
-    if (this.type === 'email' && !this.value.toLocaleLowerCase().match(this.emailRegex) && this.submitted) {
+    if (this.type === 'email' && !this.value.toLocaleLowerCase().match(this.emailRegex)) {
       errors = [...errors, errorMessages.messages.fields.email.actual];
     }
 
-    if (this.type === 'password' && this.value.length < 8 && this.submitted) {
+    if (this.type === 'password' && this.value.length < 8) {
       errors = [...errors, errorMessages.messages.fields.password.minlength];
     }
 
-    if (this.type === 'tel' && this.value.length < 11 && this.submitted) {
+    if (this.type === 'tel' && this.value.length < 11) {
       errors = [...errors, errorMessages.messages.fields.phone.minlength];
     }
 
-    if (this.type === 'password' && this.passwordFromParent !== '' && this.value !== this.passwordFromParent && this.submitted && this.name === 'password-confirmation') {
+    if (this.type === 'password' && this.passwordFromParent !== '' && this.value !== this.passwordFromParent && this.name === 'password-confirmation') {
       errors = [...errors, errorMessages.messages.fields.passwordConfirmation.equalTo];
     }
 

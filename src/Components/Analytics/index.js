@@ -6,7 +6,7 @@ import Pagination from '../Shared/Pagination';
 
 const Analytics = ({ storeId }) => {
   const storeAnalytics = analytics.filter((analytic) => analytic.storeId === storeId
-        && analytic.isStore)[0];
+    && analytic.isStore)[0];
   const itemAnalytics = analytics.filter((analytic) => !analytic.isStore);
 
   const analyticNames = ['Views this Week: ',
@@ -34,7 +34,7 @@ const Analytics = ({ storeId }) => {
           </div>
         </div>
 
-        <input type="email" className="form-control w-100 mt-5" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search for item ..." />
+        <input type="email" className="form-control w-100 mt-5" aria-describedby="emailHelp" placeholder="Search for item ..." />
 
         {itemAnalytics.map((analytic) => (
           <div key={analytic.id} className="gray-background rouded p-2 my-2">

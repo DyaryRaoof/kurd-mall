@@ -1,25 +1,30 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setNavStoreOrItem } from '../../redux/design/design';
 import './Header.css';
 import MaterialIcon from '../Shared/MateriaIcon';
 import Search from './Search';
 import Sidebar from './Sidebar';
+import { setUser } from '../../redux/user/user';
 
 const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const user = useSelector((state) => state.userReducer.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const changeShowSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
-
-  const { t } = useTranslation();
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    dispatch(setUser(null));
+    navigate('/');
+  };
 
   return (
     <div>
@@ -29,31 +34,35 @@ const Header = () => {
           <li className="w-100 mx-auto d-sm-block d-none"><Search /></li>
 
           <li className="ms-auto">
-            <button className="icon-text-pair icon-button" type="button" onClick={() => { navigate('/log-in'); }}>
-              <span className="d-flex justify-content-end width-100">{t('logIn')}</span>
+            <button className="icon-text-pair icon-button" type="button" onClick={user ? handleLogout : () => { navigate('/log-in'); }}>
+              <span className="d-flex justify-content-end width-100">{user ? t('logOut') : t('logIn')}</span>
               <div>
                 <MaterialIcon onClick={() => { }} orange text="person" />
               </div>
             </button>
           </li>
-          <li>
-            <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/profile'); }}>
-              <span>
-                <MaterialIcon onClick={() => { }} orange text="manage_accounts" />
-              </span>
-              {' '}
-              <span>{t('profile')}</span>
-            </button>
-          </li>
-          <li>
-            <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/cart'); }}>
-              <span>
-                <MaterialIcon onClick={() => { }} orange text="shopping_cart" />
-              </span>
-              {' '}
-              <span>{t('cart')}</span>
-            </button>
-          </li>
+          {user ? (
+            <>
+              <li>
+                <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/profile'); }}>
+                  <span>
+                    <MaterialIcon onClick={() => { }} orange text="manage_accounts" />
+                  </span>
+                  {' '}
+                  <span>{t('profile')}</span>
+                </button>
+              </li>
+              <li>
+                <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/cart'); }}>
+                  <span>
+                    <MaterialIcon onClick={() => { }} orange text="shopping_cart" />
+                  </span>
+                  {' '}
+                  <span>{t('cart')}</span>
+                </button>
+              </li>
+            </>
+          ) : null}
         </ul>
       </nav>
       <hr className="nav-hr" />
