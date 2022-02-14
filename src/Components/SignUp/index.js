@@ -13,7 +13,7 @@ const SignUp = () => {
     setPassword(passwordFromChild);
   };
 
-  const formValidity = [false, false];
+  const formValidity = [false, false, false, false, false];
   const [fieldValues, setFieldValues] = useState([]);
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ const SignUp = () => {
               type="text"
               submitted={submitted}
               setParentValue={(value) => { setParentValueNow(value, 0); }}
-              setParentFormValidiy={(value) => { setFormValidityNow(value, 0); }}
+              setParentFormValidity={(value) => { setFormValidityNow(value, 0); }}
               setChildValue={fieldValues[0]}
 
             />
@@ -64,15 +64,16 @@ const SignUp = () => {
               type="email"
               submitted={submitted}
               setParentValue={(value) => { setParentValueNow(value, 1); }}
-              setParentFormValidiy={(value) => { setFormValidityNow(value, 1); }}
+              setParentFormValidity={(value) => { setFormValidityNow(value, 1); }}
               setChildValue={fieldValues[1]}
             />
             <Field
               placeholder={t('phoneNumber')}
-              type="tel"
+              type="number"
+              name="tel"
               submitted={submitted}
               setParentValue={(value) => { setParentValueNow(value, 2); }}
-              setParentFormValidiy={(value) => { setFormValidityNow(value, 2); }}
+              setParentFormValidity={(value) => { setFormValidityNow(value, 2); }}
               setChildValue={fieldValues[2]}
             />
             <Field
@@ -82,7 +83,7 @@ const SignUp = () => {
               getPassword={getPassword}
               name="password"
               setParentValue={(value) => { setParentValueNow(value, 3); }}
-              setParentFormValidiy={(value) => { setFormValidityNow(value, 3); }}
+              setParentFormValidity={(value) => { setFormValidityNow(value, 3); }}
               setChildValue={fieldValues[3]}
             />
             <Field
@@ -92,7 +93,9 @@ const SignUp = () => {
               passwordFromParent={password}
               name="password-confirmation"
               setParentValue={(value) => { setParentValueNow(value, 4); }}
-              setParentFormValidiy={(value) => { setFormValidityNow(value, 4); }}
+              setParentFormValidity={
+                (value) => { setFormValidityNow(value, 4); }
+              }
               setChildValue={fieldValues[4]}
             />
             <button type="submit" className="form-control orange p-3 my-3">{t('signUp')}</button>

@@ -49,7 +49,7 @@
         "passwordRequired": "Password is required. ",
         "passwordMinlength": "Password must be at least 8 characters long. ",
         "phoneRequired": "Phone number is required. ",
-        "phoneMinLength": "Phone number must be at least 11 characters long. ",
+        "phoneMinlength": "Phone number must be at least 11 characters long. ",
         "passwordConfirmationRequired": "Password confirmation is required. ",
         "passwordConfirmationEqualTo": "Passwords do not match. ",
         "imageRequired": "You need to upload at least one image. "

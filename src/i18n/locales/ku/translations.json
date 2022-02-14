@@ -50,7 +50,7 @@
         "passwordRequired": " .وشەی نهێنی داواکراوە",
         "passwordMinlength": " .وشەی نهێنی دەبێت زیاتر دەبێت لە ٨ پیت",
         "phoneRequired": " .ژمارەی تەلەفۆن داواکراوە",
-        "phoneMinLength": " .ژمارەی تەلەفۆن دەبێت زیاتربێت لە ١١ پیت",
+        "phoneMinlength": " .ژمارەی تەلەفۆن دەبێت زیاتربێت لە ١١ پیت",
         "passwordConfirmationRequired": " .وشەی نهێنی دووبارە داواکراوە",
         "passwordConfirmationEqualTo": " .وشەی نهێنی دووبارە دەبێت بە هەمان دەقی ووشەی نهێنی بێت",
         "imageRequired": " .وێنەیەک یەن زیاتر داواکراوە"

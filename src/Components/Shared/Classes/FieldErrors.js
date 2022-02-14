@@ -26,7 +26,7 @@ class FieldErrors {
       errors = [...errors, errorMessages.messages.fields.password.minlength];
     }
 
-    if (this.type === 'tel' && this.value.length < 11) {
+    if (this.name === 'tel' && this.value.length < 11) {
       errors = [...errors, errorMessages.messages.fields.phone.minlength];
     }
 
