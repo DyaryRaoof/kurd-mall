@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 const CheckBox = ({ submitted, setParentValue: onChange, text }) => {
   const [checked, setChecked] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="form-check">
-      <input className="form-check-input" type="checkbox" value={checked} id="flexCheckDefault" onChange={(e) => { onChange(e.target.value); setChecked(e.target.value); }} />
+      <input className="form-check-input" type="checkbox" value={checked} id="flexCheckDefault" onChange={(e) => { onChange(e.target.checked); setChecked(e.target.checked); }} />
       <span className="form-check-label" htmlFor="flexCheckDefault">
         {text}
       </span>
-      <p className="text-danger">{submitted && !checked && 'This field is required'}</p>
+      <p className="text-danger">{submitted && !checked && t('errors.fieldRequired')}</p>
     </div>
   );
 };

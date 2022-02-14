@@ -57,5 +57,17 @@
     },
     "phone": "تەلەفۆن",
     "becomeDriver": "ببە بە سایەقی گەیەنەر",
-    "editProfile": "پرۆفایل دەستکاری بکە"
+    "editProfile": "پرۆفایل دەستکاری بکە",
+    "driver": "سایەقی گەیەنەر",
+    "isImageOfYourFace": "ئەمە وێنەی نوێی دەمووچاوتە؟",
+    "isYourRealName": "ئەمە ناوی ڕاستی خۆتە؟",
+    "isYourCurrentEmail": "ئەمە ئیمەیلی ئێستای خۆتە؟",
+    "isYourCurrentPhone": "ئەمە ژمارەی تەلەفۆنی ئێستای خۆتە؟",
+    "addQualityDocuments": "تکایە وێنەی دیقە بەرزی هەویە و جنسیە داخڵ بکە، هەردوو دیویان بەردەست بکەیت",
+    "termsOfWorkingWithUs": "مەجەکانی کارکردن لەگەڵ ئیمە",
+    "fillInRequiredFields": "ئەبێت هەمووخانەی داواکراوەکان پڕبکەیتەوە",
+    "youCanUpload": "ئەتوانیت داخڵبکەیت",
+    "images": "وێنە",
+    "chooseImages": "وێنە هەڵبژێرە",
+    "agreeToTerms": "ڕازیم بە مەرجەکان"
 }

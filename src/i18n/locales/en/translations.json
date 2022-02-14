@@ -56,5 +56,17 @@
     },
     "phone": "Phone",
     "becomeDriver": "Become a Driver",
-    "editProfile": "Edit Profile"
+    "editProfile": "Edit Profile",
+    "driver": "Driver",
+    "isImageOfYourFace": "Is this a new image of your face?",
+    "isYourRealName": "is This your real name?",
+    "isYourCurrentEmail": "is This your current email?",
+    "isYourCurrentPhone": "is This your current phone number?",
+    "addQualityDocuments": "Please add a high quality picture of your National Identity and Personal Identity",
+    "termsOfWorkingWithUs": "Terms of working with us",
+    "fillInRequiredFields": "You need to fill in all required fields",
+    "youCanUpload": "You can upload ",
+    "images": "images",
+    "chooseImages": "Choose images",
+    "agreeToTerms": "Agree to the terms"
 }
