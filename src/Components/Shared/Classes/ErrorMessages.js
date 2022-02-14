@@ -1,28 +1,31 @@
+import { useTranslation } from 'react-i18next';
+
 class ErrorMessages {
   constructor() {
+    ({ t: this.t } = useTranslation());
     this.messages = {
       fields: {
-        required: 'This field is required.',
+        required: this.t('errors.fieldRequired'),
         email: {
-          required: 'Email is required. ',
-          actual: 'You need an actual email address. ',
+          required: this.t('errors.emailRequired'),
+          actual: this.t('errors.emailActual'),
         },
         password: {
-          required: 'Password is required. ',
-          minlength: 'Password must be at least 8 characters. ',
+          required: this.t('errors.passwordRequired'),
+          minlength: this.t('errors.passwordMinlength'),
         },
         phone: {
-          required: 'Phone number is required. ',
-          minlength: 'Phone number must be at least 11 characters. ',
+          required: this.t('errors.phoneRequired'),
+          minlength: this.t('errors.phoneMinlength'),
         },
         passwordConfirmation: {
-          required: 'Password confirmation is required. ',
-          minlength: 'Password must be at least 8 characters. ',
-          equalTo: 'Passwords do not match. ',
+          required: this.t('errors.passwordConfirmationRequired'),
+          minlength: this.t('errors.passwordMinlength'),
+          equalTo: this.t('errors.passwordConfirmationEqualTo'),
         },
       },
       images: {
-        required: 'You need to upload at least one image. ',
+        required: this.t('errors.imageRequired'),
       },
     };
   }

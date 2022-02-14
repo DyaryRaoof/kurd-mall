@@ -36,5 +36,23 @@
     "hi": "سڵاو",
     "notAMember": "هێشتا تۆمار نەکراویت؟",
     "signUP": "تۆمار ببە",
-    "logOut": "دەرچوون"
+    "logOut": "دەرچوون",
+    "alreadyAMember": "پێشتر تۆمارکراویت؟",
+    "name": "ناو",
+    "email": "ئیمەیل",
+    "password": "وشەی نهێنی",
+    "confirmPassword": "وشەی نهێنی دووبارە",
+    "phoneNumber": "ژمارەی تەلەفۆن",
+    "errors": {
+        "fieldRequired": " .ئەم خانەیە داواکراوە",
+        "emailRequired": " .ئیمەیڵ داواکراوە",
+        "emailActual": " .ئیمەیڵی دروست نییە",
+        "passwordRequired": " .وشەی نهێنی داواکراوە",
+        "passwordMinlength": " .وشەی نهێنی دەبێت زیاتر دەبێت لە ٨ پیت",
+        "phoneRequired": " .ژمارەی تەلەفۆن داواکراوە",
+        "phoneMinLength": " .ژمارەی تەلەفۆن دەبێت زیاتربێت لە ١١ پیت",
+        "passwordConfirmationRequired": " .وشەی نهێنی دووبارە داواکراوە",
+        "passwordConfirmationEqualTo": " .وشەی نهێنی دووبارە دەبێت بە هەمان دەقی ووشەی نهێنی بێت",
+        "imageRequired": " .وێنەیەک یەن زیاتر داواکراوە"
+    }
 }

@@ -6,7 +6,7 @@ const Field = ({
   placeholder, type, submitted, passwordFromParent,
   name, getPassword, textarea, setParentValue, setChildValue, autoFocus, setParentFormValidity,
 }) => {
-  const errorsClass = new FieldErrors(setChildValue || '', submitted, type, name, passwordFromParent);
+  const errorsClass = new FieldErrors(setChildValue || '', type, name, passwordFromParent);
   const errors = errorsClass.validate();
   useEffect(() => {
     setParentFormValidity(errors.length === 0);

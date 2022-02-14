@@ -35,5 +35,23 @@
     "hi": "Hi",
     "notAMember": "Not a member yet?",
     "signUP": "Sign Up",
-    "logOut": "Log Out"
+    "logOut": "Log Out",
+    "alreadyAMember": "Already a member?",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "phoneNumber": "Phone Number",
+    "errors": {
+        "fieldRequired": "This field is required",
+        "emailRequired": "Email is required. ",
+        "emailActual": "You need an actual email address. ",
+        "passwordRequired": "Password is required. ",
+        "passwordMinlength": "Password must be at least 8 characters long. ",
+        "phoneRequired": "Phone number is required. ",
+        "phoneMinLength": "Phone number must be at least 11 characters long. ",
+        "passwordConfirmationRequired": "Password confirmation is required. ",
+        "passwordConfirmationEqualTo": "Passwords do not match. ",
+        "imageRequired": "You need to upload at least one image. "
+    }
 }

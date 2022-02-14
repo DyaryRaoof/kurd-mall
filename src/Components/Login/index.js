@@ -41,7 +41,6 @@ const Login = () => {
           <form onSubmit={(e) => {
             e.preventDefault();
             setSubmitted(true);
-            console.log(formValidity);
             if (!formValidity.includes(false)) {
               disptch(setUser(user));
               localStorage.setItem('user', JSON.stringify(user));
