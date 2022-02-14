@@ -53,5 +53,7 @@
         "passwordConfirmationRequired": "Password confirmation is required. ",
         "passwordConfirmationEqualTo": "Passwords do not match. ",
         "imageRequired": "You need to upload at least one image. "
-    }
+    },
+    "phone": "Phone",
+    "becomeDriver": "Become a Driver"
 }

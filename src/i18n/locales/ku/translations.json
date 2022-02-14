@@ -54,5 +54,7 @@
         "passwordConfirmationRequired": " .وشەی نهێنی دووبارە داواکراوە",
         "passwordConfirmationEqualTo": " .وشەی نهێنی دووبارە دەبێت بە هەمان دەقی ووشەی نهێنی بێت",
         "imageRequired": " .وێنەیەک یەن زیاتر داواکراوە"
-    }
+    },
+    "phone": "تەلەفۆن",
+    "becomeDriver": "ببە بە سایەقی گەیەنەر"
 }
