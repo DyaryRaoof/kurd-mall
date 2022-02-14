@@ -55,5 +55,6 @@
         "imageRequired": "You need to upload at least one image. "
     },
     "phone": "Phone",
-    "becomeDriver": "Become a Driver"
+    "becomeDriver": "Become a Driver",
+    "editProfile": "Edit Profile"
 }

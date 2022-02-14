@@ -13,7 +13,7 @@ const SignUp = () => {
     setPassword(passwordFromChild);
   };
 
-  const formValidity = [false, false, false, false, false];
+  const formValidity = Array(5).fill(false);
   const [fieldValues, setFieldValues] = useState([]);
   const navigate = useNavigate();
 
