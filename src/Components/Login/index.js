@@ -1,7 +1,10 @@
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import signUP from '../../images/design/sign-up.png';
 import Field from '../Shared/Field';
+import { setUser } from '../../redux/user/user';
+import user from '../mock-data/user';
 
 const Login = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -13,12 +16,13 @@ const Login = () => {
     const newFieldValues = [...fieldValues];
     newFieldValues[index] = value;
     setFieldValues(newFieldValues);
-    console.log(value);
   };
 
   const setFormValidityNow = (value, index) => {
     formValidity[index] = value;
   };
+
+  const disptch = useDispatch();
 
   return (
     <main className="container sign-up-main">
@@ -35,9 +39,8 @@ const Login = () => {
           <form onSubmit={(e) => {
             e.preventDefault();
             setSubmitted(true);
-            console.log(formValidity);
             if (!formValidity.includes(false)) {
-              console.log('Form submitted');
+              disptch(setUser(user));
             }
           }}
           >

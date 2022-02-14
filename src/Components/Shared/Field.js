@@ -9,7 +9,9 @@ const Field = ({
   const errorsClass = new FieldErrors(setChildValue || '', submitted, type, name, passwordFromParent);
   const errors = errorsClass.validate();
   useEffect(() => {
-    setParentFormValidity(errors.length === 0);
+    if (submitted) {
+      setParentFormValidity(errors.length === 0);
+    }
   }, [errors]);
 
   return (
