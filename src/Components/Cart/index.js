@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import CartItem from './CartItem';
 import cartItemsImported from '../mock-data/cartItems';
 import MateriaIcon from '../Shared/MateriaIcon';
@@ -9,6 +10,7 @@ import getShippingPrice from '../Shared/methods/getShippingPrice';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState(cartItemsImported);
+  const { t } = useTranslation();
 
   const setTotals = (quantity, index) => {
     const newCartItems = [...cartItems];
@@ -38,12 +40,12 @@ const Cart = () => {
       <div id="map" />
       <div className="gray-background rounded p-2 ">
         <button className="icon-button" type="button" onClick={() => { openMapAtPosition(postion); }}>
-          <div className="fw-bold">Send to this location</div>
+          <div className="fw-bold">{t('sendToThisLocation')}</div>
           <div className="d-flex justify-content-center"><MateriaIcon text="place" orange isLarge /></div>
         </button>
         <div className="d-flex justify-content-end">
           <RoundOrangeIconButton
-            buttonText="Update My Location"
+            buttonText={t('updateMyLocation')}
             width="170px"
             padding="5px"
             isIconPresent={false}
@@ -68,20 +70,21 @@ const Cart = () => {
       <div className="d-flex justify-content-between">
         <div>
           <div>
-            Overall Total:
+            {t('overAllTotal')}
+            :
             {' '}
             {cartItems.filter((item) => item.currency === 'IQD').reduce((acc, item) => acc + item.totalPrice, 0)}
             {' '}
-            IQD
+            {t('iqd')}
             +
             {cartItems.filter((item) => item.currency === 'USD').reduce((acc, item) => acc + item.totalPrice, 0)}
             {' '}
-            USD
+            {t('usd')}
           </div>
         </div>
         <div>
           <RoundOrangeIconButton
-            buttonText="Checkout"
+            buttonText={t('checkout')}
             width="170px"
             padding="5px"
             isIconPresent={false}

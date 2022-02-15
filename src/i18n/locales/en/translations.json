@@ -68,5 +68,17 @@
     "youCanUpload": "You can upload ",
     "images": "images",
     "chooseImages": "Choose images",
-    "agreeToTerms": "Agree to the terms"
+    "agreeToTerms": "Agree to the terms",
+    "next": "Next",
+    "previous": "Previous",
+    "orderNo": "Order No",
+    "messageSupplier": "Message Supplier",
+    "removeItem": "Remove Item",
+    "updateMyLocation": "Update My Location",
+    "sendToThisLocation": "Send To This Location",
+    "numberOfItems": "Number of Items",
+    "shippingPrice": "Shipping Price",
+    "total": "Total",
+    "checkout": "Checkout",
+    "overAllTotal": "Over All Total"
 }

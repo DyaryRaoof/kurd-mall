@@ -69,5 +69,17 @@
     "youCanUpload": "ئەتوانیت داخڵبکەیت",
     "images": "وێنە",
     "chooseImages": "وێنە هەڵبژێرە",
-    "agreeToTerms": "ڕازیم بە مەرجەکان"
+    "agreeToTerms": "ڕازیم بە مەرجەکان",
+    "next": "دواتر",
+    "previous": "پێشتر",
+    "orderNo": "داواکاری ژمارە",
+    "messageSupplier": "نامە بنێرە بۆ کۆگا بنێرە",
+    "removeItem": "کاڵا لابەرە",
+    "updateMyLocation": "شوێنەکەم تازەبکەرەوە",
+    "sendToThisLocation": "بۆ ئەم شوێنە بنێرە",
+    "numberOfItems": "ژمارەی کاڵاکان",
+    "shippingPrice": "نرخی گەیاندن",
+    "total": "کۆی",
+    "checkout": "بکڕە",
+    "overAllTotal": "کۆی گشتی"
 }

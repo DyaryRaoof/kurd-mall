@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import makeid from '../Shared/methods/makeid';
 import './CartItem.css';
@@ -8,12 +9,18 @@ const CartItem = ({
   item, setParentQuantity, priceForItem, shippingPrice, totalPrice, onRemove,
 }) => {
   const [numberOfItems, setNumberOfItems] = useState(1);
+  const { t } = useTranslation();
 
   return (
     <div className="white-background rounded m-2 p-2">
-      <div>
-        Order No :
-        {item.orderNo}
+      <div className="d-flex">
+        <span>
+          {t('orderNo')}
+        </span>
+        :
+        <span>
+          {item.orderNo}
+        </span>
       </div>
       <div className="d-flex justify-content-between">
         <div className="orange mt-2">
@@ -35,26 +42,42 @@ const CartItem = ({
         <div>
           <div className="d-flex align-items-center">
             <div>
-              No of Items:
+              {t('numberOfItems')}
+              :
             </div>
             <input className="form-control cart-number-of-items" type="number" value={numberOfItems} onChange={(e) => { setNumberOfItems(e.target.value); setParentQuantity(e.target.value); }} />
           </div>
-          <div>
-            Price:
-            {`${priceForItem} ${item.currency}`}
+          <div className="d-flex">
+            <span>
+              {t('price')}
+            </span>
+            :
+            <span>
+              {`${priceForItem} ${item.currency}`}
+            </span>
           </div>
-          <div>
-            Shipping Price:
-            {`${shippingPrice} ${item.currency}`}
+          <div className="d-flex">
+            <div>
+              {t('shippingPrice')}
+            </div>
+            :
+            <span>
+              {`${shippingPrice} ${item.currency}`}
+            </span>
           </div>
-          <div>
-            Total:
-            {`${totalPrice} ${item.currency}`}
+          <div className="d-flex">
+            <span>
+              {t('total')}
+            </span>
+            :
+            <span>
+              {`${totalPrice} ${item.currency}`}
+            </span>
           </div>
         </div>
       </div>
       <RoundOrangeIconButton
-        buttonText="Message Supplier"
+        buttonText={t('messageSupplier')}
         onPressed={() => { }}
         width="200px"
         padding="5px"
@@ -62,7 +85,7 @@ const CartItem = ({
       />
       <div className="d-flex justify-content-end">
         <button type="button" className="icon-button" onClick={() => { onRemove(); }}>
-          <div className="text-danger"><u>Remove Item</u></div>
+          <div className="text-danger"><u>{t('removeItem')}</u></div>
         </button>
       </div>
     </div>
