@@ -80,5 +80,16 @@
     "shippingPrice": "Shipping Price",
     "total": "Total",
     "checkout": "Checkout",
-    "overAllTotal": "Over All Total"
+    "overAllTotal": "Over All Total",
+    "createAStore": "Create A Store",
+    "storeName": "Store Name",
+    "storeInfo": "Store Info",
+    "storeAddress": "Store Address",
+    "facebookLink": "Facebook Link",
+    "instagramLink": "Instagram Link",
+    "select": "Select Category",
+    "category": "Category",
+    "subcategory": "Subcategory",
+    "city": "City",
+    "create": "Create"
 }

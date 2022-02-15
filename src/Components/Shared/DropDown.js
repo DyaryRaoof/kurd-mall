@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import './DropDown.css';
 
 const DropDown = ({
-  categoryName, dropdownValues, setSelectedCategory, submitted, bgColorClass, setParentValue,
+  categoryName, dropdownValues, bgColorClass, setParentValue,
 }) => {
-  const [currentCategory, setCurrentCategory] = useState(null);
+  const [currentCategory, setCurrentCategory] = useState(dropdownValues[0]);
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -14,7 +16,7 @@ const DropDown = ({
           {currentCategory ? currentCategory.name
             : (
               <span>
-                Select
+                {t('select')}
                 {' '}
                 {categoryName}
               </span>
@@ -27,9 +29,6 @@ const DropDown = ({
                 className="dropdown-item icon-button"
                 type="button"
                 onClick={() => {
-                  if (categoryName === 'Category') {
-                    setSelectedCategory(value);
-                  }
                   setCurrentCategory(value);
                   setParentValue(value);
                 }}
@@ -40,7 +39,6 @@ const DropDown = ({
           ))}
         </ul>
       </div>
-      {!currentCategory && submitted && (<div className="text-danger text-center">{`You Select A ${categoryName}`}</div>)}
     </div>
   );
 };
@@ -51,14 +49,11 @@ DropDown.protoTypes = {
 DropDown.propTypes = {
   categoryName: PropTypes.string.isRequired,
   dropdownValues: PropTypes.instanceOf(Array).isRequired,
-  setSelectedCategory: PropTypes.func,
-  submitted: PropTypes.bool.isRequired,
   bgColorClass: PropTypes.string,
   setParentValue: PropTypes.func,
 };
 
 DropDown.defaultProps = {
-  setSelectedCategory: () => { },
   bgColorClass: '',
   setParentValue: () => { },
 };

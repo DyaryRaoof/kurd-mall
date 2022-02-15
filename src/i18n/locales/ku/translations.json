@@ -81,5 +81,16 @@
     "shippingPrice": "نرخی گەیاندن",
     "total": "کۆی",
     "checkout": "بکڕە",
-    "overAllTotal": "کۆی گشتی"
+    "overAllTotal": "کۆی گشتی",
+    "createAStore": "کۆگا دروست بکە",
+    "storeName": "ناوی کۆگا",
+    "storeInfo": "زانیارییەکانی کۆگا",
+    "storeAddress": "ناونیشانی کۆگا",
+    "facebookLink": "لینکی فەیسبوک",
+    "instagramLink": "لینکی انستاگرام",
+    "select": "هەڵبژێرە",
+    "category": "بەش",
+    "subcategory": "بەشی تایبەتی",
+    "city": "شار",
+    "create": "دروست بکە"
 }
