@@ -91,5 +91,21 @@
     "category": "Category",
     "subcategory": "Subcategory",
     "city": "City",
-    "create": "Create"
+    "create": "Create",
+    "description": "Description",
+    "priceInIQDEg": "Price in IQD eg. 10000",
+    "contInIQDEg": "Cost in IQD eg. 800",
+    "profit": "Profit",
+    "usersWillNotSeeThis": "User will not see this",
+    "numbersAvailableEg": "Numbers available eg. 10",
+    "tags": "Tags",
+    "tagsEg": "Tags. eg. winter, cotton, wool",
+    "shipping": "Shipping",
+    "shippingEg": "Item weight in Kg eg. 0.1",
+    "variants": "Variants",
+    "thisItemHasVariants": "This item is has variants for example size, color, etc.",
+    "addVariant": "Add Variant",
+    "variantNameEg": "Variant Name. eg. Size",
+    "variantValuesEg": "Variant Values. eg. Small, Medium, Large",
+    "removeVariant": "Remove Variant"
 }

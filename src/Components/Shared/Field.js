@@ -3,8 +3,18 @@ import { useEffect } from 'react';
 import FieldErrors from './Classes/FieldErrors';
 
 const Field = ({
-  placeholder, type, submitted, passwordFromParent,
-  name, getPassword, textarea, setParentValue, setChildValue, autoFocus, setParentFormValidity,
+  placeholder,
+  type,
+  submitted,
+  passwordFromParent,
+  name,
+  getPassword,
+  textarea,
+  setParentValue,
+  setChildValue,
+  autoFocus,
+  setParentFormValidity,
+  isFLoat,
 }) => {
   const errorsClass = new FieldErrors(setChildValue || '', type, name, passwordFromParent);
   const errors = errorsClass.validate();
@@ -24,6 +34,7 @@ const Field = ({
           value={setChildValue}
           /* eslint-disable  jsx-a11y/no-autofocus */
           autoFocus={autoFocus != null ? autoFocus : false}
+          step={isFLoat ? '0.1' : '1'}
 
         />
       )
@@ -57,18 +68,21 @@ Field.propTypes = {
   setChildValue: PropTypes.string.isRequired,
   autoFocus: PropTypes.bool,
   setParentFormValidity: PropTypes.func,
+  isFLoat: PropTypes.bool,
 
 };
 
 Field.defaultProps = {
   passwordFromParent: '',
   name: '',
-  getPassword: () => { },
   submitted: false,
   textarea: false,
-  setParentValue: () => { },
   autoFocus: false,
+  isFLoat: false,
   setParentFormValidity: () => { },
+  setParentValue: () => { },
+  getPassword: () => { },
+
 };
 
 export default Field;
