@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import MaterialIcon from '../Shared/MateriaIcon';
 import Carousel from '../StoreDetailPage/Carousel';
@@ -14,6 +15,7 @@ import ItemsCarousel from '../Shared/ItemsCarousel';
 const ItemDetail = ({ item }) => {
   const [selectedVariant, setSelectedVariant] = useState(item.variants[0]);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -39,16 +41,32 @@ const ItemDetail = ({ item }) => {
                 <div className="col-6">
                   <div>
                     <div className="orange">
-                      {`${item.price} ${item.currency} 
-                  + ${item.shippingPrice} ${item.currency} shipping`}
+                      <div className="d-flex">
+                        <span>{item.price}</span>
+                        <span className="px-2">{item.currency === 'IQD' ? t('iqd') : t('usd')}</span>
+                      </div>
+                      <div className="d-flex">
+                        <span>{item.shippingPrice}</span>
+                        <span className="px-2">{item.currency === 'IQD' ? t('iqd') : t('usd')}</span>
+                        <span>{t('shipping')}</span>
+                      </div>
+                      <div className="d-flex">
+                        <span>
+                          {item.price + item.shippingPrice}
+                        </span>
+                        <span className="px-2">{item.currency === 'IQD' ? t('iqd') : t('usd')}</span>
+                        <span>
+                          {t('total')}
+                        </span>
+                      </div>
                     </div>
-                    <div className="orange">{`${item.price + item.shippingPrice} ${item.currency} total`}</div>
+
                   </div>
 
                 </div>
-                <div className="col-6 ">
+                <div className="col-6">
                   <Stars number={item.stars} users={item.reviewers} isInteractive />
-                  <div className="text-danger">{`Only ${item.leftInStock} are left in stock `}</div>
+                  <div className="text-danger text-end pe-5">{`${t('only')} ${item.leftInStock} ${t('leftInStock')} `}</div>
                 </div>
                 <div className="mt-2">{item.description}</div>
               </div>
@@ -75,28 +93,28 @@ const ItemDetail = ({ item }) => {
         </div>
         <div className="d-flex justify-content-center align-items-center flex-column mt-5">
           <button className="icon-button" type="button">
-            <RoundOrangeIconButton buttonText="Add to cart" iconName="add_shopping_cart" />
+            <RoundOrangeIconButton buttonText={t('addToCart')} iconName="add_shopping_cart" />
           </button>
           <button type="button" className="icon-button mt-3">
-            <RoundOrangeIconButton buttonText="Message Seller" iconName="mode_comment" />
+            <RoundOrangeIconButton buttonText={t('messageSupplier')} iconName="mode_comment" />
           </button>
         </div>
 
         <div>
-          <h3 className="orange">Comments</h3>
+          <h3 className="orange">{t('comments')}</h3>
           {Array(5).fill(0).map(() => (
             <Comment key={makeid(10)} comment={comment} />
           ))}
           <div className="d-flex justify-content-end">
             <button type="button" className="icon-button" onClick={() => navigate('/see-all-comments', { state: { itemId: item.id } })}>
-              <p className="orange"><u>See All Comments</u></p>
+              <p className="orange"><u>{t('seeAllComments')}</u></p>
             </button>
           </div>
 
         </div>
 
         <div>
-          <h3 className="orange">Related Items</h3>
+          <h3 className="orange">{t('relatedItems')}</h3>
           {Array(5).fill(0).map(() => (
             <ItemsCarousel
               key={makeid(10)}

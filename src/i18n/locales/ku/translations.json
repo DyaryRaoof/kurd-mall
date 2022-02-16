@@ -20,8 +20,8 @@
     "help": "یارمەتی",
     "copyRight": "© 2022 هەموو مافێکی پارێزراوە",
     "leftInStock": "دانە بەردەست ماوە",
-    "iqd": "د.ع",
-    "usd": "دۆلار",
+    "iqd": " د.ع ",
+    "usd": " دۆلار ",
     "seeAll": "هەمووی ببینە",
     "searchResults": "ئەنجامەکانی گەڕان",
     "showing20": "نیشاندانی 20",
@@ -73,7 +73,7 @@
     "next": "دواتر",
     "previous": "پێشتر",
     "orderNo": "داواکاری ژمارە",
-    "messageSupplier": "نامە بنێرە بۆ کۆگا بنێرە",
+    "messageSupplier": "نامە بۆ کۆگا بنێرە",
     "removeItem": "کاڵا لابەرە",
     "updateMyLocation": "شوێنەکەم تازەبکەرەوە",
     "sendToThisLocation": "بۆ ئەم شوێنە بنێرە",
@@ -108,5 +108,11 @@
     "addVariant": "هاوشێوە زیاد بکە",
     "variantNameEg": "ناوی هاوشێوە ، نموونە ڕەنگ یان قەبارە",
     "variantValuesEg": "بەهای هاوشێوە ، نموونە سوور، ١٠",
-    "removeVariant": "هاوشێوە لابەرە"
+    "removeVariant": "هاوشێوە لابەرە",
+    "comments": "کۆمێنتەکان",
+    "seeAllComments": "هەموو کۆمێنتەکان ببینە",
+    "relatedItems": "کاڵای هاوشێوە",
+    "addToCart": "زیادیبکە بۆ کارت",
+    "at": "لە",
+    "only": "تەنها"
 }

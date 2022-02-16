@@ -107,5 +107,11 @@
     "addVariant": "Add Variant",
     "variantNameEg": "Variant Name. eg. Size",
     "variantValuesEg": "Variant Values. eg. Small, Medium, Large",
-    "removeVariant": "Remove Variant"
+    "removeVariant": "Remove Variant",
+    "comments": "Comments",
+    "seeAllComments": "See All Comments",
+    "relatedItems": "Related Items",
+    "addToCart": "Add To Cart",
+    "at": "At",
+    "only": "Only"
 }
