@@ -28,43 +28,64 @@ const Header = () => {
 
   return (
     <div>
-      <nav className="mt-3">
-        <ul className="d-flex upper-nav-ul align-items-center">
-          <li className="width-100"><button type="button" className="icon-button" onClick={() => { navigate('/'); }}>KurdMall</button></li>
-          <li className="w-100 mx-auto d-sm-block d-none"><Search /></li>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid">
+          <button type="button" className="icon-button" onClick={() => { navigate('/'); }}>KurdMall</button>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <li className="w-100 mx-auto d-sm-block d-none"><Search /></li>
 
-          <li className="ms-auto">
-            <button className="icon-text-pair icon-button" type="button" onClick={user ? handleLogout : () => { navigate('/log-in'); }}>
-              <span className="d-flex justify-content-end width-100">{user ? t('logOut') : t('logIn')}</span>
-              <div>
-                <MaterialIcon onClick={() => { }} orange text="person" />
-              </div>
-            </button>
-          </li>
-          {user ? (
-            <>
-              <li>
-                <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/profile'); }}>
-                  <span>
-                    <MaterialIcon onClick={() => { }} orange text="manage_accounts" />
-                  </span>
-                  {' '}
-                  <span>{t('profile')}</span>
+            <ul className="navbar-nav">
+
+              <li className="ms-auto">
+                <button className="icon-text-pair icon-button" type="button" onClick={user ? handleLogout : () => { navigate('/log-in'); }}>
+                  <span className="d-flex justify-content-end width-100">{user ? t('logOut') : t('logIn')}</span>
+                  <div>
+                    <MaterialIcon onClick={() => { }} orange text="person" />
+                  </div>
                 </button>
               </li>
-              <li>
-                <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/cart'); }}>
-                  <span>
-                    <MaterialIcon onClick={() => { }} orange text="shopping_cart" />
-                  </span>
-                  {' '}
-                  <span>{t('cart')}</span>
-                </button>
-              </li>
-            </>
-          ) : null}
-        </ul>
+              {user ? (
+                <>
+                  <li className="ms-auto">
+                    <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/profile'); }}>
+                      <span>
+                        <MaterialIcon onClick={() => { }} orange text="manage_accounts" />
+                      </span>
+                      {' '}
+                      <span>{t('profile')}</span>
+                    </button>
+                  </li>
+                  <li className="ms-auto">
+                    <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/cart'); }}>
+                      <span>
+                        <MaterialIcon onClick={() => { }} orange text="shopping_cart" />
+                      </span>
+                      {' '}
+                      <span>{t('cart')}</span>
+                    </button>
+                  </li>
+
+                  <li className="ms-auto me-2">
+                    <button type="button" className="position-relative icon-button">
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+                        99+
+                        <span className="visually-hidden">unread messages</span>
+                      </span>
+                      <span>
+                        <MaterialIcon onClick={() => { }} orange text="chat_bubble_outline" />
+                      </span>
+                    </button>
+                  </li>
+                </>
+              ) : null}
+            </ul>
+          </div>
+        </div>
       </nav>
+
       <hr className="nav-hr" />
       <nav>
         <ul className="lower-nav-ul d-flex align-items-center">
