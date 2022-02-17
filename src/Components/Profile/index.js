@@ -56,7 +56,19 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <RoundOrangeIconButton iconName="local_shipping" buttonText={t('becomeDriver')} isLarge onPressed={() => navigate('/driver')} />
+
+      <div className="row">
+        <div className="col-md-6">
+          <div className="d-flex justify-content-center">
+            <RoundOrangeIconButton iconName="local_shipping" buttonText={t('becomeDriver')} isLarge onPressed={() => navigate('/driver')} />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="d-flex justify-content-center">
+            <RoundOrangeIconButton iconName="apps" buttonText={t('myCollection')} isLarge onPressed={() => navigate('/my-collection')} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

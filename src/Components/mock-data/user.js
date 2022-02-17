@@ -6,6 +6,7 @@ const user = {
   isDriver: false,
   isAdmin: false,
   hasStore: false,
+  storeId: 1,
 };
 
 export default user;

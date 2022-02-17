@@ -113,5 +113,7 @@
     "relatedItems": "Related Items",
     "addToCart": "Add To Cart",
     "at": "At",
-    "only": "Only"
+    "only": "Only",
+    "myCollection": "My Collection",
+    "analytics": "Analytics"
 }

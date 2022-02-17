@@ -27,9 +27,17 @@ const ItemCard = ({
     }
   };
 
+  const checkIfUserHasStore = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (isStore && user.storeId === id) {
+      return true;
+    }
+    return false;
+  };
+
   return (
 
-    <div className="container">
+    <div className="mt-2 mx-1">
       <div className={`${!isSearchItem ? 'card item-card' : ''} p-2`}>
         <button
           onClick={() => handleClick()}
@@ -65,18 +73,26 @@ const ItemCard = ({
         </button>
 
         {
-          !isStore && (
+          (!isStore || checkIfUserHasStore()) && (
             <div className="d-flex justify-content-end">
 
               <button
                 type="button"
                 className="icon-button"
                 onClick={() => {
-                  navigate('/create-item', {
-                    state: {
-                      name, stars, price, reviewers, leftInStock, id,
-                    },
-                  });
+                  if (isStore) {
+                    navigate('/create-store', {
+                      state: {
+                        name, stars, reviewers, id,
+                      },
+                    });
+                  } else {
+                    navigate('/create-item', {
+                      state: {
+                        name, stars, price, reviewers, leftInStock, id,
+                      },
+                    });
+                  }
                 }}
               >
                 <MaterialIcon text="create" orange />

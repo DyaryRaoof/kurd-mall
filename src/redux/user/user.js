@@ -1,6 +1,6 @@
 const SET_USER = 'kurd-mall/user/SET_USER';
 
-const initialState = { user: null };
+const initialState = { user: { storeId: '' } };
 
 export const setUser = (payload) => ({
   type: SET_USER,

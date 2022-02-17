@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { setUser } from './redux/user/user';
+// import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
+// import { setUser } from './redux/user/user';
 import Home from './Components/Home';
 import SignUp from './Components/SignUp';
 import Header from './Components/Header';
@@ -26,13 +26,14 @@ import OrdersAll from './Components/OrdersAll';
 import DriverOrders from './Components/DriverOrders';
 import OwnerOrders from './Components/OwnerOrders';
 import BuyerOrders from './Components/BuyerOrders';
+import MyCollection from './Components/MyCollection';
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    dispatch(setUser(JSON.parse(user)));
-  });
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const user = localStorage.getItem('user');
+  //   dispatch(setUser(JSON.parse(user)));
+  // });
 
   return (
     <div>
@@ -59,6 +60,7 @@ function App() {
           <Route path="/driver-orders" exact element={<DriverOrders />} />
           <Route path="/owner-orders" exact element={<OwnerOrders />} />
           <Route path="/buyer-orders" exact element={<BuyerOrders />} />
+          <Route path="/my-collection" exact element={<MyCollection />} />
         </Routes>
       </Router>
       <Footer />
