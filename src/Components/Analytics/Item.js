@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 const Item = ({ name, value }) => (
   <div className="d-flex">
     <p className="orange">{name}</p>
-    <span>{value}</span>
+    <span className="px-2">{value}</span>
   </div>
 );
 

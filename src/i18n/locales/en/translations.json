@@ -115,5 +115,18 @@
     "at": "At",
     "only": "Only",
     "myCollection": "My Collection",
-    "analytics": "Analytics"
+    "analytics": "Analytics",
+    "viewsThisWeek": "Views This Week ",
+    "viewsToday": "Views Today ",
+    "viewsLifetime": "Views Lifetime ",
+    "totalStars": "Total Stars ",
+    "totalReviews": "Total Reviews ",
+    "totalShares": "Total Shares ",
+    "totalComments": "Total Comments ",
+    "totalRevenueIQD": "Total Revenue (IQD) ",
+    "totalRevenueUSD": "Total Revenue (USD) ",
+    "totalItemsSold": "Total Item Sold ",
+    "store": "Store",
+    "seeItem": "See Item",
+    "searchForItem": "Search For Item"
 }

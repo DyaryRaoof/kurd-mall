@@ -116,5 +116,18 @@
     "at": "لە",
     "only": "تەنها",
     "myCollection": "کاڵاکانم",
-    "analytics": "شیکاری"
+    "analytics": "شیکاری",
+    "viewsThisWeek": "ئەم هەفتەیە بینراوە",
+    "viewsToday": "ئەمرۆ بینراوە",
+    "viewsLifetime": "لەسەرەتای تۆمارکردنەوە بینراوە",
+    "totalStars": "ژمارەی ئەستێرەکان",
+    "totalReviews": "ژمارەی پێدەری ئەستێرەکان",
+    "totalShares": "ژمارەی بڵاوکردنەوەکان",
+    "totalComments": "ژمارەی کۆمێنتەکان",
+    "totalRevenueIQD": "داهاتی تەواو بە دینار",
+    "totalRevenueUSD": "داهاتی تەواو بە دۆلار",
+    "totalItemsSold": "ژمارەی کاڵای فرۆشراو",
+    "store": "کۆگا",
+    "seeItem": "کاڵا ببینە",
+    "searchForItem": "بۆ کاڵا بگەڕێ"
 }
