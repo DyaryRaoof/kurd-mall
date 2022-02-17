@@ -141,5 +141,6 @@
     "deliver": "Deliver",
     "status": "Status",
     "waiting": "Waiting",
-    "pickedUp": "Picked Up"
+    "pickedUp": "Picked Up",
+    "claimOrder": "Claim Order"
 }

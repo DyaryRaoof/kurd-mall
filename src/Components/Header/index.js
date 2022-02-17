@@ -69,7 +69,7 @@ const Header = () => {
                   </li>
 
                   <li className="ms-auto">
-                    <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/driver-orders'); }}>
+                    <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/orders-all'); }}>
                       <span>
                         <MaterialIcon onClick={() => { }} orange text="local_shipping" />
                       </span>

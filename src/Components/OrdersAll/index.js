@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import Item from './Item';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 import importedCartItems from '../mock-data/cartItems';
 import Pagination from '../Shared/Pagination';
+import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 
 const OrdersAll = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(importedCartItems);
   const handleRemove = (id) => {
     const newCartItems = cartItems.filter((item) => item.id !== id);
@@ -12,7 +17,7 @@ const OrdersAll = () => {
   };
   return (
     <div>
-      <h3>All Orders</h3>
+      <h3>{t('allOrders')}</h3>
       <div className="gray-background rounded p-1 my-2">
         {cartItems.map((item) => (
           <Item
@@ -25,6 +30,9 @@ const OrdersAll = () => {
             onRemove={() => { handleRemove(item.id); }}
           />
         ))}
+      </div>
+      <div className="d-flex justify-content-end">
+        <RoundOrangeIconButton buttonText={t('myOrders')} onPressed={() => { navigate('/driver-orders'); }} iconName="local_shipping" />
       </div>
       <Pagination onPageChange={() => { }} currentPage={0} totalPages={10} />
 
