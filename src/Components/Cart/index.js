@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
 import cartItemsImported from '../mock-data/cartItems';
 import MateriaIcon from '../Shared/MateriaIcon';
@@ -9,8 +10,9 @@ import openMapAtPosition from '../Shared/methods/openMapAtPostion';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState(cartItemsImported);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState(cartItemsImported);
 
   const setTotals = (quantity, index) => {
     const newCartItems = [...cartItems];
@@ -36,7 +38,7 @@ const Cart = () => {
 
   return (
     <main className="container">
-      <h2 className="orange">Cart</h2>
+      <h2 className="orange">{t('cart')}</h2>
       <div id="map" />
       <div className="gray-background rounded p-2 ">
         <button className="icon-button" type="button" onClick={() => { openMapAtPosition(postion); }}>
@@ -84,10 +86,11 @@ const Cart = () => {
         </div>
         <div>
           <RoundOrangeIconButton
-            buttonText={t('checkout')}
+            buttonText={cartItems.length > 0 ? t('checkout') : t('myOrders')}
             width="170px"
             padding="5px"
             isIconPresent={false}
+            onPressed={() => { navigate('/owner-orders'); }}
           />
         </div>
       </div>

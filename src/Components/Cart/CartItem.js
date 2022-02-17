@@ -10,6 +10,13 @@ const CartItem = ({
 }) => {
   const [numberOfItems, setNumberOfItems] = useState(1);
   const { t } = useTranslation();
+  const getCurrencyTranslation = (currency) => {
+    if (currency === 'IQD') {
+      return t('iqd');
+    }
+
+    return t('usd');
+  };
 
   return (
     <div className="white-background rounded m-2 p-2">
@@ -53,7 +60,7 @@ const CartItem = ({
             </span>
             :
             <span>
-              {`${priceForItem} ${item.currency}`}
+              {`${priceForItem} ${getCurrencyTranslation(item.currency)}`}
             </span>
           </div>
           <div className="d-flex">
@@ -62,7 +69,7 @@ const CartItem = ({
             </div>
             :
             <span>
-              {`${shippingPrice} ${item.currency}`}
+              {`${shippingPrice} ${getCurrencyTranslation(item.currency)}`}
             </span>
           </div>
           <div className="d-flex">
@@ -71,7 +78,7 @@ const CartItem = ({
             </span>
             :
             <span>
-              {`${totalPrice} ${item.currency}`}
+              {`${totalPrice} ${getCurrencyTranslation(item.currency)}`}
             </span>
           </div>
         </div>
