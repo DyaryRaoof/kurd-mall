@@ -143,5 +143,12 @@
     "status": "ڕەوش",
     "waiting": "چاوەڕێیە",
     "pickedUp": "هەڵگیراوە",
-    "claimOrder": "داواکاری هەڵبگرە"
+    "claimOrder": "داواکاری هەڵبگرە",
+    "messageDriver": "پەیام بۆ گەیەنەر بنێرە",
+    "done": "تەواو",
+    "address": "ناونیشان",
+    "location": "شوێن",
+    "instagram": "ئینستاگرام",
+    "facebook": "فەیسبووک",
+    "addItem": "کاڵا زیادبکە"
 }

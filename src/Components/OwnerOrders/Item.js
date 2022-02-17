@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import PropTypes from 'prop-types';
 import CartTop from '../Shared/CartTop';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
@@ -18,7 +19,7 @@ const Item = ({
         {
           isBuyer ? (
             <RoundOrangeIconButton
-              buttonText="Open Item"
+              buttonText={t('openItem')}
               onPressed={() => { }}
               width="200px"
               padding="5px"
@@ -30,7 +31,7 @@ const Item = ({
       </div>
       <div className="col-md-4 d-flex justify-content-center my-2 ">
         <RoundOrangeIconButton
-          buttonText="Open Store"
+          buttonText={t('openStore')}
           onPressed={() => { }}
           width="200px"
           padding="5px"
@@ -39,7 +40,7 @@ const Item = ({
       </div>
       <div className="col-md-4 d-flex justify-content-center my-2">
         <RoundOrangeIconButton
-          buttonText={isBuyer ? 'Message Store' : 'Message Driver'}
+          buttonText={isBuyer ? t('messageSupplier') : t('messageDriver')}
           onPressed={() => { }}
           width="200px"
           padding="5px"
@@ -50,8 +51,13 @@ const Item = ({
     </div>
     <div className="d-flex flex-column align-items-end justify-content-center">
       <p>
-        <span> Status: </span>
-        <span className="orange">{item.pickedUp ? 'Picked Up' : 'Waiting'}</span>
+        <span>
+          {' '}
+          {t('status')}
+          :
+          {' '}
+        </span>
+        <span className="orange">{item.pickedUp ? t('pickedUp') : t('waiting')}</span>
       </p>
     </div>
   </div>

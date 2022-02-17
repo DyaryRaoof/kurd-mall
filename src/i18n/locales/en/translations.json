@@ -142,5 +142,12 @@
     "status": "Status",
     "waiting": "Waiting",
     "pickedUp": "Picked Up",
-    "claimOrder": "Claim Order"
+    "claimOrder": "Claim Order",
+    "messageDriver": "Message Driver",
+    "done": "Done",
+    "address": "Address",
+    "location": "Location",
+    "instagram": "Instagram",
+    "facebook": "facebook",
+    "addItem": "Add Item"
 }

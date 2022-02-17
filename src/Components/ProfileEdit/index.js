@@ -49,7 +49,7 @@ const ProfileEdit = () => {
           setChildValue={fieldValues[1]}
           setParentFormValidity={(value) => { formValidity[1] = value; }}
         />
-        <SubmitButton name="Done" />
+        <SubmitButton name={t('done')} />
       </form>
     </div>
   );
