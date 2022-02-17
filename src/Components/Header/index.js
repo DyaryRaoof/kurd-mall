@@ -125,7 +125,7 @@ const Header = () => {
       <hr className="nav-hr" />
       <nav>
         <ul className="d-flex justify-content-center list-style-none">
-          <li className="px-1"><button className="icon-button orange" type="button"><u>{t('yourCollection')}</u></button></li>
+          <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/my-collection'); }}><u>{t('yourCollection')}</u></button></li>
           <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-store'); }}><u>{t('createStore')}</u></button></li>
           <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-item'); }}><u>{t('addItemToStore')}</u></button></li>
         </ul>
