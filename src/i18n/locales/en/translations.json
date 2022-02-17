@@ -128,5 +128,18 @@
     "totalItemsSold": "Total Item Sold ",
     "store": "Store",
     "seeItem": "See Item",
-    "searchForItem": "Search For Item"
+    "searchForItem": "Search For Item",
+    "read": "Read",
+    "chats": "Chats",
+    "chat": "Chat",
+    "enterMessage": "Enter Message",
+    "writeComment": "Write Comment",
+    "myOrders": "My Orders",
+    "allOrders": "All Orders",
+    "openStore": "Open Store",
+    "pickUp": "Pick Up",
+    "deliver": "Deliver",
+    "status": "Status",
+    "waiting": "Waiting",
+    "pickedUp": "Picked Up"
 }

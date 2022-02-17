@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 const Bubble = ({ chat }) => {
   const currentUserId = 1;
+  const { t } = useTranslation();
   const {
     name, message, time, isRead, userId,
   } = chat;
@@ -25,7 +27,12 @@ const Bubble = ({ chat }) => {
         </div>
 
       </div>
-      {isRead && userId === currentUserId ? <div className="text-end me-5">Read </div> : null}
+      {isRead && userId === currentUserId ? (
+        <div className="text-end me-5">
+          {t('read')}
+          {' '}
+        </div>
+      ) : null}
     </div>
   );
 };

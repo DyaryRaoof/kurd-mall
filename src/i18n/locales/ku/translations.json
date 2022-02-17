@@ -129,5 +129,18 @@
     "totalItemsSold": "ژمارەی کاڵای فرۆشراو",
     "store": "کۆگا",
     "seeItem": "کاڵا ببینە",
-    "searchForItem": "بۆ کاڵا بگەڕێ"
+    "searchForItem": "بۆ کاڵا بگەڕێ",
+    "read": "بینراوە",
+    "chats": "نامەکان",
+    "chat": "نامە",
+    "enterMessage": "پەیامێک بنووسە",
+    "writeComment": "کۆمێنتێک بنووسە",
+    "myOrders": "گەیاندنەکانم",
+    "allOrders": "هەموو داواکاریەکان",
+    "openStore": "کۆگا بکەرەوە",
+    "pickUp": "هەلبگرە",
+    "deliver": "رادەستبکە",
+    "status": "ڕەوش",
+    "waiting": "چاوەڕێیە",
+    "pickedUp": "هەڵگیراوە"
 }

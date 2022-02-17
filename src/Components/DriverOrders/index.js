@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Item from './Item';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 import importedCartItems from '../mock-data/cartItems';
 
 const DriverOrders = () => {
+  const { t } = useTranslation();
   const [cartItems, setCartItems] = useState(importedCartItems);
   const onPickUpChanged = (id) => {
     let newCartItems = [...cartItems];
@@ -19,7 +21,7 @@ const DriverOrders = () => {
 
   return (
     <main className="container">
-      <h3>All Orders</h3>
+      <h3>{t('allOrders')}</h3>
       <div className="gray-background rounded p-1 my-2">
         {cartItems.map((item) => (
           <Item

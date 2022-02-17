@@ -68,9 +68,19 @@ const Header = () => {
                     </button>
                   </li>
 
+                  <li className="ms-auto">
+                    <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/driver-orders'); }}>
+                      <span>
+                        <MaterialIcon onClick={() => { }} orange text="local_shipping" />
+                      </span>
+                      {' '}
+                      <span>{t('myOrders')}</span>
+                    </button>
+                  </li>
+
                   <li className="ms-auto me-2">
-                    <button type="button" className="position-relative icon-button">
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+                    <button type="button" className="position-relative icon-button" onClick={() => { navigate('/chat-list'); }}>
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill orange-bg">
                         99+
                         <span className="visually-hidden">unread messages</span>
                       </span>
