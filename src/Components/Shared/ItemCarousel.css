@@ -1,0 +1,11 @@
+
+.item-carousel {
+  overflow-x: auto;
+}
+
+.carousel-button {
+  position: relative;
+  z-index: 100;
+  top: 200px;
+  margin: 0 20px;
+}

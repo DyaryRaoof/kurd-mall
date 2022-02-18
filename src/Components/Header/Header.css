@@ -1,0 +1,32 @@
+.nav-hr {
+  filter: drop-shadow(0 1px 3px black);
+}
+
+.upper-nav-ul,
+.lower-nav-ul {
+  list-style: none;
+}
+
+.upper-nav-ul li {
+  padding: 3px;
+}
+
+.orange {
+  color: #e05e00;
+}
+
+.icon-text-pair {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.width-100 {
+  width: 100px;
+}
+
+.icon-button {
+  border: none;
+  background-color: transparent;
+}

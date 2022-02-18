@@ -1,0 +1,13 @@
+.item-detail-top-icons {
+  z-index: 100 !important;
+}
+
+.item-detail-variants-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.variant-image {
+  width: 30px;
+  object-fit: cover;
+}
