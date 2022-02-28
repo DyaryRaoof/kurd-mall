@@ -1,12 +1,11 @@
-// import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import signUP from '../../images/design/sign-up.png';
 import Field from '../Shared/Field';
-// import { setUser } from '../../redux/user/user';
-// import user from '../mock-data/user';
-import { signIn } from '../../api/user';
+import { setUser } from '../../redux/user/user';
+import { signInUser } from '../../api/user';
 
 const Login = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -25,15 +24,21 @@ const Login = () => {
     formValidity[index] = value;
   };
 
-  // const disptch = useDispatch();
+  const disptch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
     if (!formValidity.includes(false)) {
-      const response = await signIn({ user: { email: fieldValues[0], password: fieldValues[1] } });
+      const response = await signInUser({
+        user: {
+          email: fieldValues[0],
+          password: fieldValues[1],
+        },
+      });
       localStorage.setItem('token', JSON.stringify(response.headers.authorization.split(' ')[1]));
       if (response.status === 200) {
+        disptch(setUser(response.data.user));
         localStorage.setItem('user', JSON.stringify(response.data.user));
         navigate('/');
       }

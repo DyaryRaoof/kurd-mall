@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import signUP from '../../images/design/sign-up.png';
 import Field from '../Shared/Field';
 import './SignUp.css';
+import { signUpUser } from '../../api/user';
 
 const SignUp = () => {
   const [submitted, setSubmitted] = useState(false);
   const [password, setPassword] = useState('');
+  const [returnedErrors, setReturnedErrors] = useState(null);
   const [t] = useTranslation();
   const getPassword = (passwordFromChild) => {
     setPassword(passwordFromChild);
@@ -27,6 +29,29 @@ const SignUp = () => {
     formValidity[index] = value;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    if (!formValidity.includes(false)) {
+      const user = {
+        user: {
+          name: fieldValues[0],
+          email: fieldValues[1],
+          phone: fieldValues[2],
+          password: fieldValues[3],
+          password_confirmation: fieldValues[4],
+        },
+      };
+      const response = await signUpUser(user);
+      console.log(response);
+      if (response.status === 200) {
+        navigate('/log-in');
+      } else {
+        setReturnedErrors(JSON.stringify(response.data));
+      }
+    }
+  };
+
   return (
     <main className="container sign-up-main">
       <div className="row">
@@ -43,11 +68,7 @@ const SignUp = () => {
             </a>
           </p>
           <form onSubmit={(e) => {
-            e.preventDefault();
-            setSubmitted(true);
-            if (!formValidity.includes(false)) {
-              navigate('/log-in');
-            }
+            handleSubmit(e);
           }}
           >
             <Field
@@ -99,6 +120,7 @@ const SignUp = () => {
               setChildValue={fieldValues[4]}
             />
             <button type="submit" className="form-control orange p-3 my-3">{t('signUp')}</button>
+            {returnedErrors && <div className="alert alert-danger text-center">{returnedErrors}</div>}
           </form>
         </div>
       </div>
