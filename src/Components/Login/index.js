@@ -13,6 +13,7 @@ const Login = () => {
   const [t] = useTranslation();
   const [fieldValues, setFieldValues] = useState(['', '']);
   const navigate = useNavigate();
+  const [returnedErrors, setReturnedErrors] = useState(null);
 
   const setParentValueNow = (value, index) => {
     const newFieldValues = [...fieldValues];
@@ -36,11 +37,14 @@ const Login = () => {
           password: fieldValues[1],
         },
       });
-      localStorage.setItem('token', JSON.stringify(response.headers.authorization.split(' ')[1]));
       if (response.status === 200) {
         disptch(setUser(response.data.user));
         localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('token', JSON.stringify(response.headers.authorization));
         navigate('/');
+      } else {
+        console.log(response);
+        setReturnedErrors(JSON.stringify(response.data));
       }
     }
   };
@@ -78,6 +82,8 @@ const Login = () => {
               setParentFormValidity={(value) => { setFormValidityNow(value, 1); }}
             />
             <button type="submit" className="form-control orange p-3 my-3">{t('logIn')}</button>
+            {returnedErrors && <div className="alert alert-danger text-center">{returnedErrors}</div>}
+
           </form>
         </div>
       </div>

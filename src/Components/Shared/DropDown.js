@@ -8,19 +8,29 @@ const DropDown = ({
 }) => {
   const [currentCategory, setCurrentCategory] = useState(dropdownValues[0]);
   const { t } = useTranslation();
+  const language = localStorage.getItem('language');
+
+  const categoryValue = () => {
+    if (currentCategory === null) {
+      return null;
+    }
+    if (language === 'en') {
+      return currentCategory.name_en;
+    }
+    return currentCategory.name_ku;
+  };
 
   return (
     <div>
       <div className="dropdown">
         <button className={`${bgColorClass} btn border border-1 border-secondary dropdown-toggle form-control my-3 p-3`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          {currentCategory ? currentCategory.name
-            : (
-              <span>
-                {t('select')}
-                {' '}
-                {categoryName}
-              </span>
-            )}
+          {currentCategory ? categoryValue : (
+            <span>
+              {t('select')}
+              {' '}
+              {categoryName}
+            </span>
+          )}
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           {dropdownValues.map((value) => (
@@ -33,7 +43,7 @@ const DropDown = ({
                   setParentValue(value);
                 }}
               >
-                {value.name}
+                {language === 'en' ? value.name_en : value.name_ku}
               </button>
             </li>
           ))}

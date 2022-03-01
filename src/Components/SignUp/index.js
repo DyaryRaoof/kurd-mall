@@ -16,7 +16,7 @@ const SignUp = () => {
   };
 
   const formValidity = Array(5).fill(false);
-  const [fieldValues, setFieldValues] = useState([]);
+  const [fieldValues, setFieldValues] = useState(Array(5).fill(''));
   const navigate = useNavigate();
 
   const setParentValueNow = (value, index) => {
@@ -43,7 +43,6 @@ const SignUp = () => {
         },
       };
       const response = await signUpUser(user);
-      console.log(response);
       if (response.status === 200) {
         navigate('/log-in');
       } else {

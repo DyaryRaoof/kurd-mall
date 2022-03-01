@@ -1,27 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Field from '../Shared/Field';
 import createStore from '../../images/design/create-store.png';
 import './CreateStore.css';
 import DropDown from '../Shared/DropDown';
-import categories from '../mock-data/categories';
+// import categories from '../mock-data/categories';
 import cities from '../mock-data/cities';
 import ImageSelector from '../Shared/ImageSelector';
 import SubmitButton from '../Shared/SubmitButton';
 import ErrorMessages from '../Shared/Classes/ErrorMessages';
 import makeid from '../Shared/methods/makeid';
+import fetchCategories from '../../api/categories';
 
 const CreateStore = () => {
+  const dispatch = useDispatch();
+  const categoriesReducer = useSelector((state) => state.categoriesReducer);
+  const categories = categoriesReducer.categories || [];
+  useEffect(() => {
+    dispatch(fetchCategories);
+  }, []);
+
   const [submitted, setSubmitted] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState(categories[0] || {});
   const [fieldValues, setFieldValues] = useState(Array(5).fill(''));
   const [images, setImages] = useState({ urls: [], files: [] });
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   let city = cities[0];
-  let subcategory = selectedCategory.subcategories[0];
+  let subcategory = selectedCategory.subcategories ? selectedCategory.subcategories[0] : {};
   const formValidity = Array(3).fill(false);
 
   const setSelectedCategoryNow = (category) => {
@@ -117,12 +126,12 @@ const CreateStore = () => {
                 setChildValue={fieldValues[4]}
               />
               <DropDown
-                dropdownValues={categories}
+                dropdownValues={categories || []}
                 categoryName={t('category')}
                 setParentValue={(value) => { setSelectedCategoryNow(value); }}
               />
               <DropDown
-                dropdownValues={selectedCategory.subcategories}
+                dropdownValues={selectedCategory.subcategories || []}
                 categoryName={t('subcategory')}
                 setParentValue={(value) => { subcategory = value; }}
               />
