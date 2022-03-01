@@ -7,29 +7,37 @@ import createStore from '../../images/design/create-store.png';
 import './CreateStore.css';
 import DropDown from '../Shared/DropDown';
 // import categories from '../mock-data/categories';
-import cities from '../mock-data/cities';
+// import cities from '../mock-data/cities';
 import ImageSelector from '../Shared/ImageSelector';
 import SubmitButton from '../Shared/SubmitButton';
 import ErrorMessages from '../Shared/Classes/ErrorMessages';
 import makeid from '../Shared/methods/makeid';
 import fetchCategories from '../../api/categories';
+import fetchSubcategories from '../../api/subcategories';
+import redirectOnTokenExipiration from '../../methods/redirectOnTokenExipiration';
+import fetchCities from '../../api/cities';
 
 const CreateStore = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const categoriesReducer = useSelector((state) => state.categoriesReducer);
-  const categories = categoriesReducer.categories || [];
+  const categories = useSelector((state) => state.categoriesReducer.categories) || [];
+  const subcategories = useSelector((state) => state.subcategoriesReducer.subcategories) || [];
+  const cities = useSelector((state) => state.citiesReducer.cities) || [];
+  let city = cities[0];
+
   useEffect(() => {
     dispatch(fetchCategories);
+    fetchSubcategories(dispatch, 0);
+    dispatch(fetchCities);
+    redirectOnTokenExipiration();
   }, []);
 
   const [submitted, setSubmitted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(categories[0] || {});
   const [fieldValues, setFieldValues] = useState(Array(5).fill(''));
   const [images, setImages] = useState({ urls: [], files: [] });
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
-  let city = cities[0];
   let subcategory = selectedCategory.subcategories ? selectedCategory.subcategories[0] : {};
   const formValidity = Array(3).fill(false);
 
@@ -60,6 +68,28 @@ const CreateStore = () => {
     return true;
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    const store = {
+      store: {
+        storeName: fieldValues[0],
+        storeInfo: fieldValues[1],
+        storeAddress: fieldValues[2],
+        facebookLink: fieldValues[3],
+        instagramLink: fieldValues[4],
+        categoryId: selectedCategory.id,
+        subcategoryId: subcategory.id,
+        cityId: city.id,
+      }
+    };
+    if (checkFormValidity()) {
+      navigate('/store-detail', {
+        state: store,
+      });
+    }
+  };
+
   return (
     <main className="create-store-main">
       <div className="container">
@@ -70,23 +100,7 @@ const CreateStore = () => {
           <div className="col-md-6 text-center">
             <h1 className="orange text-center create-store-heading">{t('createAStore')}</h1>
             <form onSubmit={(e) => {
-              e.preventDefault();
-              setSubmitted(true);
-              const store = {
-                storeName: fieldValues[0],
-                storeInfo: fieldValues[1],
-                storeAddress: fieldValues[2],
-                facebookLink: fieldValues[3],
-                instagramLink: fieldValues[4],
-                categoryId: selectedCategory.id,
-                subcategoryId: subcategory.id,
-                cityId: city.id,
-              };
-              if (checkFormValidity()) {
-                navigate('/store-detail', {
-                  state: store,
-                });
-              }
+              handleSubmit(e);
             }}
             >
               <Field
@@ -131,7 +145,10 @@ const CreateStore = () => {
                 setParentValue={(value) => { setSelectedCategoryNow(value); }}
               />
               <DropDown
-                dropdownValues={selectedCategory.subcategories || []}
+                dropdownValues={
+                  subcategories
+                    .filter((sub) => sub.category_id === selectedCategory.id) || []
+                }
                 categoryName={t('subcategory')}
                 setParentValue={(value) => { subcategory = value; }}
               />

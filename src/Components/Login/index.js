@@ -43,7 +43,6 @@ const Login = () => {
         localStorage.setItem('token', JSON.stringify(response.headers.authorization));
         navigate('/');
       } else {
-        console.log(response);
         setReturnedErrors(JSON.stringify(response.data));
       }
     }

@@ -1,7 +1,6 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { useEffect } from 'react';
-// import { setUser } from './redux/user/user';
+import {
+  BrowserRouter as Router, Route, Routes,
+} from 'react-router-dom';
 import Home from './Components/Home';
 import SignUp from './Components/SignUp';
 import Header from './Components/Header';
@@ -27,14 +26,9 @@ import DriverOrders from './Components/DriverOrders';
 import OwnerOrders from './Components/OwnerOrders';
 import BuyerOrders from './Components/BuyerOrders';
 import MyCollection from './Components/MyCollection';
+import PrivateRoute from './Components/PrivateRoute';
 
 function App() {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const user = localStorage.getItem('user');
-  //   dispatch(setUser(JSON.parse(user)));
-  // });
-
   return (
     <div>
       <Router>
@@ -43,7 +37,7 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/sign-up" exact element={<SignUp />} />
           <Route path="/log-in" exact element={<Login />} />
-          <Route path="/create-store" exact element={<CreateStore />} />
+          <Route exact path="/create-store" element={<PrivateRoute element={<CreateStore />} />} />
           <Route path="/create-item" exact element={<CreateItem />} />
           <Route path="/store-detail" exact element={<StoreDetail store={store} />} />
           <Route path="/item-detail" exact element={<ItemDetail item={item[0]} />} />

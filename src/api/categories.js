@@ -7,7 +7,6 @@ const fetchCategories = async (dispatch) => {
     const response = await backend.get('categories');
     dispatch(fetchCategoriesSuccess(response.data));
   } catch (err) {
-    console.log(err.response);
     dispatch(fetchCategoriesFailure(JSON.stringify(err.response.data)));
   }
 };

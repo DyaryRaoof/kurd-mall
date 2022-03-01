@@ -24,7 +24,7 @@ const DropDown = ({
     <div>
       <div className="dropdown">
         <button className={`${bgColorClass} btn border border-1 border-secondary dropdown-toggle form-control my-3 p-3`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          {currentCategory ? categoryValue : (
+          {currentCategory ? categoryValue() : (
             <span>
               {t('select')}
               {' '}
