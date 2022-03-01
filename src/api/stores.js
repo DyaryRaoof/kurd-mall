@@ -4,7 +4,7 @@ import backend from './backend';
 const postStore = async (dispatch, store, images) => {
   const data = new FormData();
   [...images].forEach((image) => {
-    data.append('images', image);
+    data.append('store[images][]', image, image.name);
   });
   const userId = JSON.parse(localStorage.getItem('user')).id;
 

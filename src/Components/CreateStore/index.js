@@ -14,7 +14,7 @@ import ErrorMessages from '../Shared/Classes/ErrorMessages';
 import makeid from '../Shared/methods/makeid';
 import fetchCategories from '../../api/categories';
 import fetchSubcategories from '../../api/subcategories';
-import redirectOnTokenExipiration from '../../methods/redirectOnTokenExipiration';
+import redirectOnTokenExipiration from '../Shared/methods/redirectOnTokenExipiration';
 import fetchCities from '../../api/cities';
 import postStore from '../../api/stores';
 
