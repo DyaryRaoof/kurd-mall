@@ -149,5 +149,6 @@
     "location": "Location",
     "instagram": "Instagram",
     "facebook": "facebook",
-    "addItem": "Add Item"
+    "addItem": "Add Item",
+    "locationRequired": "Location is required"
 }

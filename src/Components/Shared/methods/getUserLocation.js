@@ -1,10 +1,10 @@
-const getUserLocation = () => {
+const getUserLocation = () => new Promise((resolve, reject) => {
   let currentPosition = {};
   navigator.geolocation.getCurrentPosition((position) => {
     currentPosition = { long: position.coords.longitude, lat: position.coords.latitude };
-  });
-
-  return currentPosition;
-};
+    resolve(currentPosition);
+  }, (err) => { reject(err); },
+  { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 });
+});
 
 export default getUserLocation;

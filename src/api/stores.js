@@ -9,6 +9,7 @@ const postStore = async (dispatch, store, images) => {
   const userId = JSON.parse(localStorage.getItem('user')).id;
 
   data.append('store[name]', store.name);
+  data.append('store[phone]', store.phone);
   data.append('store[description]', store.description);
   data.append('store[address]', store.address);
   data.append('store[facebook]', store.facebook);
@@ -17,6 +18,8 @@ const postStore = async (dispatch, store, images) => {
   data.append('store[subcategory_id]', store.subcategory_id);
   data.append('store[city_id]', store.city_id);
   data.append('store[user_id]', userId);
+  data.append('store[locaation_long]', store.locaation_long);
+  data.append('store[location_lat]', store.location_lat);
 
   try {
     dispatch(postStoreLoading());
