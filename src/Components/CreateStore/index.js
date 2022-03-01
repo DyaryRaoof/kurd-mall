@@ -16,14 +16,15 @@ import fetchCategories from '../../api/categories';
 import fetchSubcategories from '../../api/subcategories';
 import redirectOnTokenExipiration from '../../methods/redirectOnTokenExipiration';
 import fetchCities from '../../api/cities';
+import postStore from '../../api/stores';
 
 const CreateStore = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [returnedErrors, setReturnedErrors] = useState(null);
   const categories = useSelector((state) => state.categoriesReducer.categories) || [];
   const subcategories = useSelector((state) => state.subcategoriesReducer.subcategories) || [];
   const cities = useSelector((state) => state.citiesReducer.cities) || [];
-  let city = cities[0];
 
   useEffect(() => {
     dispatch(fetchCategories);
@@ -33,12 +34,14 @@ const CreateStore = () => {
   }, []);
 
   const [submitted, setSubmitted] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(categories[0] || {});
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [fieldValues, setFieldValues] = useState(Array(5).fill(''));
   const [images, setImages] = useState({ urls: [], files: [] });
   const { t } = useTranslation();
 
-  let subcategory = selectedCategory.subcategories ? selectedCategory.subcategories[0] : {};
+  const [subcategory, setSubcategory] = useState(null);
+  const [city, setCity] = useState(null);
+
   const formValidity = Array(3).fill(false);
 
   const setSelectedCategoryNow = (category) => {
@@ -62,31 +65,39 @@ const CreateStore = () => {
   const errors = (new ErrorMessages()).messages.images.required;
 
   const checkFormValidity = () => {
-    if (formValidity.includes(false) || images.files.length < 1) {
+    if (formValidity.includes(false)
+      || images.files.length < 1
+      || !selectedCategory.id
+      || !city
+      || !subcategory) {
       return false;
     }
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
-    const store = {
-      store: {
-        storeName: fieldValues[0],
-        storeInfo: fieldValues[1],
-        storeAddress: fieldValues[2],
-        facebookLink: fieldValues[3],
-        instagramLink: fieldValues[4],
-        categoryId: selectedCategory.id,
-        subcategoryId: subcategory.id,
-        cityId: city.id,
-      }
-    };
+
     if (checkFormValidity()) {
-      navigate('/store-detail', {
-        state: store,
-      });
+      const store = {
+        name: fieldValues[0],
+        description: fieldValues[1],
+        address: fieldValues[2],
+        facebook: fieldValues[3],
+        instagram: fieldValues[4],
+        category_id: selectedCategory.id,
+        subcategory_id: subcategory.id,
+        city_id: city.id,
+      };
+      const response = await postStore(dispatch, store, images.files);
+      if (response.status === 201) {
+        navigate('/store-detail', {
+          state: store,
+        });
+      } else {
+        setReturnedErrors(JSON.stringify(response.data));
+      }
     }
   };
 
@@ -146,16 +157,17 @@ const CreateStore = () => {
               />
               <DropDown
                 dropdownValues={
-                  subcategories
-                    .filter((sub) => sub.category_id === selectedCategory.id) || []
+                  selectedCategory
+                    ? subcategories
+                      .filter((sub) => sub.category_id === selectedCategory.id) || [] : []
                 }
                 categoryName={t('subcategory')}
-                setParentValue={(value) => { subcategory = value; }}
+                setParentValue={(value) => { setSubcategory(value); }}
               />
               <DropDown
                 dropdownValues={cities}
                 categoryName={t('city')}
-                setParentValue={(value) => { city = value; }}
+                setParentValue={(value) => { setCity(value); }}
               />
               <ImageSelector
                 numberOfImages={5}
@@ -167,6 +179,8 @@ const CreateStore = () => {
               <div className="mt-5">
                 <SubmitButton name={t('create')} />
               </div>
+
+              {returnedErrors && <div className="alert alert-danger text-center">{returnedErrors}</div>}
 
             </form>
           </div>

@@ -6,7 +6,7 @@ import './DropDown.css';
 const DropDown = ({
   categoryName, dropdownValues, bgColorClass, setParentValue,
 }) => {
-  const [currentCategory, setCurrentCategory] = useState(dropdownValues[0]);
+  const [currentCategory, setCurrentCategory] = useState(null);
   const { t } = useTranslation();
   const language = localStorage.getItem('language');
 
@@ -51,9 +51,6 @@ const DropDown = ({
       </div>
     </div>
   );
-};
-
-DropDown.protoTypes = {
 };
 
 DropDown.propTypes = {
