@@ -17,10 +17,7 @@ import fetchSubcategories from '../../api/subcategories';
 import redirectOnTokenExipiration from '../Shared/methods/redirectOnTokenExipiration';
 import fetchCities from '../../api/cities';
 import postStore from '../../api/stores';
-import getUserLocation from '../Shared/methods/getUserLocation';
-import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
-import openMapAtPosition from '../Shared/methods/openMapAtPostion';
-import MateriaIcon from '../Shared/MateriaIcon';
+import LocationWidget from '../Shared/LocationWidget';
 
 const CreateStore = () => {
   const navigate = useNavigate();
@@ -29,21 +26,13 @@ const CreateStore = () => {
   const categories = useSelector((state) => state.categoriesReducer.categories) || [];
   const subcategories = useSelector((state) => state.subcategoriesReducer.subcategories) || [];
   const cities = useSelector((state) => state.citiesReducer.cities) || [];
-  const [positionLoading, setPositionLoading] = useState(false);
   const [position, setPosition] = useState(null);
-
-  const setPositionNow = async () => {
-    setPositionLoading(true);
-    setPosition(await getUserLocation());
-    setPositionLoading(false);
-  };
 
   useEffect(() => {
     dispatch(fetchCategories);
     fetchSubcategories(dispatch, 0);
     dispatch(fetchCities);
     redirectOnTokenExipiration();
-    setPositionNow();
   }, []);
 
   const [submitted, setSubmitted] = useState(false);
@@ -208,33 +197,10 @@ const CreateStore = () => {
               />
               {submitted && images.urls.length < 1 && (<div className="text-danger text-center">{errors}</div>)}
               {images.urls && images.urls.length > 0 && (<div className="d-flex orange-border mb-3">{images.urls && images.urls.map((i) => <img className="p-2 m-2 store-images" key={makeid(10)} src={i} alt="Store" />)}</div>)}
-              <div id="map" />
-              <div className="gray-background rounded p-2 ">
-                <button
-                  className="icon-button"
-                  type="button"
-                  onClick={async () => {
-                    if (!position) {
-                      setPositionNow();
-                    }
-                    openMapAtPosition(position);
-                  }}
-                >
-                  <div className="fw-bold">{t('location')}</div>
-                  <div className="d-flex justify-content-center"><MateriaIcon text="place" orange isLarge /></div>
-                </button>
-                <div className="d-flex justify-content-end">
-                  {positionLoading && <div className="spinner-border text-warning" role="status" />}
-                  <RoundOrangeIconButton
-                    buttonText={t('updateMyLocation')}
-                    width="170px"
-                    padding="5px"
-                    isIconPresent={false}
-                    onPressed={async () => { setPositionNow(); }}
-                  />
-                </div>
-              </div>
+
+              <LocationWidget setParentPosition={(position) => { setPosition(position); }} />
               {!position && submitted && <div className="text-danger mb-5">{t('locationRequired')}</div>}
+
               {submitted && !checkFormValidity() && <div className="alert alert-danger my-3" role="alert">{t('fillInRequiredFields')}</div>}
               <div className="mt-5">
                 <SubmitButton name={t('create')} />
