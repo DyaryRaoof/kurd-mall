@@ -17,7 +17,7 @@ import fetchSubcategories from '../../api/subcategories';
 import redirectOnTokenExipiration from '../Shared/methods/redirectOnTokenExipiration';
 import fetchCities from '../../api/cities';
 import postStore from '../../api/stores';
-import LocationWidget from '../Shared/LocationWidget';
+import GetLocationWidget from '../Shared/GetLocationWidget';
 
 const CreateStore = () => {
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ const CreateStore = () => {
       const response = await postStore(dispatch, store, images.files);
       if (response.status === 201) {
         navigate('/store-detail', {
-          state: store,
+          state: { store: response.data },
         });
       } else {
         setReturnedErrors(JSON.stringify(response.data));
@@ -198,7 +198,7 @@ const CreateStore = () => {
               {submitted && images.urls.length < 1 && (<div className="text-danger text-center">{errors}</div>)}
               {images.urls && images.urls.length > 0 && (<div className="d-flex orange-border mb-3">{images.urls && images.urls.map((i) => <img className="p-2 m-2 store-images" key={makeid(10)} src={i} alt="Store" />)}</div>)}
 
-              <LocationWidget setParentPosition={(position) => { setPosition(position); }} />
+              <GetLocationWidget setParentPosition={(position) => { setPosition(position); }} />
               {!position && submitted && <div className="text-danger mb-5">{t('locationRequired')}</div>}
 
               {submitted && !checkFormValidity() && <div className="alert alert-danger my-3" role="alert">{t('fillInRequiredFields')}</div>}

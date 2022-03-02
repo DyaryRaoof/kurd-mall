@@ -6,7 +6,7 @@ import openMapAtPosition from './methods/openMapAtPostion';
 import MateriaIcon from './MateriaIcon';
 import getUserLocation from './methods/getUserLocation';
 
-const LocationWidget = ({ setParentPosition }) => {
+const GetLocationWidget = ({ setParentPosition }) => {
   const [position, setPosition] = useState(null);
   const [positionLoading, setPositionLoading] = useState(false);
   const setPositionNow = async () => {
@@ -54,8 +54,8 @@ const LocationWidget = ({ setParentPosition }) => {
   );
 };
 
-LocationWidget.propTypes = {
+GetLocationWidget.propTypes = {
   setParentPosition: PropTypes.func.isRequired,
 };
 
-export default LocationWidget;
+export default GetLocationWidget;
