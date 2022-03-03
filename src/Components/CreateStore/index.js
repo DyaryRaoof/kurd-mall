@@ -172,7 +172,7 @@ const CreateStore = () => {
                 categoryName={t('category')}
                 setParentValue={(value) => { setSelectedCategoryNow(value); }}
               />
-              {!selectedCategory && <div className="text-danger">{t('errors.fieldRequired')}</div>}
+              {!selectedCategory && submitted && <div className="text-danger">{t('errors.fieldRequired')}</div>}
               <DropDown
                 dropdownValues={
                   selectedCategory
@@ -182,14 +182,14 @@ const CreateStore = () => {
                 categoryName={t('subcategory')}
                 setParentValue={(value) => { setSubcategory(value); }}
               />
-              {!subcategory && <div className="text-danger">{t('errors.fieldRequired')}</div>}
+              {!subcategory && submitted && <div className="text-danger">{t('errors.fieldRequired')}</div>}
 
               <DropDown
                 dropdownValues={cities}
                 categoryName={t('city')}
                 setParentValue={(value) => { setCity(value); }}
               />
-              {!city && <div className="text-danger">{t('errors.fieldRequired')}</div>}
+              {!city && submitted && <div className="text-danger">{t('errors.fieldRequired')}</div>}
 
               <ImageSelector
                 numberOfImages={5}
@@ -207,7 +207,6 @@ const CreateStore = () => {
               </div>
 
               {returnedErrors && <div className="alert alert-danger text-center my-3">{returnedErrors}</div>}
-
             </form>
           </div>
         </div>
