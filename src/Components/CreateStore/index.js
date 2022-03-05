@@ -99,6 +99,7 @@ const CreateStore = () => {
       };
       const response = await postStore(dispatch, store, images.files);
       if (response.status === 201) {
+        localStorage.setItem('store', JSON.stringify(response.data));
         navigate('/store-detail', {
           state: { store: response.data },
         });

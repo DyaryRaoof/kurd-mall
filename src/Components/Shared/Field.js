@@ -30,7 +30,7 @@ const Field = ({
           className="form-control p-3 my-3"
           type={type}
           placeholder={placeholder}
-          onChange={(e) => { setParentValue(e.target.value); if (name === 'password') { getPassword(e.target.value); } }}
+          onChange={(e) => { setParentValue(e.target.value); setParentFormValidity(!(errors.length > 0)); if (name === 'password') { getPassword(e.target.value); } }}
           value={setChildValue}
           /* eslint-disable  jsx-a11y/no-autofocus */
           autoFocus={autoFocus != null ? autoFocus : false}
@@ -43,11 +43,10 @@ const Field = ({
             className="form-control p-3 my-3"
             type={type}
             placeholder={placeholder}
-            onChange={(e) => { setParentValue(e.target.value); if (name === 'password') { getPassword(e.target.value); } }}
+            onChange={(e) => { setParentValue(e.target.value); setParentFormValidity(!(errors.length > 0)); if (name === 'password') { getPassword(e.target.value); } }}
             value={setChildValue}
             /* eslint-disable jsx-a11y/no-autofocus */
             autoFocus={autoFocus != null ? autoFocus : false}
-            setParentFormValidity={!(errors.length > 0)}
 
           />
         )}

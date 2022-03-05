@@ -94,8 +94,8 @@
     "city": "شار",
     "create": "دروست بکە",
     "description": "زانیاری",
-    "priceInIQDEg": "نرخ بە دینار، نموونە ١٠٠٠",
-    "costInIQDEg": "تێچوو بە دینار، نموونە٨٠٠",
+    "priceInIQDEg": "نرخ، نموونە ١٠٠٠",
+    "costInIQDEg": "تێچوو، نموونە٨٠٠",
     "profit": "قازانج",
     "usersWillNotSeeThis": "بەکارهێناران ئەمە نابینن",
     "numbersAvailableEg": "ژمارەی بەردەست، نموونە ٢٠",
@@ -151,5 +151,6 @@
     "instagram": "ئینستاگرام",
     "facebook": "فەیسبووک",
     "addItem": "کاڵا زیادبکە",
-    "locationRequired": "شوێن داواکراوە"
+    "locationRequired": "شوێن داواکراوە",
+    "currency": "دراو"
 }

@@ -11,7 +11,6 @@ import LocationWidget from '../Shared/LocatoinWidget';
 
 const StoreDetail = () => {
   const { store } = useLocation().state;
-  console.log(useLocation().state);
   const categories = JSON.parse(localStorage.getItem('categories')) || [];
   const subcategories = JSON.parse(localStorage.getItem('subcategories')) || [];
   const cities = JSON.parse(localStorage.getItem('cities')) || [];

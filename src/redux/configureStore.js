@@ -7,9 +7,16 @@ import categoriesReducer from './categories/categories';
 import subcategoriesReducer from './subcategories/subcategories';
 import citiesReducer from './cities/cities';
 import storesReducer from './stores/stores';
+import itemsReducer from './items/items';
 
 const reducers = combineReducers({
-  designReducer, userReducer, categoriesReducer, subcategoriesReducer, citiesReducer, storesReducer,
+  designReducer,
+  userReducer,
+  categoriesReducer,
+  subcategoriesReducer,
+  citiesReducer,
+  storesReducer,
+  itemsReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 

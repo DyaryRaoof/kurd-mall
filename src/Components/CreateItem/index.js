@@ -1,20 +1,34 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import DropDown from '../Shared/DropDown';
+import { useDispatch } from 'react-redux';
 import Field from '../Shared/Field';
 import './CreateItem.css';
-import categories from '../mock-data/categories';
 import ImageSelector from '../Shared/ImageSelector';
 import SubmitButton from '../Shared/SubmitButton';
 import makeid from '../Shared/methods/makeid';
+import CurrencyDropdown from '../Shared/CurrencyDropdown';
+import TagsField from './TagsField';
+import postItem from '../../api/items';
 
 const { useNavigate } = require('react-router-dom');
 
 const CreateItem = () => {
+  const dispatch = useDispatch();
+  const [returnedErrors, setReturnedErrors] = useState(null);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [selectedImages, setSelectedImages] = useState({ urls: [], files: [] });
   const [item, setItem] = useState({
-    categoryId: 0, variants: [], name: '', description: '', price: 0, quantity: 0, images: [],
+    categoryId: '',
+    variants: [],
+    name: '',
+    currency: '',
+    description: '',
+    price: '',
+    cost: '',
+    quantity: '',
+    images: [],
+    tags: [],
+    shipping_kg: '',
   });
   const [submitted, setSubmitted] = useState(false);
   const [currentFieldIndex, setCurrentFieldIndex] = useState({ index: 0, field: 'name' });
@@ -28,25 +42,13 @@ const CreateItem = () => {
     setItem({ ...item, variants: newVariants });
   };
 
-  const setVariantName = (name, variantIndex) => {
-    setVariantValues('name', name, variantIndex);
-  };
-
-  const setVariantPrice = (price, variantIndex) => {
-    setVariantValues('price', price, variantIndex);
-  };
-
   const setVariantImageIndex = (imageIndex, variantIndex) => {
     setVariantValues('imageIndex', imageIndex, variantIndex);
   };
 
-  const setSelectedCategoryNow = (category) => {
-    setItem({ ...item, categoryId: category.id });
-  };
-
   const setSelectedImagesNow = (urls, files) => {
     setSelectedImages({ urls, files });
-    setItem({ ...item, images: urls });
+    setItem({ ...item, images: files });
   };
 
   const setFormValidityNow = (value) => {
@@ -57,15 +59,25 @@ const CreateItem = () => {
     setFormValidity(true);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+
+    if (formValidity && selectedImages.files.length > 0) {
+      item.store = JSON.parse(localStorage.getItem('store'));
+      const response = await postItem(dispatch, item, item.images);
+      if (response.status === 201) {
+        navigate('/item-detail', { state: { item: response.data } });
+      } else {
+        setReturnedErrors(JSON.stringify(response.data));
+      }
+    }
+  };
+
   return (
     <main className="container">
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        setSubmitted(true);
-
-        if (formValidity && selectedImages.files.length > 0) {
-          navigate('/');
-        }
+      <form onSubmit={async (e) => {
+        handleSubmit(e);
       }}
       >
         <div className="item-input-section gray-background">
@@ -98,20 +110,6 @@ const CreateItem = () => {
             setChildValue={item.description}
 
           />
-        </div>
-
-        <div className="item-input-section gray-background">
-          <div>
-            {' '}
-            {t('category')}
-            {' '}
-          </div>
-          <DropDown categoryName="Category" dropdownValues={categories} setParentValue={setSelectedCategoryNow} bgColorClass="white-background" submitted={submitted} />
-          <div>
-            {' '}
-            {t('subcategory')}
-          </div>
-          <DropDown categoryName="Subcategory" dropdownValues={categories.filter((c) => c.id === item.categoryId)[0].subcategories} bgColorClass="white-background" setParentValue={(value) => { setItem({ ...item, subcategoryId: value.id }); }} submitted={submitted} />
         </div>
 
         <div className="item-input-section gray-background">
@@ -159,6 +157,13 @@ const CreateItem = () => {
             {item.price - item.cost}
           </div>
           <div className="text-danger text-end">{t('usersWillNotSeeThis')}</div>
+          <div>
+            {' '}
+            {t('currency')}
+            {' '}
+          </div>
+          <div className="w-100 d-flex justify-content-start"><CurrencyDropdown setParentValue={(value) => { item.currency = value; }} /></div>
+          {!item.currency && submitted && <div className="text-danger text-start">{t('errors.fieldRequired')}</div>}
           <Field
             placeholder={t('numbersAvailableEg')}
             type="number"
@@ -179,12 +184,7 @@ const CreateItem = () => {
             {t('tags')}
             {' '}
           </div>
-          <Field
-            placeholder={t('tagsEg')}
-            type="text"
-            setParentValue={(value) => { setItem({ ...item, tags: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }}
-            setChildValue={item.tags}
-          />
+          <TagsField setParentValue={(value) => { setItem({ ...item, tags: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} />
         </div>
 
         <div className="item-input-section gray-background">
@@ -197,11 +197,11 @@ const CreateItem = () => {
             placeholder={t('shippingEg')}
             type="number"
             setParentValue={(value) => {
-              setItem({ ...item, shippingWeight: value });
+              setItem({ ...item, shipping_kg: value });
               setCurrentFieldIndex({ index: 0, field: 'other' });
             }}
             submitted={submitted}
-            setChildValue={item.shippingWeight}
+            setChildValue={item.shipping_kg}
             setParentFormValidity={(value) => { setFormValidityNow(value); }}
             isFLoat
           />
@@ -227,7 +227,7 @@ const CreateItem = () => {
                   <Field
                     placeholder={t('variantNameEg')}
                     type="text"
-                    setParentValue={(value) => { setVariantName(value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'name' }); }}
+                    setParentValue={(value) => { setVariantValues('name', value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'name' }); }}
                     setChildValue={item.variants[indexOfVariant].name}
                     submitted={submitted}
                     autoFocus={currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'name'}
@@ -236,14 +236,37 @@ const CreateItem = () => {
                   />
                   <Field
                     placeholder={t('variantValuesEg')}
+                    type="text"
+                    setParentValue={(value) => { setVariantValues('value', value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'value' }); }}
+                    setChildValue={item.variants[indexOfVariant].value}
+                    submitted={submitted}
+                    autoFocus={currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'value'}
+                    setParentFormValidity={(value) => { setFormValidityNow(value); }}
+
+                  />
+
+                  <Field
+                    placeholder={t('priceInIQDEg')}
                     type="number"
-                    setParentValue={(value) => { setVariantPrice(value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'price' }); }}
+                    setParentValue={(value) => { setVariantValues('price', value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'price' }); }}
                     setChildValue={item.variants[indexOfVariant].price}
                     submitted={submitted}
                     autoFocus={currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'price'}
                     setParentFormValidity={(value) => { setFormValidityNow(value); }}
 
                   />
+
+                  <Field
+                    placeholder={t('costInIQDEg')}
+                    type="number"
+                    setParentValue={(value) => { setVariantValues('cost', value, indexOfVariant); setCurrentFieldIndex({ index: indexOfVariant, field: 'cost' }); }}
+                    setChildValue={item.variants[indexOfVariant].cost}
+                    submitted={submitted}
+                    autoFocus={currentFieldIndex.index === indexOfVariant && currentFieldIndex.field === 'cost'}
+                    setParentFormValidity={(value) => { setFormValidityNow(value); }}
+
+                  />
+
                   <div>{t('chooseImages')}</div>
                   <div className="rounded">
                     {selectedImages.urls.map((url, index) => (
@@ -280,7 +303,9 @@ const CreateItem = () => {
                 const newVariants = [...item.variants];
                 newVariants.push({
                   name: '',
+                  value: '',
                   price: '',
+                  cost: '',
                   imageIndex: '',
                 });
                 setItem({ ...item, variants: newVariants });
@@ -290,10 +315,11 @@ const CreateItem = () => {
             </button>
           </div>
         </div>
-        {((!formValidity && submitted) || selectedImages.files.length === 0) && <div className="alert alert-danger" role="alert">{t('fillInRequiredFields')}</div>}
+        {((!formValidity && submitted) && selectedImages.files.length === 0) && <div className="alert alert-danger" role="alert">{t('fillInRequiredFields')}</div>}
         <div className="mt-5">
           <SubmitButton name="Create" />
         </div>
+        {returnedErrors && <div className="alert alert-danger text-center my-3">{returnedErrors}</div>}
       </form>
     </main>
   );

@@ -150,5 +150,6 @@
     "instagram": "Instagram",
     "facebook": "facebook",
     "addItem": "Add Item",
-    "locationRequired": "Location is required"
+    "locationRequired": "Location is required",
+    "currency": "Currency"
 }
