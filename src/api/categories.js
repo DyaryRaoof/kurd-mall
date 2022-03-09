@@ -2,6 +2,12 @@ import { fetchCategoriesFailure, fetchCategoriesLoading, fetchCategoriesSuccess 
 import backend from './backend';
 
 const fetchCategories = async (dispatch) => {
+  const categories = localStorage.getItem('categories');
+  if (categories) {
+    dispatch(fetchCategoriesSuccess(JSON.parse(categories)));
+    return;
+  }
+
   try {
     dispatch(fetchCategoriesLoading());
     const response = await backend.get('categories');

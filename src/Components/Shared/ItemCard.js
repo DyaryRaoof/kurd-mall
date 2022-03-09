@@ -6,22 +6,25 @@ import './ItemCard.css';
 import MaterialIcon from './MateriaIcon';
 
 const ItemCard = ({
-  name, stars, price, leftInStock, image, isSearchItem, isStore, id, currency, reviewers,
+  item, isStore, isSearchItem,
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const {
+    name, stars, price, quantity, image_urls: imageURLS, id, currency, reviewers,
+  } = item;
 
   const handleClick = () => {
     if (isStore) {
       navigate('/store-detail', {
         state: {
-          name, stars, price, reviewers, leftInStock, id,
+          name, stars, price, reviewers, quantity, id,
         },
       });
     } else {
       navigate('/item-detail', {
         state: {
-          name, stars, price, reviewers, leftInStock, id,
+          name, stars, price, reviewers, quantity, id,
         },
       });
     }
@@ -46,7 +49,7 @@ const ItemCard = ({
         >
           <div className="row">
             <div className={`${isSearchItem ? 'col-md-3' : ''}`}>
-              <img src={image} className="card-img-top item-image" alt="Item" />
+              <img src={imageURLS[0]} className="card-img-top item-image" alt="Item" />
             </div>
             <div className={`${isSearchItem ? 'col-md-9' : ''}`}>
               <div className={`card-body ${isSearchItem ? 'col-md-9 d-flex flex-column align-items-start' : ''}`}>
@@ -61,7 +64,7 @@ const ItemCard = ({
                     </div>
                     <div className="red">
                       {' '}
-                      {leftInStock}
+                      {quantity}
                       {' '}
                       {t('leftInStock')}
                     </div>
@@ -89,7 +92,7 @@ const ItemCard = ({
                   } else {
                     navigate('/create-item', {
                       state: {
-                        name, stars, price, reviewers, leftInStock, id,
+                        name, stars, price, reviewers, quantity, id,
                       },
                     });
                   }
@@ -107,16 +110,9 @@ const ItemCard = ({
 };
 
 ItemCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  stars: PropTypes.number.isRequired,
-  reviewers: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  leftInStock: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  isSearchItem: PropTypes.bool,
+  item: PropTypes.instanceOf(Object).isRequired,
   isStore: PropTypes.bool,
-  id: PropTypes.number.isRequired,
-  currency: PropTypes.string.isRequired,
+  isSearchItem: PropTypes.bool,
 };
 
 ItemCard.defaultProps = {

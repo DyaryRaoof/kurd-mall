@@ -8,6 +8,7 @@ import subcategoriesReducer from './subcategories/subcategories';
 import citiesReducer from './cities/cities';
 import storesReducer from './stores/stores';
 import itemsReducer from './items/items';
+import homeItemsReducer from './homeItems/homeItems';
 
 const reducers = combineReducers({
   designReducer,
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   citiesReducer,
   storesReducer,
   itemsReducer,
+  homeItemsReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 

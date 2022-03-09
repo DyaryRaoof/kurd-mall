@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import MaterialIcon from './MateriaIcon';
-import items from '../mock-data/items';
+// import items from '../mock-data/items';
 import ItemCard from './ItemCard';
 import './ItemCarousel.css';
 
-const ItemsCarousel = ({ subcategoryName, isStore }) => {
+const ItemsCarousel = ({ subcategoryName, isStore, items }) => {
   const carouselRef = useRef(null);
   const scroll = async (scrollOffset) => {
     carouselRef.current.scrollLeft += scrollOffset;
@@ -38,15 +38,8 @@ const ItemsCarousel = ({ subcategoryName, isStore }) => {
           {items.map((item) => (
             <ItemCard
               key={item.id}
-              name={item.name}
-              stars={item.stars}
-              price={item.price}
-              currency={item.currency}
-              image={item.image}
-              leftInStock={item.leftInStock}
+              item={item}
               isStore={isStore}
-              reviewers={item.reviewers}
-              id={item.id}
             />
           ))}
         </div>
@@ -58,6 +51,7 @@ const ItemsCarousel = ({ subcategoryName, isStore }) => {
 ItemsCarousel.propTypes = {
   subcategoryName: PropTypes.string.isRequired,
   isStore: PropTypes.bool,
+  items: PropTypes.instanceOf(Array).isRequired,
 };
 
 ItemsCarousel.defaultProps = {
