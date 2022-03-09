@@ -61,15 +61,19 @@ const HomeBody = () => {
       {
         [...categories].map(
           (c) => [...subcategories].filter((sub) => sub.category_id === c.id
-            && sub.id <= currenctSubcategoryIndex).map((sub) => (
+            && sub.id <= currenctSubcategoryIndex).map((sub) => {
+            const subcatItems = items.filter((item) => item.subcategory_id === sub.id);
+            if (subcatItems.length === 0) return null;
+            return (
               <div className="my-5" key={sub.name}>
                 <ItemsCarousel
                   subcategoryName={language === 'ku' ? sub.name_ku : sub.name_en}
                   isStore={navStoreOrItem === 'stores'}
-                  items={items.filter((item) => item.subcategory_id === sub.id)}
+                  items={subcatItems}
                 />
               </div>
-          )),
+            );
+          }),
         )
       }
     </main>
