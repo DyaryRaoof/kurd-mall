@@ -53,7 +53,7 @@ const HomeBody = () => {
   useEffect(() => {
     const subcategoryIds = [...subcategories].map((sub) => sub.id)
       .slice(0, currenctSubcategoryIndex);
-    getHomeItems(dispatch, subcategoryIds);
+    getHomeItems(dispatch, subcategoryIds, true);
   }, [subcategories]);
 
   return (

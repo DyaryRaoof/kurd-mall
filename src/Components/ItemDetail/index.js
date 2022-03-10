@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 // import PropTypes from 'prop-types';
 import MaterialIcon from '../Shared/MateriaIcon';
 import Carousel from '../StoreDetailPage/Carousel';
@@ -10,8 +11,10 @@ import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 import makeid from '../Shared/methods/makeid';
 import Comment from '../Shared/Comment';
 import comment from '../mock-data/comment';
-import ItemsCarousel from '../Shared/ItemsCarousel';
+// import ItemsCarousel from '../Shared/ItemsCarousel';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
+import getRelatedItems from '../../api/relatedItems';
+import ItemCard from '../Shared/ItemCard';
 
 const ItemDetail = () => {
   const location = useLocation();
@@ -20,7 +23,13 @@ const ItemDetail = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const shippingPrice = getShippingPrice(item.shipping_kg, item.currency);
-  //
+  const dispatch = useDispatch();
+  const relatedItems = useSelector((state) => state.relatedItemsReducer.items);
+
+  useEffect(() => {
+    getRelatedItems(dispatch, item);
+  }, []);
+
   return (
     <div>
       <div className="container">
@@ -86,6 +95,7 @@ const ItemDetail = () => {
                         <img src={item.image_urls[variant.image_index]} alt={variant.name} className="variant-image" />
                       </div>
                       <div className="item-detail-variant-name">{variant.name}</div>
+                      <div className="item-detail-variant-name">{variant.value}</div>
                       <div className="item-detail-variant-price">
                         {`${variant.price} ${item.currency}`}
                       </div>
@@ -120,12 +130,10 @@ const ItemDetail = () => {
 
         <div>
           <h3 className="orange">{t('relatedItems')}</h3>
-          {Array(5).fill(0).map(() => (
-            <ItemsCarousel
-              key={makeid(10)}
-              subcategoryName="Electronics"
-            />
-          ))}
+          <div className="d-flex flex-wrap justify-content-start">
+            {relatedItems.length > 0
+              && relatedItems.map((item) => (<ItemCard key={item.id} item={item} />))}
+          </div>
         </div>
 
       </div>

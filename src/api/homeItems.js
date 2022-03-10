@@ -1,15 +1,15 @@
 import backend from './backend';
-import { gettHomeItemLoading, postHomeItemSuccess, postHomeItemFailure } from '../redux/homeItems/homeItems';
+import { gettHomeItemLoading, getHomeItemSuccess, getHomeItemFailure } from '../redux/homeItems/homeItems';
 
-const getHomeItems = async (dispatch, subcategoryIds) => {
+const getHomeItems = async (dispatch, subcategoryIds, replaceItems) => {
   try {
     dispatch(gettHomeItemLoading());
-    const response = await backend.get(`items/home-index?subcategory_ids=${JSON.stringify(subcategoryIds)}`);
+    const response = await backend.get(`items/home_index?subcategory_ids=${JSON.stringify(subcategoryIds)}`);
     const pureData = response.data.data.map((d) => d.attributes);
-    dispatch(postHomeItemSuccess(pureData));
+    dispatch(getHomeItemSuccess({ items: pureData, replaceItems }));
     return response;
   } catch (err) {
-    dispatch(postHomeItemFailure(JSON.stringify(err.response.data)));
+    dispatch(getHomeItemFailure(JSON.stringify(err.response.data)));
     return err.response;
   }
 };

@@ -24,7 +24,7 @@ const ItemCard = ({
     } else {
       navigate('/item-detail', {
         state: {
-          name, stars, price, reviewers, quantity, id,
+          item,
         },
       });
     }
