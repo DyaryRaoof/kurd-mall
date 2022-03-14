@@ -11,6 +11,8 @@ const redirectOnTokenExipiration = (navigate) => {
         localStorage.removeItem('token');
         navigate('/log-in');
       }
+    } else {
+      navigate('/log-in');
     }
   }, 1000);
 };

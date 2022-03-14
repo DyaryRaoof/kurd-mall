@@ -9,10 +9,13 @@ import makeid from '../Shared/methods/makeid';
 import CurrencyDropdown from '../Shared/CurrencyDropdown';
 import TagsField from './TagsField';
 import postItem from '../../api/items';
+import redirectOnTokenExipiration from '../Shared/methods/redirectOnTokenExipiration';
 
 const { useNavigate } = require('react-router-dom');
 
 const CreateItem = () => {
+  const navigate = useNavigate();
+  redirectOnTokenExipiration(navigate);
   const dispatch = useDispatch();
   const [returnedErrors, setReturnedErrors] = useState(null);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
@@ -34,7 +37,6 @@ const CreateItem = () => {
   const [currentFieldIndex, setCurrentFieldIndex] = useState({ index: 0, field: 'name' });
   const [formValidity, setFormValidity] = useState(false);
   const [t] = useTranslation();
-  const navigate = useNavigate();
 
   const setVariantValues = (objectKey, value, variantIndex) => {
     const newVariants = [...item.variants];
@@ -67,9 +69,7 @@ const CreateItem = () => {
       item.store = JSON.parse(localStorage.getItem('store'));
       const response = await postItem(dispatch, item, item.images);
       if (response.status === 201) {
-        if (response.status === 1000) {
-          navigate('/item-detail', { state: { item: response.data } });
-        }
+        navigate('/item-detail', { state: { item: response.data } });
       } else {
         setReturnedErrors(JSON.stringify(response.data));
       }

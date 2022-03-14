@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { t } from 'i18next';
 import ItemsCarousel from '../Shared/ItemsCarousel';
 import fetchCategories from '../../api/categories';
 import fetchSubcategories from '../../api/subcategories';
@@ -14,9 +16,11 @@ const HomeBody = () => {
   const paginationNumber = 10;
   const [currenctSubcategoryIndex, setCurrentSubcategoryIndex] = useState(paginationNumber);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isBottom = (el) => el.getBoundingClientRect().bottom <= window.innerHeight;
 
   const loadNextItems = async () => {
+    console.log('triggered');
     const storageSubcategories = JSON.parse(localStorage.getItem('subcategories'));
 
     const subcategoryIds = [...storageSubcategories].map((sub) => sub.id)
@@ -58,10 +62,9 @@ const HomeBody = () => {
 
   return (
     <main className="container home-main">
-      {
-        [...categories].map(
-          (c) => [...subcategories].filter((sub) => sub.category_id === c.id
-            && sub.id <= currenctSubcategoryIndex).map((sub) => {
+      {items.length > 0
+        ? [...categories].map(
+          (c) => [...subcategories].filter((sub) => sub.category_id === c.id).map((sub) => {
             const subcatItems = items.filter((item) => item.subcategory_id === sub.id);
             if (subcatItems.length === 0) return null;
             return (
@@ -75,7 +78,18 @@ const HomeBody = () => {
             );
           }),
         )
-      }
+        : (
+          <h1 className="text-center">
+            {t('beFirstToCreateStore')}
+            <button
+              className="icon-button orange"
+              type="button"
+              onClick={() => { navigate('/create-store'); }}
+            >
+              {t('here')}
+            </button>
+          </h1>
+        )}
     </main>
   );
 };

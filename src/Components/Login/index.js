@@ -42,6 +42,7 @@ const Login = () => {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         localStorage.setItem('token', JSON.stringify(response.headers.authorization));
         navigate('/');
+        window.location.reload();
       } else {
         setReturnedErrors(JSON.stringify(response.data));
       }

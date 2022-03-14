@@ -1,10 +1,23 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+
+const nullifyTokenIfExpired = (token) => {
+  const nakedToken = token.split('Bearer ')[1];
+  const decoded = jwtDecode(nakedToken);
+  if (decoded.exp < Date.now() / 1000) {
+    localStorage.removeItem('token');
+    window.location.reload();
+    return null;
+  }
+  return token;
+};
 
 const setAxiosHeaders = () => {
   axios.defaults.baseURL = 'http://localhost:3001/';
-  const token = JSON.parse(localStorage.getItem('token'));
-  console.log(token, 'token');
+  let token = JSON.parse(localStorage.getItem('token'));
+  console.log(token, 'from axios');
   if (token) {
+    token = nullifyTokenIfExpired(token);
     axios.defaults.headers.common.Authorization = token;
   } else {
     axios.defaults.headers.common.Authorization = null;

@@ -151,5 +151,7 @@
     "facebook": "facebook",
     "addItem": "Add Item",
     "locationRequired": "Location is required",
-    "currency": "Currency"
+    "currency": "Currency",
+    "beFirstToCreateStore": "Be the first to create a store, and start selling",
+    "here": "Here"
 }

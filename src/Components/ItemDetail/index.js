@@ -72,7 +72,7 @@ const ItemDetail = () => {
                   </div>
                 </div>
                 <div className="col-6">
-                  <Stars number={item.stars} users={item.reviewers} isInteractive />
+                  <Stars item={item} stars={item.stars} isInteractive />
                   <div className="text-danger text-end pe-5">{`${t('only')} ${item.quantity} ${t('leftInStock')} `}</div>
                 </div>
               </div>

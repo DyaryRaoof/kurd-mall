@@ -1,15 +1,26 @@
 import { useState } from 'react';
 
 import { PropTypes } from 'prop-types';
+import { useDispatch } from 'react-redux';
 import MaterialIcon from './MateriaIcon';
 import makeid from './methods/makeid';
+import postStar from '../../api/stars';
 
-const Stars = ({ number, users, isInteractive }) => {
-  const [currentStars, setCurrentStars] = useState({ number, users });
+const Stars = ({ item, isInteractive }) => {
+  const [postError, setPostError] = useState('');
+  const dispatch = useDispatch();
+  const [currentStars, setCurrentStars] = useState(item.stars
+    ? { number: item.stars.number, reviewers: item.stars.reviewers }
+    : { number: 0, reviewers: 0 });
 
-  const handleClick = (index) => {
+  const handleClick = async (index) => {
     if (isInteractive) {
-      setCurrentStars({ number: index + 1, users: users + 1 });
+      const response = await postStar(dispatch, item, index + 1);
+      if (response.status === 201) {
+        setCurrentStars({ number: index + 1, reviewers: currentStars.reviewers + 1 });
+      } else {
+        setPostError(JSON.stringify(response.data));
+      }
     }
   };
 
@@ -24,25 +35,27 @@ const Stars = ({ number, users, isInteractive }) => {
     return <MaterialIcon key={makeid(10)} text="star" orange />;
   };
   return (
-    <div className="d-flex justify-content-center">
-      <div className="d-flex">
+    <div>
+      <div className="d-flex justify-content-center">
+        <div className="d-flex">
 
-        {[...Array(5).keys()].map((a, index) => {
-          if (a < currentStars.number) {
-            return createStar(true, index);
-          }
-          return createStar(false, index);
-        })}
-        {' '}
+          {[...Array(5).keys()].map((a, index) => {
+            if (a < currentStars.number) {
+              return createStar(true, index);
+            }
+            return createStar(false, index);
+          })}
+          {' '}
+        </div>
+        <span className="orange">{currentStars.reviewers}</span>
       </div>
-      <span className="orange">{currentStars.users}</span>
+      <div className="text-danger text-center">{postError}</div>
     </div>
   );
 };
 
 Stars.propTypes = {
-  number: PropTypes.number.isRequired,
-  users: PropTypes.number.isRequired,
+  item: PropTypes.instanceOf(Object).isRequired,
   isInteractive: PropTypes.bool,
 };
 
