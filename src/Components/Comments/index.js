@@ -2,17 +2,19 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Modal } from 'bootstrap';
 import Comment from '../Shared/Comment';
 import postComment from '../../api/itemComments';
 import getDetailComments from '../../api/detailComments';
 import Paginator from '../Shared/Paginator';
+import LoginConfirmationModal from '../Shared/LoginConfirmationModal';
 
 const Comments = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const location = useLocation();
   const pageCommments = useSelector((state) => state.detailCommentsReducer.comments || []);
-  const [comments, setComments] = useState(pageCommments);
+  const [comments, setComments] = useState([]);
   const { itemId } = location.state;
   const [commentText, setCommentText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +24,12 @@ const Comments = () => {
   }, []);
 
   const handleComment = () => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    if (!token) {
+      const loginModal = new Modal(document.getElementById('login-confirmation-modal'), {});
+      loginModal.show();
+      return;
+    }
     const comment = {
       item_id: itemId,
       user_id: JSON.parse(localStorage.getItem('user')).id,
@@ -30,7 +38,8 @@ const Comments = () => {
       description: commentText,
       created_at: Date.now(),
     };
-    setComments([...comments, comment]);
+    setComments([...comments, comment].sort((a, b) => b.created_at - a.created_at));
+
     setCommentText('');
     postComment(dispatch, itemId, commentText);
   };
@@ -66,6 +75,8 @@ const Comments = () => {
           }}
         />
       )}
+
+      <LoginConfirmationModal />
     </main>
   );
 };

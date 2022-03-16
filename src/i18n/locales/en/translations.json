@@ -154,5 +154,9 @@
     "currency": "Currency",
     "beFirstToCreateStore": "Be the first to create a store, and start selling",
     "here": "Here",
-    "imageReuiqred": "Image is required"
+    "imageReuiqred": "Image is required",
+    "youNeedToLogin": "You need to login to perform this action",
+    "notLoggedIn": "You are not logged in",
+    "login": "Login",
+    "close": "Close"
 }

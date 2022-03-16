@@ -119,14 +119,14 @@ const ItemDetail = () => {
           ))}
           <div className="d-flex justify-content-end">
             <button type="button" className="icon-button" onClick={() => navigate('/see-all-comments', { state: { itemId: item.id } })}>
-              <p className="orange"><u>{t('seeAllComments')}</u></p>
+              <p className="orange"><u>{item.latest_5_comments.length > 0 ? t('seeAllComments') : t('writeComment')}</u></p>
             </button>
           </div>
 
         </div>
 
         <div>
-          <h3 className="orange">{t('relatedItems')}</h3>
+          {relatedItems.length > 0 && <h3 className="orange">{t('relatedItems')}</h3>}
           <div className="d-flex flex-wrap justify-content-start">
             {relatedItems.length > 0
               && relatedItems.map((item) => (<ItemCard key={item.id} item={item} />))}

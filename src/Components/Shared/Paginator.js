@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -19,7 +20,7 @@ const Paginator = ({ onChange, wasLastpage }) => {
                 }
               }}
             >
-              Previous
+              {t('previous')}
             </button>
           </li>
           <li className="page-item">
@@ -65,7 +66,7 @@ const Paginator = ({ onChange, wasLastpage }) => {
                 }
               }}
             >
-              Next
+              {t('next')}
             </button>
           </li>
         </ul>

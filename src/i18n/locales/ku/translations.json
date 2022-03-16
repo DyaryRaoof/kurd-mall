@@ -155,5 +155,9 @@
     "currency": "دراو",
     "beFirstToCreateStore": "یەکەم کەس بە بۆ درووستکردنی کۆگا و دەستبکە بە فرۆشتن",
     "here": "لێرە",
-    "imageRequired": "وێنە داواکراوە"
+    "imageRequired": "وێنە داواکراوە",
+    "youNeedToLogin": "پێویستە داخڵببیت بۆ ئەنجامدانی ئەم کارە",
+    "notLoggedIn": "داخڵ نەبوویت",
+    "login": "داخڵببە",
+    "close": "دابخە"
 }
