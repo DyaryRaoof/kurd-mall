@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { Collapse } from 'bootstrap';
+
 import MaterialIcon from '../Shared/MateriaIcon';
 import Carousel from '../StoreDetailPage/Carousel';
 import './ItemDetail.css';
@@ -12,6 +14,7 @@ import Comment from '../Shared/Comment';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 import getRelatedItems from '../../api/relatedItems';
 import ItemCard from '../Shared/ItemCard';
+import CollapsableShare from '../Shared/CollapsableShare';
 
 const ItemDetail = () => {
   const location = useLocation();
@@ -32,12 +35,24 @@ const ItemDetail = () => {
       <div className="container">
         <div className="row">
 
-          <div className="d-flex justify-content-between position relative item-detail-top-icons">
-            <MaterialIcon text="share" orange isLarge />
+          <div className="d-flex justify-content-between align-items-start position relative item-detail-top-icons">
+            <div>
+              <button
+                type="button"
+                className="icon-button"
+                onClick={() => {
+                  new Collapse(document.querySelector('#share-collapse')).collapse({ toggle: true });
+                }}
+              >
+                <MaterialIcon text="share" orange isLarge />
+              </button>
+              <CollapsableShare />
 
+            </div>
             <button type="button" className="icon-button" onClick={() => { navigate('/store-detail', { state: item.storeId }); }}>
               <MaterialIcon text="store" orange isLarge />
             </button>
+
           </div>
           <Carousel images={[...item.image_urls]} />
           <div className="row mx-2">

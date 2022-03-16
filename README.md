@@ -29,10 +29,10 @@ This is a responsive react web app that's build as an e-commerce platform. it al
 https://github.com/DyaryRaoof/kurd-mall-backend
 
 <!-- ## Live Demo
-[Live Demo](https://objective-pasteur-0b310b.netlify.app/)
+[Live Demo]()
 
 ## Demo Video
-[Demo Video](https://www.loom.com/share/6b894b02e57d472cb6eb2375e188fa11) -->
+[Demo Video]() -->
 
 ## Getting Started
 
@@ -40,7 +40,6 @@ https://github.com/DyaryRaoof/kurd-mall-backend
 - Open the cloned folder on the IDE of your choice;
 - Install dependencies with `npm i`;
 - Use `npm start` to start the website;
-<!-- - Use `npm test` to run tests; -->
 
 ## Author
 👤 **Dyary Raoof Bayz**
@@ -49,22 +48,9 @@ https://github.com/DyaryRaoof/kurd-mall-backend
 - Twitter: [@DyaryRaoof](https://twitter.com/DyaryRaoof)
 - LinkedIn: [@DyaryRaoof](https://linkedin.com/in/DyaryRaoof)
 
-
-<!-- ## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](https://github.com/DyaryRaoof/the-covid-datacenter/issues). -->
-
 ## Show your support
 
 Give a ⭐️ if you like this project!
 
 ## Acknowledgments
-
 - Hat tip to anyone whose code was used
-
-<!-- ## 📝 License
-
-This project is [MIT](./MIT.md) licensed. -->
-
