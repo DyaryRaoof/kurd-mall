@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import getJavascriptDateFromTimeStamp from './methods/getJavascriptDateFromTimeStamp';
 
 import './Comment.css';
 
@@ -15,9 +16,9 @@ const Comment = ({ comment }) => {
         <div className="comments-name">
           <span className="comments-date">
             {comment.description}
-            <span className="orange">
+            <span className="orange mx-3">
               {t('at')}
-              {comment.date}
+              {getJavascriptDateFromTimeStamp(comment.created_at)}
             </span>
           </span>
         </div>

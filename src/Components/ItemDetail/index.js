@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-// import PropTypes from 'prop-types';
 import MaterialIcon from '../Shared/MateriaIcon';
 import Carousel from '../StoreDetailPage/Carousel';
 import './ItemDetail.css';
@@ -10,8 +9,6 @@ import Stars from '../Shared/Stars';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 import makeid from '../Shared/methods/makeid';
 import Comment from '../Shared/Comment';
-import comment from '../mock-data/comment';
-// import ItemsCarousel from '../Shared/ItemsCarousel';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 import getRelatedItems from '../../api/relatedItems';
 import ItemCard from '../Shared/ItemCard';
@@ -117,7 +114,7 @@ const ItemDetail = () => {
 
         <div>
           <h3 className="orange">{t('comments')}</h3>
-          {Array(5).fill(0).map(() => (
+          {item.latest_5_comments.map((comment) => (
             <Comment key={makeid(10)} comment={comment} />
           ))}
           <div className="d-flex justify-content-end">
@@ -140,32 +137,5 @@ const ItemDetail = () => {
     </div>
   );
 };
-
-// ItemDetail.propTypes = {
-//   item: PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     currency: PropTypes.string.isRequired,
-//     image: PropTypes.string.isRequired,
-//     stars: PropTypes.number.isRequired,
-//     reviewers: PropTypes.number.isRequired,
-//     leftInStock: PropTypes.number.isRequired,
-//     storeId: PropTypes.number.isRequired,
-//     shippingKg: PropTypes.number.isRequired,
-//     shippingPrice: PropTypes.number.isRequired,
-//     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     description: PropTypes.string.isRequired,
-//     variants: PropTypes.arrayOf(PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       name: PropTypes.string.isRequired,
-//       price: PropTypes.number.isRequired,
-//       imageIndex: PropTypes.number.isRequired,
-//     })).isRequired,
-//     images: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     categoryId: PropTypes.number.isRequired,
-//     subcategoryId: PropTypes.number.isRequired,
-//     id: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
 
 export default ItemDetail;

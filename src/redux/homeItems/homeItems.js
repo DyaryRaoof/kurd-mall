@@ -23,7 +23,7 @@ const homeItemsReducer = (state = initialState, action) => {
     case GET_HOME_ITEMS_SUCCESS:
       if (action.payload.replaceItems) {
         return {
-          ...state, items: action.payload.items, isLoading: true, error: null,
+          ...state, items: action.payload.items, isLoading: false, error: null,
         };
       }
       return {

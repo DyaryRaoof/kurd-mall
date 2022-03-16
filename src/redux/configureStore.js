@@ -12,6 +12,7 @@ import homeItemsReducer from './homeItems/homeItems';
 import relatedItemsReducer from './relatedItems/relatedItems';
 import starsReducer from './stars/stars';
 import commentsReducer from './comments/comments';
+import detailCommentsReducer from './detailComments/detailComments';
 
 const reducers = combineReducers({
   designReducer,
@@ -25,6 +26,8 @@ const reducers = combineReducers({
   relatedItemsReducer,
   starsReducer,
   commentsReducer,
+  detailCommentsReducer,
+
 });
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 

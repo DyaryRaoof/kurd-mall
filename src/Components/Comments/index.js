@@ -1,19 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-// import comment from '../mock-data/comment';
-import makeid from '../Shared/methods/makeid';
+import { useDispatch, useSelector } from 'react-redux';
 import Comment from '../Shared/Comment';
 import postComment from '../../api/itemComments';
+import getDetailComments from '../../api/detailComments';
+import Paginator from '../Shared/Paginator';
 
 const Comments = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const location = useLocation();
-  const [comments, setComments] = useState(location.state.comments || []);
+  const pageCommments = useSelector((state) => state.detailCommentsReducer.comments || []);
+  const [comments, setComments] = useState(pageCommments);
   const { itemId } = location.state;
   const [commentText, setCommentText] = useState('');
+  useEffect(() => {
+    getDetailComments(dispatch, itemId, 1);
+  }, []);
+
+  useEffect(() => {
+    setComments(pageCommments);
+  }, [pageCommments]);
 
   const handleComment = () => {
     const comment = {
@@ -22,7 +30,7 @@ const Comments = () => {
       user_image: JSON.parse(localStorage.getItem('user')).image_urls[0],
       user_name: JSON.parse(localStorage.getItem('user')).name,
       description: commentText,
-      date: Date.now(),
+      created_at: Date.now(),
     };
     setComments([...comments, comment]);
     setCommentText('');
@@ -48,8 +56,12 @@ const Comments = () => {
         />
       </div>
       {comments.map((comment) => (
-        <Comment key={makeid(10)} comment={comment} />
+        <Comment key={comment.id} comment={comment} />
       ))}
+      <Paginator onChange={(page) => {
+        getDetailComments(dispatch, itemId, page);
+      }}
+      />
     </main>
   );
 };
