@@ -153,5 +153,6 @@
     "locationRequired": "Location is required",
     "currency": "Currency",
     "beFirstToCreateStore": "Be the first to create a store, and start selling",
-    "here": "Here"
+    "here": "Here",
+    "imageReuiqred": "Image is required"
 }

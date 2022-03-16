@@ -10,3 +10,7 @@
 .sign-up-main {
   margin-bottom: 30vh;
 }
+
+.sign-up-user-avatar { 
+  width: 100px;
+}

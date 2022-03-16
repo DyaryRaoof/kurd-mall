@@ -5,18 +5,24 @@ import signUP from '../../images/design/sign-up.png';
 import Field from '../Shared/Field';
 import './SignUp.css';
 import { signUpUser } from '../../api/user';
+import ImageSelector from '../Shared/ImageSelector';
+import DropDown from '../Shared/DropDown';
 
 const SignUp = () => {
   const [submitted, setSubmitted] = useState(false);
   const [password, setPassword] = useState('');
   const [returnedErrors, setReturnedErrors] = useState(null);
+  const cities = JSON.parse(localStorage.getItem('cities'));
   const [t] = useTranslation();
   const getPassword = (passwordFromChild) => {
     setPassword(passwordFromChild);
   };
 
+  const [image, setImage] = useState({ url: null, file: null });
+
   const formValidity = Array(5).fill(false);
   const [fieldValues, setFieldValues] = useState(Array(5).fill(''));
+  const [cityId, setCityId] = useState(null);
   const navigate = useNavigate();
 
   const setParentValueNow = (value, index) => {
@@ -34,13 +40,13 @@ const SignUp = () => {
     setSubmitted(true);
     if (!formValidity.includes(false)) {
       const user = {
-        user: {
-          name: fieldValues[0],
-          email: fieldValues[1],
-          phone: fieldValues[2],
-          password: fieldValues[3],
-          password_confirmation: fieldValues[4],
-        },
+        name: fieldValues[0],
+        email: fieldValues[1],
+        phone: fieldValues[2],
+        password: fieldValues[3],
+        password_confirmation: fieldValues[4],
+        image: image.file,
+        cityId,
       };
       const response = await signUpUser(user);
       if (response.status === 200) {
@@ -118,6 +124,14 @@ const SignUp = () => {
               }
               setChildValue={fieldValues[4]}
             />
+            <DropDown dropdownValues={cities} categoryName={t('city')} setParentValue={(city) => { setCityId(city.id); }} />
+            {submitted && !cityId && <div className="text-danger text-center">{t('errors.fieldRequired')}</div>}
+            <ImageSelector
+              numberOfImages={1}
+              setImages={(urls, files) => setImage({ url: urls[0], file: files[0] })}
+            />
+            {image.url && <img src={image.url} alt="avatar" className="sign-up-user-avatar" />}
+            {submitted && !image.url && <div className="text-danger text-center">{t('imageRequired')}</div>}
             <button type="submit" className="form-control orange p-3 my-3">{t('signUp')}</button>
             {returnedErrors && <div className="alert alert-danger text-center">{returnedErrors}</div>}
           </form>

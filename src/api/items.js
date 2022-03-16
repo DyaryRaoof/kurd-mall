@@ -28,7 +28,6 @@ const postItem = async (dispatch, item, images) => {
 
   try {
     dispatch(postItemLoading());
-    console.log(backend);
     const response = await backend.post(`users/${userId}/stores/${item.store.id}/items`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
     dispatch(postItemSuccess(response.data));
     return response;

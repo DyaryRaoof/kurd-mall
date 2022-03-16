@@ -20,7 +20,6 @@ const HomeBody = () => {
   const isBottom = (el) => el.getBoundingClientRect().bottom <= window.innerHeight;
 
   const loadNextItems = async () => {
-    console.log('triggered');
     const storageSubcategories = JSON.parse(localStorage.getItem('subcategories'));
 
     const subcategoryIds = [...storageSubcategories].map((sub) => sub.id)
