@@ -25,6 +25,9 @@ This is a responsive react web app that's build as an e-commerce platform. it al
 - CSS
 - JSX
 
+## Back End Repo
+https://github.com/DyaryRaoof/kurd-mall-backend
+
 <!-- ## Live Demo
 [Live Demo](https://objective-pasteur-0b310b.netlify.app/)
 
