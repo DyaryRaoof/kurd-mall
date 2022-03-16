@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-const Paginator = ({ onChange }) => {
+const Paginator = ({ onChange, wasLastpage }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
@@ -60,7 +60,9 @@ const Paginator = ({ onChange }) => {
               type="button"
               className="page-link icon-button"
               onClick={() => {
-                setCurrentPage(currentPage + 1); onChange(currentPage + 1);
+                if (!wasLastpage) {
+                  setCurrentPage(currentPage + 1); onChange(currentPage + 1);
+                }
               }}
             >
               Next
@@ -74,6 +76,7 @@ const Paginator = ({ onChange }) => {
 
 Paginator.propTypes = {
   onChange: PropTypes.func.isRequired,
+  wasLastpage: PropTypes.bool.isRequired,
 };
 
 export default Paginator;

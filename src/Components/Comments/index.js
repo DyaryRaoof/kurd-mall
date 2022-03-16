@@ -15,13 +15,11 @@ const Comments = () => {
   const [comments, setComments] = useState(pageCommments);
   const { itemId } = location.state;
   const [commentText, setCommentText] = useState('');
-  useEffect(() => {
-    getDetailComments(dispatch, itemId, 1);
-  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    setComments(pageCommments);
-  }, [pageCommments]);
+  useEffect(async () => {
+    await getDetailComments(dispatch, itemId, 1);
+  }, []);
 
   const handleComment = () => {
     const comment = {
@@ -55,13 +53,19 @@ const Comments = () => {
           }}
         />
       </div>
-      {comments.map((comment) => (
+      {[...comments, ...pageCommments].map((comment) => (
         <Comment key={comment.id} comment={comment} />
       ))}
-      <Paginator onChange={(page) => {
-        getDetailComments(dispatch, itemId, page);
-      }}
-      />
+
+      {(pageCommments.length > 29 || (pageCommments.length === 0 && currentPage !== 1)) && (
+        <Paginator
+          wasLastpage={pageCommments.length === 0}
+          onChange={(page) => {
+            getDetailComments(dispatch, itemId, page);
+            setCurrentPage(page);
+          }}
+        />
+      )}
     </main>
   );
 };
