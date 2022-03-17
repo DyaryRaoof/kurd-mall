@@ -2,28 +2,34 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import Carousel from './Carousel';
 import StoreInfoItem from './StoreInfoItem';
 import './StoreDetail.css';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 import MaterialIcon from '../Shared/MateriaIcon';
 import LocationWidget from '../Shared/LocatoinWidget';
+import getStoreDetail from '../../api/storeDetail';
 
 const StoreDetail = () => {
-  const { store } = useLocation().state;
+  let { store } = useLocation().state;
+  const { storeId } = useLocation().state;
   const categories = JSON.parse(localStorage.getItem('categories')) || [];
   const subcategories = JSON.parse(localStorage.getItem('subcategories')) || [];
   const cities = JSON.parse(localStorage.getItem('cities')) || [];
+  const fetchedStore = useSelector((state) => state.storeDetailReducer.store);
   const {
     name, description,
     address, phone, city_id: cityId,
     category_id: cateogryId, subcategory_id: subcategoryId,
     instagram, facebook, locaation_long: locationLong, location_lat: locationLat,
     image_urls: imageURLs,
-  } = store;
+  } = store || fetchedStore || {};
 
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const category = categories.find((category) => category.id === cateogryId);
   const subcategory = subcategories.find((subcategory) => subcategory.id === subcategoryId);
@@ -31,11 +37,21 @@ const StoreDetail = () => {
 
   const language = localStorage.getItem('language');
 
-  return (
+  useEffect(() => {
+    if (storeId) {
+      getStoreDetail(dispatch, storeId);
+    }
+  }, []);
+
+  useEffect(() => {
+    store = fetchedStore;
+  }, [fetchedStore]);
+
+  return fetchedStore || store ? (
     <div className="container">
       <div className="row">
         <div className="col-md-7 mt-5">
-          <Carousel images={[...imageURLs]} />
+          <Carousel images={imageURLs || []} />
         </div>
         <div className="col-md-5 mt-5">
           <div className="border border-1 border-top-5 rounded border-warning">
@@ -62,7 +78,8 @@ const StoreDetail = () => {
       <RoundOrangeIconButton buttonText={t('addItem')} iconName="add_circle" onPressed={() => navigate('/create-item')} />
       {/* items here */}
     </div>
-  );
+  )
+    : <div />;
 };
 
 StoreDetail.propTypes = {

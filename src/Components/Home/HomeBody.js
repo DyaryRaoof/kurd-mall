@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { t } from 'i18next';
 import ItemsCarousel from '../Shared/ItemsCarousel';
@@ -13,40 +13,8 @@ const HomeBody = () => {
   const categories = useSelector((state) => state.categoriesReducer.categories) || [];
   const subcategories = useSelector((state) => state.subcategoriesReducer.subcategories) || [];
   const language = localStorage.getItem('language') || 'ku';
-  const paginationNumber = 10;
-  const [currenctSubcategoryIndex, setCurrentSubcategoryIndex] = useState(paginationNumber);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isBottom = (el) => el.getBoundingClientRect().bottom <= window.innerHeight;
-
-  const loadNextItems = async () => {
-    const storageSubcategories = JSON.parse(localStorage.getItem('subcategories'));
-
-    const subcategoryIds = [...storageSubcategories].map((sub) => sub.id)
-      .slice(currenctSubcategoryIndex + 1, currenctSubcategoryIndex + paginationNumber);
-
-    await getHomeItems(dispatch, subcategoryIds);
-
-    if (currenctSubcategoryIndex < storageSubcategories.length) {
-      setCurrentSubcategoryIndex(currenctSubcategoryIndex + paginationNumber);
-    }
-  };
-
-  const trackScrolling = () => {
-    const wrappedElement = document.querySelector('.home-main');
-    if (isBottom(wrappedElement)) {
-      document.removeEventListener('scroll', trackScrolling);
-      loadNextItems();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('scroll', trackScrolling);
-
-    return () => {
-      document.removeEventListener('scroll', trackScrolling);
-    };
-  }, [currenctSubcategoryIndex]);
 
   useEffect(() => {
     dispatch(fetchCategories);
@@ -54,8 +22,7 @@ const HomeBody = () => {
   }, []);
 
   useEffect(() => {
-    const subcategoryIds = [...subcategories].map((sub) => sub.id)
-      .slice(0, currenctSubcategoryIndex);
+    const subcategoryIds = [...subcategories].map((sub) => sub.id);
     getHomeItems(dispatch, subcategoryIds, true);
   }, [subcategories]);
 
@@ -90,6 +57,7 @@ const HomeBody = () => {
           </h1>
         )}
     </main>
+
   );
 };
 

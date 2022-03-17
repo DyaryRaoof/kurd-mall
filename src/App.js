@@ -38,7 +38,7 @@ function App() {
           <Route path="/sign-up" exact element={<SignUp />} />
           <Route path="/log-in" exact element={<Login />} />
           <Route exact path="/create-store" element={<PrivateRoute element={<CreateStore />} />} />
-          <Route path="/create-item" exact element={<CreateItem />} />
+          <Route exact path="/create-item" element={<PrivateRoute element={<CreateItem />} />} />
           <Route path="/store-detail" exact element={<StoreDetail store={store} />} />
           <Route path="/item-detail" exact element={<ItemDetail item={item[0]} />} />
           <Route path="/see-all-comments" exact element={<Comments />} />

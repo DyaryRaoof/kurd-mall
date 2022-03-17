@@ -47,9 +47,9 @@ const ItemDetail = () => {
                 <MaterialIcon text="share" orange isLarge />
               </button>
               <CollapsableShare />
-
             </div>
-            <button type="button" className="icon-button" onClick={() => { navigate('/store-detail', { state: item.storeId }); }}>
+
+            <button type="button" className="icon-button" onClick={() => { navigate('/store-detail', { state: { storeId: item.store_id } }); }}>
               <MaterialIcon text="store" orange isLarge />
             </button>
 
