@@ -1,11 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import categories from '../mock-data/categories';
 import './Sidebar.css';
 import MaterialIcon from '../Shared/MateriaIcon';
 
 const Sidebar = ({ clicked, changeShowSidebar }) => {
+  const categories = JSON.parse(localStorage.getItem('categories'));
+  const language = localStorage.getItem('language') || 'ku';
+  const subcategories = JSON.parse(localStorage.getItem('subcategories'));
   const [showSubcategories, setShowSubcategories] = useState({ show: false, categoryId: 0 });
   const { t } = useTranslation();
 
@@ -22,12 +24,14 @@ const Sidebar = ({ clicked, changeShowSidebar }) => {
         {categories.map((c) => (
           <li key={c.id}>
             <button className="d-flex justify-content-between icon-button" type="button" onClick={() => { setShowSubcategories({ show: !showSubcategories.show, categoryId: c.id }); }}>
-              <span>{c.name}</span>
+              <span>{language === 'ku' ? c.name_ku : c.name_en}</span>
               <MaterialIcon text="arrow_drop_down" orange />
             </button>
             {' '}
             <ul className={`${showSubcategories.show && showSubcategories.categoryId === c.id ? 'show-sub-categories' : 'd-none'}`}>
-              {c.subcategories.map((sub) => <li key={sub.id}><span>{sub.name}</span></li>)}
+              {subcategories
+                .filter((sub) => sub.category_id === c.id)
+                .map((sub) => <li key={sub.id}><span>{language === 'ku' ? sub.name_ku : sub.name_en}</span></li>)}
             </ul>
 
             <hr />
