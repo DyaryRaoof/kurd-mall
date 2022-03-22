@@ -27,6 +27,7 @@ import OwnerOrders from './Components/OwnerOrders';
 import BuyerOrders from './Components/BuyerOrders';
 import MyCollection from './Components/MyCollection';
 import PrivateRoute from './Components/PrivateRoute';
+import AllItems from './Components/AllItems';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="/owner-orders" exact element={<OwnerOrders />} />
           <Route path="/buyer-orders" exact element={<BuyerOrders />} />
           <Route path="/my-collection" exact element={<MyCollection />} />
+          <Route path="/all-items" exact element={<AllItems />} />
         </Routes>
       </Router>
       <Footer />

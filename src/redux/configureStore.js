@@ -15,6 +15,8 @@ import commentsReducer from './comments/comments';
 import detailCommentsReducer from './detailComments/detailComments';
 import storeDetailReducer from './storeDetail/storeDetail';
 import homeStoresReducer from './homeStores/homeStores';
+import allItemsReducer from './allItems/allItems';
+import allStoresReducer from './allStores/allStores';
 
 const reducers = combineReducers({
   designReducer,
@@ -31,6 +33,8 @@ const reducers = combineReducers({
   detailCommentsReducer,
   storeDetailReducer,
   homeStoresReducer,
+  allItemsReducer,
+  allStoresReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 

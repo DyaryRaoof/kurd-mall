@@ -66,10 +66,7 @@ const SearchDetail = () => {
               {items.map((item) => (
                 <ItemCard
                   key={item.id}
-                  name={item.name}
-                  stars={item.stars}
-                  price={item.price}
-                  image={item.image}
+                  item={item}
                   leftInStock={item.leftInStock}
                   isSearchItem
                 />

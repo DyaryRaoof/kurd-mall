@@ -21,6 +21,10 @@ ul li {
   font-weight: bold;
 }
 
+.subcategory-button {
+  border-color: #e05e00;
+}
+
 @keyframes animate-side-bar {
   0% {
     transform: translateX(-50vw);

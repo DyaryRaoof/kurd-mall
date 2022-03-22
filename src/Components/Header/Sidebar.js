@@ -1,8 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './Sidebar.css';
 import MaterialIcon from '../Shared/MateriaIcon';
+
+import './Sidebar.css';
 
 const Sidebar = ({ clicked, changeShowSidebar }) => {
   const categories = JSON.parse(localStorage.getItem('categories'));
@@ -10,6 +13,8 @@ const Sidebar = ({ clicked, changeShowSidebar }) => {
   const subcategories = JSON.parse(localStorage.getItem('subcategories'));
   const [showSubcategories, setShowSubcategories] = useState({ show: false, categoryId: 0 });
   const { t } = useTranslation();
+  const navStoreOrItem = useSelector((state) => state.designReducer.navStoreOrItem);
+  const navigate = useNavigate();
 
   return (
     <aside className={`side-bar ${clicked ? 'show-side-bar' : ''}`}>
@@ -31,7 +36,18 @@ const Sidebar = ({ clicked, changeShowSidebar }) => {
             <ul className={`${showSubcategories.show && showSubcategories.categoryId === c.id ? 'show-sub-categories' : 'd-none'}`}>
               {subcategories
                 .filter((sub) => sub.category_id === c.id)
-                .map((sub) => <li key={sub.id}><span>{language === 'ku' ? sub.name_ku : sub.name_en}</span></li>)}
+                .map((sub) => (
+                  <button
+                    type="button"
+                    key={sub.id}
+                    className="subcategory-buttons"
+                    onClick={() => {
+                      navigate('/all-items', { state: { subcategoryId: sub.id, isStore: navStoreOrItem === 'stores' } });
+                    }}
+                  >
+                    <li><span>{language === 'ku' ? sub.name_ku : sub.name_en}</span></li>
+                  </button>
+                ))}
             </ul>
 
             <hr />

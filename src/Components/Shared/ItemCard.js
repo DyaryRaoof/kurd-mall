@@ -49,7 +49,7 @@ const ItemCard = ({
         >
           <div className="row">
             <div className={`${isSearchItem ? 'col-md-3' : ''}`}>
-              <img src={imageURLS[0]} className="card-img-top item-image" alt="Item" />
+              <img src={imageURLS ? imageURLS[0] : ''} className="card-img-top item-image" alt="Item" />
             </div>
             <div className={`${isSearchItem ? 'col-md-9' : ''}`}>
               <div className={`card-body ${isSearchItem ? 'col-md-9 d-flex flex-column align-items-start' : ''}`}>

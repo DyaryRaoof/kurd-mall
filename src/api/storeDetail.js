@@ -4,7 +4,7 @@ import { getStoreDetailLoading, getStoreDetailSuccess, getStoreDetailFailure } f
 const getStoreDetail = async (dispatch, storeId) => {
   try {
     dispatch(getStoreDetailLoading());
-    const response = await backend.get(`stores/${storeId}?`);
+    const response = await backend.get(`store/${storeId}?`);
     dispatch(getStoreDetailSuccess(response.data));
     return response;
   } catch (err) {
