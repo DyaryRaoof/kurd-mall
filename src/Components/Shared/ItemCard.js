@@ -18,7 +18,7 @@ const ItemCard = ({
     if (isStore) {
       navigate('/store-detail', {
         state: {
-          name, stars, price, reviewers, quantity, id,
+          store: item,
         },
       });
     } else {
@@ -54,9 +54,9 @@ const ItemCard = ({
             <div className={`${isSearchItem ? 'col-md-9' : ''}`}>
               <div className={`card-body ${isSearchItem ? 'col-md-9 d-flex flex-column align-items-start' : ''}`}>
                 <h5 className="card-title">{name}</h5>
-                <Stars item={item} />
                 {!isStore && (
                   <div>
+                    <Stars item={item} />
                     <div>
                       {price}
                       {' '}
