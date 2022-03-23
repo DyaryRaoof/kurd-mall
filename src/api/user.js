@@ -1,4 +1,5 @@
 import axios from 'axios';
+import backend from './backend';
 import baseURL from './baseURL';
 
 const URL = `${baseURL}users/sign_in`;
@@ -36,6 +37,11 @@ export const signUpUser = async (user) => {
   } catch (err) {
     return err.response;
   }
+};
+
+export const signOutUser = async () => {
+  const response = await backend.delete('/users/sign_out');
+  return response;
 };
 
 export default signInUser;

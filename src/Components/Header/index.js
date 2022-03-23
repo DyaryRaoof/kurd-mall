@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setNavStoreOrItem } from '../../redux/design/design';
 import './Header.css';
@@ -8,10 +8,12 @@ import MaterialIcon from '../Shared/MateriaIcon';
 import Search from './Search';
 import Sidebar from './Sidebar';
 import { setUser } from '../../redux/user/user';
+import { signOutUser } from '../../api/user';
 
 const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const user = useSelector((state) => state.userReducer.user);
+  // const user = useSelector((state) => state.userReducer.user);
+  const user = JSON.parse(localStorage.getItem('user'));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -20,10 +22,18 @@ const Header = () => {
     setShowSidebar(!showSidebar);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    const response = await signOutUser();
+    if (response.status !== 200) {
+      console.log(response.status);
+      return;
+    }
+
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     dispatch(setUser(null));
     navigate('/');
+    window.location.reload();
   };
 
   return (

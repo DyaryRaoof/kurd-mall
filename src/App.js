@@ -55,7 +55,7 @@ function App() {
           <Route path="/driver-orders" exact element={<DriverOrders />} />
           <Route path="/owner-orders" exact element={<OwnerOrders />} />
           <Route path="/buyer-orders" exact element={<BuyerOrders />} />
-          <Route path="/my-collection" exact element={<MyCollection />} />
+          <Route exact path="/create-item" element={<PrivateRoute element={<MyCollection />} />} />
           <Route path="/all-items" exact element={<AllItems />} />
         </Routes>
       </Router>
