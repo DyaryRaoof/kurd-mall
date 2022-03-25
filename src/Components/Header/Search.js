@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import getSearchItems from '../../api/searchItem';
 import { setsearchBarText } from '../../redux/design/design';
+import getSearchStores from '../../api/searchStores';
 
 const Search = () => {
   const { t } = useTranslation();
@@ -14,6 +15,7 @@ const Search = () => {
   const priceTo = useSelector((state) => state.designReducer.searchBarPriceTo);
   const currency = useSelector((state) => state.designReducer.searchBarPriceCurrency) || 'IQD';
   const ascending = useSelector((state) => state.designReducer.searchBarPriceAscending);
+  const isStore = useSelector((state) => state.designReducer.navStoreOrItem) === 'stores';
 
   return (
     <div className="mx-auto w-75 ">
@@ -24,14 +26,18 @@ const Search = () => {
         placeholder={t('search')}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            getSearchItems(dispatch,
-              e.target.value,
-              currency, priceFrom,
-              priceTo,
-              stars,
-              ascending,
-              1);
             dispatch(setsearchBarText(e.target.value));
+            if (isStore) {
+              getSearchStores(dispatch, e.target.value, 1);
+            } else {
+              getSearchItems(dispatch,
+                e.target.value,
+                currency, priceFrom,
+                priceTo,
+                stars,
+                ascending,
+                1);
+            }
             if (location.pathname !== '/search-detail') {
               navigate('/search-detail');
             }

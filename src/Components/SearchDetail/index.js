@@ -11,9 +11,11 @@ import {
 } from '../../redux/design/design';
 import './SearchDetail.css';
 import getSearchItems from '../../api/searchItem';
+import getSearchStores from '../../api/searchStores';
 
 const SearchDetail = () => {
   const items = useSelector((state) => state.searchItemsReducer.items);
+  const stores = useSelector((state) => state.searchStoresReducer.stores);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [highToLow, setHighToLow] = useState(false);
@@ -25,8 +27,14 @@ const SearchDetail = () => {
   const priceTo = useSelector((state) => state.designReducer.searchBarPriceTo);
   const ascending = useSelector((state) => state.designReducer.searchBarPriceAscending);
   const text = useSelector((state) => state.designReducer.searchBarText);
+  const isStore = useSelector((state) => state.designReducer.navStoreOrItem) === 'stores';
+  const iterator = isStore ? stores : items;
 
   useEffect(() => {
+    if (isStore) {
+      getSearchStores(dispatch, text, currentPage);
+      return;
+    }
     getSearchItems(dispatch,
       text,
       currency, priceFrom,
@@ -97,10 +105,11 @@ const SearchDetail = () => {
           <div className="d-flex">
             <div className="vertical-line d-none d-sm-block" />
             <div>
-              {items.map((item) => (
+              {iterator.map((item) => (
                 <ItemCard
                   key={item.id}
                   item={item}
+                  isStore={isStore}
                   isSearchItem
                 />
               ))}

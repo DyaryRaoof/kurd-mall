@@ -24,7 +24,6 @@ const Header = () => {
   const handleLogout = async () => {
     const response = await signOutUser();
     if (response.status !== 200) {
-      console.log(response.status);
       return;
     }
 
