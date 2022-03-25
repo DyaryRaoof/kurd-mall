@@ -32,7 +32,7 @@ const CreateStore = () => {
     dispatch(fetchCategories);
     fetchSubcategories(dispatch, 0);
     dispatch(fetchCities);
-    redirectOnTokenExipiration();
+    redirectOnTokenExipiration(navigate);
   }, []);
 
   const [submitted, setSubmitted] = useState(false);

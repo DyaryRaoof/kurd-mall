@@ -12,7 +12,6 @@ import { signOutUser } from '../../api/user';
 
 const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
-  // const user = useSelector((state) => state.userReducer.user);
   const user = JSON.parse(localStorage.getItem('user'));
   const dispatch = useDispatch();
   const navigate = useNavigate();

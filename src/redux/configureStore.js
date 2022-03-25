@@ -19,6 +19,7 @@ import allItemsReducer from './allItems/allItems';
 import allStoresReducer from './allStores/allStores';
 import myStoreReducer from './myStore/myStores';
 import myItemsReducer from './myItems/myItems';
+import searchItemsReducer from './searchItems/searchItems';
 
 const reducers = combineReducers({
   designReducer,
@@ -39,6 +40,7 @@ const reducers = combineReducers({
   allStoresReducer,
   myStoreReducer,
   myItemsReducer,
+  searchItemsReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 
