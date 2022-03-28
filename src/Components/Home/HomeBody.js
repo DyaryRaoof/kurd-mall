@@ -47,6 +47,7 @@ const HomeBody = () => {
               <div className="my-5" key={sub.name}>
                 <ItemsCarousel
                   subcategoryName={language === 'ku' ? sub.name_ku : sub.name_en}
+                  subcategoryId={sub.id}
                   isStore={navStoreOrItem === 'stores'}
                   items={subcatItems}
                 />
