@@ -22,10 +22,10 @@ const CartTop = ({
       </div>
       <div className="d-flex justify-content-between">
         <div className="orange mt-2">
-          <div>{item.supplierName}</div>
-          <div>{item.name}</div>
+          <div>{item.supplier_name}</div>
+          <div>{item.item_name}</div>
           <div>
-            {item.variantOptions.map((vo) => (
+            {item.variantOptions ? item.variantOptions.map((vo) => (
               <div className="d-flex" key={makeid(10)}>
                 <div>
                   {vo.name}
@@ -34,7 +34,7 @@ const CartTop = ({
                 </div>
                 <div>{vo.value}</div>
               </div>
-            ))}
+            )) : null}
           </div>
         </div>
         <div>
@@ -74,19 +74,7 @@ const CartTop = ({
   );
 };
 CartTop.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    orderNo: PropTypes.number.isRequired,
-    supplierName: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    currency: PropTypes.string.isRequired,
-    variantOptions: PropTypes.instanceOf(Array).isRequired,
-    shippingWeight: PropTypes.number.isRequired,
-    quantity: PropTypes.number.isRequired,
-    totalPrice: PropTypes.number.isRequired,
-    pickedUp: PropTypes.bool.isRequired,
-  }).isRequired,
+  item: PropTypes.instanceOf(Object).isRequired,
   priceForItem: PropTypes.func.isRequired,
   shippingPrice: PropTypes.func.isRequired,
   totalPrice: PropTypes.func.isRequired,

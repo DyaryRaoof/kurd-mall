@@ -20,16 +20,6 @@ export const gettAllItemLoading = () => ({
   type: GET_ALL_ITEMS_LOADING,
 });
 
-export const getAllItemFromHomeSuccess = (payload) => ({
-  type: GET_ALL_ITEMS_SUCCESS,
-  payload,
-});
-
-export const getAllItemFromHomeFailure = (payload) => ({
-  type: GET_ALL_ITEMS_FAILURE,
-  payload,
-});
-
 const allItemsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_ITEMS_SUCCESS:

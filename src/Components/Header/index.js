@@ -12,7 +12,7 @@ import { signOutUser } from '../../api/user';
 
 const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const user = JSON.parse(localStorage.getItem('user'));
+  const token = JSON.parse(localStorage.getItem('token'));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -48,14 +48,14 @@ const Header = () => {
             <ul className="navbar-nav">
 
               <li className="ms-auto">
-                <button className="icon-text-pair icon-button" type="button" onClick={user ? handleLogout : () => { navigate('/log-in'); }}>
-                  <span className="d-flex justify-content-end width-100">{user ? t('logOut') : t('logIn')}</span>
+                <button className="icon-text-pair icon-button" type="button" onClick={token ? handleLogout : () => { navigate('/log-in'); }}>
+                  <span className="d-flex justify-content-end width-100">{token ? t('logOut') : t('logIn')}</span>
                   <div>
                     <MaterialIcon onClick={() => { }} orange text="person" />
                   </div>
                 </button>
               </li>
-              {user ? (
+              {token ? (
                 <>
                   <li className="ms-auto">
                     <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/profile'); }}>

@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Collapse } from 'bootstrap';
-
+import { Collapse, Modal } from 'bootstrap';
 import MaterialIcon from '../Shared/MateriaIcon';
 import Carousel from '../StoreDetailPage/Carousel';
 import './ItemDetail.css';
@@ -15,6 +14,8 @@ import getShippingPrice from '../Shared/methods/getShippingPrice';
 import getRelatedItems from '../../api/relatedItems';
 import ItemCard from '../Shared/ItemCard';
 import CollapsableShare from '../Shared/CollapsableShare';
+import postAddItemToCart from '../../api/addItemToCart';
+import LoginConfirmationModal from '../Shared/LoginConfirmationModal';
 
 const ItemDetail = () => {
   const location = useLocation();
@@ -29,6 +30,36 @@ const ItemDetail = () => {
   useEffect(() => {
     getRelatedItems(dispatch, item);
   }, []);
+
+  const handleAddTocart = async () => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    if (!token) {
+      const loginModal = new Modal(document.getElementById('login-confirmation-modal'), {});
+      loginModal.show();
+      return;
+    }
+    const user = JSON.parse(localStorage.getItem('user'));
+    const order = {
+      item_id: item.id,
+      user_id: user.id,
+      store_id: item.store_id,
+      item_variant_id: selectedVariant ? selectedVariant.id : item.id,
+      item_name: item.name,
+      supplier_name: item.supplier_name,
+      price: selectedVariant ? selectedVariant.price : item.price,
+      currency: item.currency,
+      shipping_kg: item.shipping_kg,
+      quantity: 1,
+      total_weight: selectedVariant ? selectedVariant.shipping_kg : item.shipping_kg,
+      is_picked_up: false,
+      is_delivered: false,
+      ordered: false,
+    };
+    const response = await postAddItemToCart(dispatch, order);
+    if (response.status === 201) {
+      navigate('/cart');
+    }
+  };
 
   return (
     <div>
@@ -119,7 +150,7 @@ const ItemDetail = () => {
           </div>
         </div>
         <div className="d-flex justify-content-center align-items-center flex-column mt-5">
-          <button className="icon-button" type="button">
+          <button className="icon-button" type="button" onClick={() => { handleAddTocart(); }}>
             <RoundOrangeIconButton buttonText={t('addToCart')} iconName="add_shopping_cart" />
           </button>
           <button type="button" className="icon-button mt-3">
@@ -149,6 +180,8 @@ const ItemDetail = () => {
         </div>
 
       </div>
+      <LoginConfirmationModal />
+
     </div>
   );
 };

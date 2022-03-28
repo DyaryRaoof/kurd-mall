@@ -34,7 +34,7 @@ const CartItem = ({
           <div>{item.supplierName}</div>
           <div>{item.name}</div>
           <div>
-            {item.variantOptions.map((vo) => (
+            {item.variantOptions ? item.variantOptions.map((vo) => (
               <div className="d-flex" key={makeid(10)}>
                 <div>
                   {vo.name}
@@ -43,7 +43,7 @@ const CartItem = ({
                 </div>
                 <div>{vo.value}</div>
               </div>
-            ))}
+            )) : null}
           </div>
         </div>
         <div>
