@@ -54,6 +54,10 @@ const ItemDetail = () => {
       is_picked_up: false,
       is_delivered: false,
       ordered: false,
+      total_price: selectedVariant
+        ? selectedVariant.price + shippingPrice : item.price + shippingPrice,
+      user_phone: user.phone,
+      store_phone: item.store_phone,
     };
     const response = await postAddItemToCart(dispatch, order);
     if (response.status === 201) {

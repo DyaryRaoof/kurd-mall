@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from './CartItem';
-// import cartItemsImported from '../mock-data/cartItems';
 import MateriaIcon from '../Shared/MateriaIcon';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 import getUserLocation from '../Shared/methods/getUserLocation';
@@ -17,6 +16,8 @@ const Cart = () => {
   const navigate = useNavigate();
   const currentCartItems = useSelector((state) => state.getCartItemsReducer.items);
   const [cartItems, setCartItems] = useState(currentCartItems || []);
+  const [position, setPosition] = useState({});
+
   const dispatch = useDispatch();
 
   const setTotals = (quantity, index) => {
@@ -24,27 +25,26 @@ const Cart = () => {
     newCartItems[index].quantity = quantity;
     newCartItems[index].totalPrice = quantity * newCartItems[index].price
       + getShippingPrice(quantity
-        * newCartItems[index].shippingWeight, newCartItems[index].currency);
+        * newCartItems[index].shipping_kg, newCartItems[index].currency);
     setCartItems(newCartItems);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     dispatch(getCartItems);
     cartItems.forEach((_, index) => {
       setTotals(1, index);
     });
+    setPosition(await getUserLocation());
   }, []);
 
   useEffect(() => {
-
+    setCartItems(currentCartItems);
   }, [currentCartItems]);
 
   const handleRemove = (id) => {
     const newCartItems = cartItems.filter((item) => item.id !== id);
     setCartItems(newCartItems);
   };
-
-  let postion = getUserLocation();
 
   const priceForItem = (item) => {
     if (item.variantOptions) {
@@ -65,7 +65,7 @@ const Cart = () => {
       <h2 className="orange">{t('cart')}</h2>
       <div id="map" />
       <div className="gray-background rounded p-2 ">
-        <button className="icon-button" type="button" onClick={() => { openMapAtPosition(postion); }}>
+        <button className="icon-button" type="button" onClick={() => { openMapAtPosition(position); }}>
           <div className="fw-bold">{t('sendToThisLocation')}</div>
           <div className="d-flex justify-content-center"><MateriaIcon text="place" orange isLarge /></div>
         </button>
@@ -75,7 +75,7 @@ const Cart = () => {
             width="170px"
             padding="5px"
             isIconPresent={false}
-            onPressed={() => { postion = getUserLocation(); }}
+            onPressed={async () => { setPosition(await getUserLocation()); }}
           />
         </div>
       </div>
@@ -86,9 +86,9 @@ const Cart = () => {
             item={item}
             onRemove={() => { handleRemove(item.id); }}
             priceForItem={priceForItem(item)}
-            shippingPrice={getShippingPrice(item.quantity * item.shippingWeight, item.currency)}
+            shippingPrice={getShippingPrice(item.quantity * item.shipping_kg, item.currency)}
             setParentQuantity={(quantity) => { setTotals(quantity, index); }}
-            totalPrice={item.totalPrice}
+            totalPrice={item.total_price}
           />
         ))}
       </ul>
@@ -98,11 +98,11 @@ const Cart = () => {
             {t('overAllTotal')}
             :
             {' '}
-            {cartItems.filter((item) => item.currency === 'IQD').reduce((acc, item) => acc + item.totalPrice, 0)}
+            {cartItems.filter((item) => item.currency === 'IQD').reduce((acc, item) => acc + item.total_price, 0)}
             {' '}
             {t('iqd')}
             +
-            {cartItems.filter((item) => item.currency === 'USD').reduce((acc, item) => acc + item.totalPrice, 0)}
+            {cartItems.filter((item) => item.currency === 'USD').reduce((acc, item) => acc + item.total_price, 0)}
             {' '}
             {t('usd')}
           </div>

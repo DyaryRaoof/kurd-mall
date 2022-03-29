@@ -35,7 +35,7 @@ const OwnerOrders = ({ isBuyer }) => {
             item={item}
             priceForItem={priceForItem(item)}
             shippingPrice={getShippingPrice(item.quantity * item.shippingWeight, item.currency)}
-            totalPrice={item.totalPrice}
+            totalPrice={item.total_price}
             isBuyer={isBuyer}
           />
         ))}
