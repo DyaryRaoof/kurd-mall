@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Modal } from 'bootstrap';
 import { setNavStoreOrItem } from '../../redux/design/design';
 import './Header.css';
 import MaterialIcon from '../Shared/MateriaIcon';
@@ -9,6 +10,7 @@ import Search from './Search';
 import Sidebar from './Sidebar';
 import { setUser } from '../../redux/user/user';
 import { signOutUser } from '../../api/user';
+import GeneralModal from '../Shared/GeneralModal';
 
 const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -33,6 +35,8 @@ const Header = () => {
     navigate('/');
     window.location.reload();
   };
+
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div>
@@ -75,26 +79,24 @@ const Header = () => {
                       <span>{t('cart')}</span>
                     </button>
                   </li>
-
+                  {user.isDriver && (
+                    <li className="ms-auto">
+                      <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/orders-all'); }}>
+                        <span>
+                          <MaterialIcon onClick={() => { }} orange text="local_shipping" />
+                        </span>
+                        {' '}
+                        <span>{t('myOrders')}</span>
+                      </button>
+                    </li>
+                  )}
                   <li className="ms-auto">
-                    <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/orders-all'); }}>
+                    <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/owner-orders'); }}>
                       <span>
                         <MaterialIcon onClick={() => { }} orange text="local_shipping" />
                       </span>
                       {' '}
-                      <span>{t('myOrders')}</span>
-                    </button>
-                  </li>
-
-                  <li className="ms-auto me-2">
-                    <button type="button" className="position-relative icon-button" onClick={() => { navigate('/chat-list'); }}>
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill orange-bg">
-                        99+
-                        <span className="visually-hidden">unread messages</span>
-                      </span>
-                      <span>
-                        <MaterialIcon onClick={() => { }} orange text="chat_bubble_outline" />
-                      </span>
+                      <span>{t('myWaitingOrders')}</span>
                     </button>
                   </li>
                 </>
@@ -135,11 +137,29 @@ const Header = () => {
         <ul className="d-flex justify-content-center list-style-none">
           <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/my-collection'); }}><u>{t('yourCollection')}</u></button></li>
           <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-store'); }}><u>{t('createStore')}</u></button></li>
-          <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-item'); }}><u>{t('addItemToStore')}</u></button></li>
+          <li className="px-1">
+            <button
+              className="icon-button orange"
+              type="button"
+              onClick={() => {
+                const store = JSON.parse(localStorage.getItem('store'));
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (!store || store.user_id !== user.id) {
+                  const loginModal = new Modal(document.getElementById('general-modal'), {});
+                  loginModal.show();
+                  return;
+                }
+                navigate('/create-item');
+              }}
+            >
+              <u>{t('addItemToStore')}</u>
+            </button>
+          </li>
         </ul>
       </nav>
       <hr className="nav-hr" />
       <Sidebar clicked={showSidebar} changeShowSidebar={changeShowSidebar} />
+      <GeneralModal modalTitle={t('noStore')} modalDescription={t('createStore')} actionButtonName={t('yes')} actionButtonFunction={() => { navigate('/create-store'); }} isActionButtonNeeded />
     </div>
 
   );

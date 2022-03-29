@@ -20,6 +20,8 @@ const CreateItem = () => {
   const [returnedErrors, setReturnedErrors] = useState(null);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [selectedImages, setSelectedImages] = useState({ urls: [], files: [] });
+  const store = JSON.parse(localStorage.getItem('store'));
+
   const [item, setItem] = useState({
     categoryId: '',
     variants: [],
@@ -32,6 +34,8 @@ const CreateItem = () => {
     images: [],
     tags: [],
     shipping_kg: '',
+    store_name: store.name,
+    store_phone: store.phone,
   });
   const [submitted, setSubmitted] = useState(false);
   const [currentFieldIndex, setCurrentFieldIndex] = useState({ index: 0, field: 'name' });

@@ -10,16 +10,6 @@ const CartTop = ({
 
   return (
     <div>
-      <div className="d-flex">
-        <span>
-          {' '}
-          {t('orderNo')}
-        </span>
-        {' '}
-        :
-
-        <span>{item.orderNo}</span>
-      </div>
       <div className="d-flex justify-content-between">
         <div className="orange mt-2">
           <div>{item.supplier_name}</div>

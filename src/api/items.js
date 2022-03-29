@@ -20,6 +20,8 @@ const postItem = async (dispatch, item, images) => {
   data.append('item[user_id]', userId);
   data.append('item[shipping_kg]', item.shipping_kg);
   data.append('item[quantity]', item.quantity);
+  data.append('item[store_name]', item.store_name);
+  data.append('item[store_phone]', item.store_phone);
 
   item.variants.forEach((variant) => {
     data.append('item[variants][]', JSON.stringify(variant));

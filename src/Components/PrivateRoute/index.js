@@ -10,6 +10,8 @@ const PrivateRoute = ({ element }) => {
   if (isAuthenticated) {
     return element;
   }
+
+  window.location.reload();
   return <Navigate to="/log-in" replace state={{ from: location }} />;
 };
 

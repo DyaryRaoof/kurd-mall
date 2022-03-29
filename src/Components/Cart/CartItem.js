@@ -22,7 +22,7 @@ const CartItem = ({
     <div className="white-background rounded m-2 p-2">
       <div className="d-flex justify-content-between">
         <div className="orange mt-2">
-          <div>{item.supplierName}</div>
+          <div>{item.supplier_name}</div>
           <div>{item.item_name}</div>
           <div>
             {item.variantOptions ? item.variantOptions.map((vo) => (

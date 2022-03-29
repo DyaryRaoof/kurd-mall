@@ -45,7 +45,6 @@ const ItemDetail = () => {
       store_id: item.store_id,
       item_variant_id: selectedVariant ? selectedVariant.id : item.id,
       item_name: item.name,
-      supplier_name: item.supplier_name,
       price: selectedVariant ? selectedVariant.price : item.price,
       currency: item.currency,
       shipping_kg: item.shipping_kg,
@@ -58,6 +57,7 @@ const ItemDetail = () => {
         ? selectedVariant.price + shippingPrice : item.price + shippingPrice,
       user_phone: user.phone,
       store_phone: item.store_phone,
+      supplier_name: item.store_name,
     };
     const response = await postAddItemToCart(dispatch, order);
     if (response.status === 201) {

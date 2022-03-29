@@ -158,5 +158,9 @@
     "youNeedToLogin": "You need to login to perform this action",
     "notLoggedIn": "You are not logged in",
     "login": "Login",
-    "close": "Close"
+    "close": "Close",
+    "noStore": "You don't have a store yet",
+    "yes": "Yes",
+    "createItem": "Create Item",
+    "myWaitingOrders": "Orders"
 }
