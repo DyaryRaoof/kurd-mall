@@ -74,13 +74,17 @@ const CartItem = ({
           </div>
         </div>
       </div>
-      <RoundOrangeIconButton
-        buttonText={t('messageSupplier')}
-        onPressed={() => { }}
-        width="200px"
-        padding="5px"
-        iconName="chat_bubble_outline"
-      />
+
+      <div className="d-flex flex-column align-items-start mt-5">
+        <p className="ms-3">{item.store_phone}</p>
+        <RoundOrangeIconButton
+          buttonText={t('callSupplier')}
+          onPressed={() => window.open(`tel:${item.store_phone}`)}
+          width="200px"
+          padding="5px"
+          iconName="chat_bubble_outline"
+        />
+      </div>
       <div className="d-flex justify-content-end">
         <button type="button" className="icon-button" onClick={() => { onRemove(); }}>
           <div className="text-danger"><u>{t('removeItem')}</u></div>

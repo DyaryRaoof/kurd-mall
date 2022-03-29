@@ -162,5 +162,6 @@
     "noStore": "You don't have a store yet",
     "yes": "Yes",
     "createItem": "Create Item",
-    "myWaitingOrders": "Orders"
+    "myWaitingOrders": "Orders",
+    "callSupplier": "Call Supplier"
 }

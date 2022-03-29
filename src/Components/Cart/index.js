@@ -10,6 +10,7 @@ import openMapAtPosition from '../Shared/methods/openMapAtPostion';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 import getCartItems from '../../api/getCartItems';
 import postBuyItems from '../../api/buyItems';
+import removeCartItem from '../../api/removeCartItem';
 
 const Cart = () => {
   const { t } = useTranslation();
@@ -41,9 +42,12 @@ const Cart = () => {
     setCartItems(currentCartItems);
   }, [currentCartItems]);
 
-  const handleRemove = (id) => {
-    const newCartItems = cartItems.filter((item) => item.id !== id);
-    setCartItems(newCartItems);
+  const handleRemove = async (id) => {
+    const response = await removeCartItem(dispatch, id);
+    if (response.status === 204) {
+      const newCartItems = cartItems.filter((item) => item.id !== id);
+      setCartItems(newCartItems);
+    }
   };
 
   const priceForItem = (item) => {
