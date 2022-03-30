@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Item from './Item';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
-// import cartItems from '../mock-data/cartItems';
-import Pagination from '../Shared/Pagination';
 import getMyBoughtOrders from '../../api/getMyBoughtOrders';
 
 const OwnerOrders = ({ isBuyer }) => {
@@ -40,7 +38,6 @@ const OwnerOrders = ({ isBuyer }) => {
           />
         ))}
       </div>
-      <Pagination onPageChange={() => { }} currentPage={0} totalPages={10} />
     </main>
   );
 };

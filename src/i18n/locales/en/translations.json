@@ -165,5 +165,6 @@
     "myWaitingOrders": "Orders",
     "callSupplier": "Call Supplier",
     "loading": "Loading your content...",
-    "callDriver": "Call Driver"
+    "callDriver": "Call Driver",
+    "noItemsInCart": "You dont have any items in your cart"
 }

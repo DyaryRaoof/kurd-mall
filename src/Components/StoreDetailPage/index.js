@@ -38,9 +38,6 @@ const StoreDetail = () => {
   const language = localStorage.getItem('language');
 
   useEffect(() => {
-    console.log('got store');
-    console.log(storeId);
-    console.log(store);
     if ((store === {} || !store) && storeId) {
       getStoreDetail(dispatch, storeId);
     }
@@ -61,12 +58,12 @@ const StoreDetail = () => {
             <StoreInfoItem title={t('name')} value={name} />
             <StoreInfoItem title={t('description')} value={description} />
             <StoreInfoItem title={t('address')} value={address} />
-            <StoreInfoItem title={t('phone')} value={phone.toString()} />
+            <StoreInfoItem title={t('phone')} value={phone.toString()} isLink href={`tel:${phone}`} />
             <StoreInfoItem title={t('city')} value={language === 'ku' ? city.name_ku : city.name_en} />
             <StoreInfoItem title={t('category')} value={language === 'ku' ? category.name_ku : category.name_en} />
             <StoreInfoItem title={t('subcategory')} value={language === 'ku' ? subcategory.name_ku : subcategory.name_en} />
-            <StoreInfoItem title={t('instagram')} value={instagram} />
-            <StoreInfoItem title={t('facebook')} value={facebook} />
+            <StoreInfoItem title={t('instagram')} value={instagram} isLink href={instagram} />
+            <StoreInfoItem title={t('facebook')} value={facebook} isLink href={facebook} />
             <div className="my-2">
               <LocationWidget position={{ long: locationLong, lat: locationLat }} />
             </div>

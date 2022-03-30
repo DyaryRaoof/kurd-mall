@@ -45,7 +45,7 @@ const Item = ({
         <div className="col-md-4 d-flex justify-content-center my-2">
           <RoundOrangeIconButton
             buttonText={isBuyer ? t('messageSupplier') : t('callDriver')}
-            onPressed={() => { }}
+            onPressed={() => window.open(`tel:${isBuyer ? item.store_phone : item.driver_phone}`)}
             width="200px"
             padding="5px"
             iconName="call"

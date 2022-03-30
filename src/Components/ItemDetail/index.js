@@ -134,22 +134,24 @@ const ItemDetail = () => {
             </div>
 
             <div className="col-md-6 mt-3">
-              <div className="gray-background item-detail-variants-wrapper p-3 mx-2 rounded">
-                {item.item_variants ? item.item_variants.map((variant) => (
-                  <button key={variant.id} type="button" className={`icon-button ${selectedVariant === variant ? 'border border-danger border-2' : ''}`} onClick={() => setSelectedVariant(variant)}>
-                    <div className="item-detail-variants">
-                      <div className="item-detail-variant-image">
-                        <img src={item.image_urls[variant.image_index]} alt={variant.name} className="variant-image" />
+              {item.item_variants.length > 0 ? (
+                <div className="gray-background item-detail-variants-wrapper p-3 mx-2 rounded">
+                  {item.item_variants ? item.item_variants.map((variant) => (
+                    <button key={variant.id} type="button" className={`icon-button ${selectedVariant === variant ? 'border border-danger border-2' : ''}`} onClick={() => setSelectedVariant(variant)}>
+                      <div className="item-detail-variants">
+                        <div className="item-detail-variant-image">
+                          <img src={item.image_urls[variant.image_index]} alt={variant.name} className="variant-image" />
+                        </div>
+                        <div className="item-detail-variant-name">{variant.name}</div>
+                        <div className="item-detail-variant-name">{variant.value}</div>
+                        <div className="item-detail-variant-price">
+                          {`${variant.price} ${item.currency}`}
+                        </div>
                       </div>
-                      <div className="item-detail-variant-name">{variant.name}</div>
-                      <div className="item-detail-variant-name">{variant.value}</div>
-                      <div className="item-detail-variant-price">
-                        {`${variant.price} ${item.currency}`}
-                      </div>
-                    </div>
-                  </button>
-                )) : null}
-              </div>
+                    </button>
+                  )) : null}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>

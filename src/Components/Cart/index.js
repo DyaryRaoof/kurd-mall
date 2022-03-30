@@ -84,7 +84,7 @@ const Cart = () => {
         </div>
       </div>
       <ul className="gray-background rounded p-1 my-2">
-        {cartItems.map((item, index) => (
+        {cartItems.length > 0 ? cartItems.map((item, index) => (
           <CartItem
             key={item.id}
             item={item}
@@ -94,7 +94,7 @@ const Cart = () => {
             setParentQuantity={(quantity) => { setTotals(quantity, index); }}
             totalPrice={item.total_price}
           />
-        ))}
+        )) : <p className="text-center">{t('noItemsInCart')}</p>}
       </ul>
       <div className="d-flex justify-content-between">
         <div>
