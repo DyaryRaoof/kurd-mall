@@ -27,7 +27,7 @@ const StoreDetail = () => {
     address, phone, city_id: cityId,
     category_id: cateogryId, subcategory_id: subcategoryId,
     instagram, facebook, locaation_long: locationLong, location_lat: locationLat,
-    image_urls: imageURLs,
+    image_urls: imageURLs, user_id: userId,
   } = store || fetchedStore || {};
 
   const navigate = useNavigate();
@@ -41,6 +41,8 @@ const StoreDetail = () => {
 
   const storeItems = useSelector((state) => state.storeItemsReducer.items);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     if ((store === {} || !store) && storeId) {
@@ -86,7 +88,7 @@ const StoreDetail = () => {
           </div>
         </div>
       </div>
-      <RoundOrangeIconButton buttonText={t('addItem')} iconName="add_circle" onPressed={() => navigate('/create-item')} />
+      {userId === user.id && <div className="d-flex justify-content-center"><RoundOrangeIconButton buttonText={t('addItem')} iconName="add_circle" onPressed={() => navigate('/create-item')} /></div>}
       <div className="d-flex flex-wrap justify-content-center mt-5">
         {storeItems.map((item) => (<ItemCard key={item.id} item={item} isStore={false} />))}
       </div>

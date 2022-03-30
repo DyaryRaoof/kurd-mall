@@ -11,7 +11,6 @@ const PrivateRoute = ({ element }) => {
     return element;
   }
 
-  window.location.reload();
   return <Navigate to="/log-in" replace state={{ from: location }} />;
 };
 
