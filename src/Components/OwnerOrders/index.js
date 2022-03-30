@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { t } from 'i18next';
 import Item from './Item';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 import getMyBoughtOrders from '../../api/getMyBoughtOrders';
@@ -27,7 +28,7 @@ const OwnerOrders = ({ isBuyer }) => {
     <main className="container">
       <h3>Current Orders</h3>
       <div className="gray-background rounded p-1 my-2">
-        {cartItems.map((item) => (
+        {cartItems.length > 0 ? cartItems.map((item) => (
           <Item
             key={item.id}
             item={item}
@@ -36,7 +37,7 @@ const OwnerOrders = ({ isBuyer }) => {
             totalPrice={item.total_price}
             isBuyer={isBuyer}
           />
-        ))}
+        )) : <p className="text-center">{t('noBoughtItems')}</p>}
       </div>
     </main>
   );

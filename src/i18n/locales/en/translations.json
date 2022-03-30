@@ -166,5 +166,6 @@
     "callSupplier": "Call Supplier",
     "loading": "Loading your content...",
     "callDriver": "Call Driver",
-    "noItemsInCart": "You dont have any items in your cart"
+    "noItemsInCart": "You dont have any items in your cart",
+    "noBoughtItems": "You dont have any bought items"
 }

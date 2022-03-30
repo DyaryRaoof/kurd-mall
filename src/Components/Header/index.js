@@ -79,7 +79,7 @@ const Header = () => {
                       <span>{t('cart')}</span>
                     </button>
                   </li>
-                  {user.isDriver && (
+                  {user.is_driver && (
                     <li className="ms-auto">
                       <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/orders-all'); }}>
                         <span>
