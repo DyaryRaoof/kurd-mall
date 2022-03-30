@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import PropTypes from 'prop-types';
@@ -13,8 +13,8 @@ import LocationWidget from '../Shared/LocatoinWidget';
 import getStoreDetail from '../../api/storeDetail';
 
 const StoreDetail = () => {
-  let { store } = useLocation().state;
-  const { storeId } = useLocation().state;
+  let { store } = useLocation().state || {};
+  const { id: storeId } = useParams();
   const categories = JSON.parse(localStorage.getItem('categories')) || [];
   const subcategories = JSON.parse(localStorage.getItem('subcategories')) || [];
   const cities = JSON.parse(localStorage.getItem('cities')) || [];
@@ -38,7 +38,10 @@ const StoreDetail = () => {
   const language = localStorage.getItem('language');
 
   useEffect(() => {
-    if (storeId) {
+    console.log('got store');
+    console.log(storeId);
+    console.log(store);
+    if ((store === {} || !store) && storeId) {
       getStoreDetail(dispatch, storeId);
     }
   }, []);

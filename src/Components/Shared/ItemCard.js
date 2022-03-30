@@ -16,7 +16,7 @@ const ItemCard = ({
 
   const handleClick = () => {
     if (isStore) {
-      navigate('/store-detail', {
+      navigate(`/store-detail/${item.id}`, {
         state: {
           store: item,
         },

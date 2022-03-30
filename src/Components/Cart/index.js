@@ -61,7 +61,7 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    postBuyItems(dispatch, cartItems.map((item) => item.id));
+    postBuyItems(dispatch, cartItems.map((item) => item.id), position);
     navigate('/owner-orders');
   };
   return (

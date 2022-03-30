@@ -164,5 +164,6 @@
     "createItem": "Create Item",
     "myWaitingOrders": "Orders",
     "callSupplier": "Call Supplier",
-    "loading": "Loading your content..."
+    "loading": "Loading your content...",
+    "callDriver": "Call Driver"
 }
