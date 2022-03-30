@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Carousel from './Carousel';
 import StoreInfoItem from './StoreInfoItem';
 import './StoreDetail.css';
@@ -11,6 +11,9 @@ import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 import MaterialIcon from '../Shared/MateriaIcon';
 import LocationWidget from '../Shared/LocatoinWidget';
 import getStoreDetail from '../../api/storeDetail';
+import getStoreItems from '../../api/storeItems';
+import ItemCard from '../Shared/ItemCard';
+import Paginator from '../Shared/Paginator';
 
 const StoreDetail = () => {
   let { store } = useLocation().state || {};
@@ -34,14 +37,22 @@ const StoreDetail = () => {
   const category = categories.find((category) => category.id === cateogryId);
   const subcategory = subcategories.find((subcategory) => subcategory.id === subcategoryId);
   const city = cities.find((city) => city.id === cityId);
-
   const language = localStorage.getItem('language');
+
+  const storeItems = useSelector((state) => state.storeItemsReducer.items);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if ((store === {} || !store) && storeId) {
       getStoreDetail(dispatch, storeId);
     }
+
+    getStoreItems(dispatch, store ? store.id : storeId, 1);
   }, []);
+
+  useEffect(() => {
+    getStoreItems(dispatch, store ? store.id : storeId, currentPage);
+  }, [currentPage]);
 
   useEffect(() => {
     store = fetchedStore;
@@ -76,7 +87,13 @@ const StoreDetail = () => {
         </div>
       </div>
       <RoundOrangeIconButton buttonText={t('addItem')} iconName="add_circle" onPressed={() => navigate('/create-item')} />
-      {/* items here */}
+      <div className="d-flex flex-wrap justify-content-center mt-5">
+        {storeItems.map((item) => (<ItemCard key={item.id} item={item} isStore={false} />))}
+      </div>
+      <Paginator
+        onChange={(page) => setCurrentPage(page)}
+        wasLastpage={currentPage !== 1 && storeItems.length === 0}
+      />
     </div>
   )
     : <div />;

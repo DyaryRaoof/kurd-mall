@@ -24,6 +24,7 @@ import searchStoresReducer from './searchStores/searchStores';
 import getCartItemsReducer from './getCartItems/getCartItems';
 import buyItemsReducer from './buyItems/buyItems';
 import getMyBoughtOrdersReducer from './getMyBoughtOrders/getMyBoughtOrders';
+import storeItemsReducer from './storeItems/storeItems';
 
 const reducers = combineReducers({
   designReducer,
@@ -49,6 +50,7 @@ const reducers = combineReducers({
   getCartItemsReducer,
   buyItemsReducer,
   getMyBoughtOrdersReducer,
+  storeItemsReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 
