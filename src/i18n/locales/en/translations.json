@@ -163,5 +163,6 @@
     "yes": "Yes",
     "createItem": "Create Item",
     "myWaitingOrders": "Orders",
-    "callSupplier": "Call Supplier"
+    "callSupplier": "Call Supplier",
+    "loading": "Loading your content..."
 }

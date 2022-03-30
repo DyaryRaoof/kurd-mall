@@ -5,6 +5,7 @@ const SEARCH_BAR_PRICE_TO = 'kurd-mall/design/SEARCH_BAR_PRICE_TO';
 const SEARCH_BAR_PRICE_CURRENCY = 'kurd-mall/design/SEARCH_BAR_PRICE_CURRENCY';
 const SEARCH_BAR_PRICE_ASCENDING = 'kurd-mall/design/SEARCH_BAR_PRICE_ASCENDING';
 const SEARCH_BAR_TEXT = 'kurd-mall/design/SEARCH_BAR_TEXT';
+const SHOW_SPINNER_MODAL = 'kurd-mall/design/SHOW_SPINNER_MODAL';
 
 const initialState = {
   navStoreOrItem: 'items',
@@ -14,6 +15,7 @@ const initialState = {
   searchBarPriceTo: null,
   searchBarPriceCurrency: 'IQD',
   searchBarPriceAscending: true,
+  showSpinnerModal: false,
 };
 
 export const setNavStoreOrItem = (payload) => ({
@@ -51,6 +53,11 @@ export const setsearchBarText = (payload) => ({
   payload,
 });
 
+export const showSpinnerModal = (payload) => ({
+  type: SHOW_SPINNER_MODAL,
+  payload,
+});
+
 const designReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_NAV_STORE_OR_ITEM:
@@ -67,6 +74,8 @@ const designReducer = (state = initialState, action) => {
       return { ...state, searchBarPriceAscending: action.payload };
     case SEARCH_BAR_TEXT:
       return { ...state, searchBarText: action.payload };
+    case SHOW_SPINNER_MODAL:
+      return { ...state, showSpinnerModal: action.payload };
     default:
       return state;
   }
