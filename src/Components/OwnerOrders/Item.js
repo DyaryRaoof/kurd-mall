@@ -61,7 +61,7 @@ const Item = ({
             :
             {' '}
           </span>
-          <span className="orange">{item.pickedUp ? t('pickedUp') : t('waiting')}</span>
+          <span className="orange">{item.is_picked_up ? t('pickedUp') : t('waiting')}</span>
         </p>
       </div>
     </div>

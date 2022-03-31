@@ -4,23 +4,38 @@ import { useDispatch, useSelector } from 'react-redux';
 import Item from './Item';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
 import getDriverOrders from '../../api/dirverOrders';
+import postOrderDelivered from '../../api/postOrderDelivered';
 
 const DriverOrders = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.driverOrdersReducer.orders);
+  const orders = useSelector((state) => state.driverOrdersReducer.orders) || [];
 
   const [cartItems, setCartItems] = useState(orders);
-  const onPickUpChanged = (id) => {
+
+  const onPickUpChanged = async (id) => {
     let newCartItems = [...cartItems];
     const item = newCartItems.filter((item) => item.id === id)[0];
-    if (!item.pickedUp) {
-      item.pickedUp = !item.pickedUp;
+    if (!item.is_picked_up) {
+      item.is_picked_up = !item.is_picked_up;
     } else {
-      item.delivered = !item.delivered;
-      newCartItems = newCartItems.filter((item) => item.id !== id);
+      const response = await postOrderDelivered(dispatch, id);
+      if (response.status === 200) {
+        item.is_delivered = !item.is_delivered;
+        newCartItems = newCartItems.filter((item) => item.id !== id);
+      }
     }
     setCartItems(newCartItems);
+  };
+
+  const priceForItem = (item) => {
+    if (item.variantOptions) {
+      if (item.variantOptions.length > 1) {
+        return item.quantity * item.variantOptions[0].price;
+      }
+      return item.quantity * item.price;
+    }
+    return item.quantity * item.price;
   };
 
   useEffect(() => {
@@ -29,7 +44,7 @@ const DriverOrders = () => {
 
   useEffect(() => {
     setCartItems(orders);
-  }, orders);
+  }, [orders]);
 
   return (
     <main className="container">
@@ -39,8 +54,7 @@ const DriverOrders = () => {
           <Item
             key={item.id}
             item={item}
-            priceForItem={item.variantOptions.length > 1
-              ? item.quantity * item.price : item.quantity * item.variantOptions[0].price}
+            priceForItem={priceForItem(item)}
             shippingPrice={getShippingPrice(item.quantity * item.shipping_kg, item.currency)}
             totalPrice={item.total_price}
             onPickUpChanged={(id) => { onPickUpChanged(id); }}

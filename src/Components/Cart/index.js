@@ -18,6 +18,7 @@ const Cart = () => {
   const currentCartItems = useSelector((state) => state.getCartItemsReducer.items);
   const [cartItems, setCartItems] = useState(currentCartItems || []);
   const [position, setPosition] = useState({});
+  const [isBought, setIsBought] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -31,11 +32,11 @@ const Cart = () => {
   };
 
   useEffect(async () => {
+    setPosition(await getUserLocation());
     dispatch(getCartItems);
     cartItems.forEach((_, index) => {
       setTotals(1, index);
     });
-    setPosition(await getUserLocation());
   }, []);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
+    setIsBought(true);
     postBuyItems(dispatch, cartItems.map((item) => item.id), position);
     navigate('/owner-orders');
   };
@@ -120,6 +122,7 @@ const Cart = () => {
             onPressed={() => { handleCheckout(); }}
           />
         </div>
+        {(!position.long || !position.lat) && isBought && <div className="alert alert-danger" role="alert">{t('locationRequired')}</div>}
       </div>
     </main>
   );

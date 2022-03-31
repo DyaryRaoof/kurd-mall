@@ -44,7 +44,7 @@ const Item = ({
 
         <div className="col-md-4 d-flex justify-content-center my-2">
           <RoundOrangeIconButton
-            buttonText={item.pickedUp ? t('deliver') : t('pickUp')}
+            buttonText={item.is_picked_up ? t('deliver') : t('pickUp')}
             onPressed={() => { onPickUpChanged(item.id); }}
             width="200px"
             padding="5px"
@@ -60,26 +60,14 @@ const Item = ({
             :
             {' '}
           </span>
-          <span className="orange">{item.pickedUp ? t('pickedUp') : t('waiting')}</span>
+          <span className="orange">{item.is_picked_up ? t('pickedUp') : t('waiting')}</span>
         </p>
       </div>
     </div>
   );
 };
 Item.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    orderNo: PropTypes.number.isRequired,
-    supplierName: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    currency: PropTypes.string.isRequired,
-    variantOptions: PropTypes.instanceOf(Array).isRequired,
-    shippingWeight: PropTypes.number.isRequired,
-    quantity: PropTypes.number.isRequired,
-    totalPrice: PropTypes.number.isRequired,
-    pickedUp: PropTypes.bool.isRequired,
-  }).isRequired,
+  item: PropTypes.instanceOf(Object).isRequired,
   priceForItem: PropTypes.func.isRequired,
   shippingPrice: PropTypes.func.isRequired,
   totalPrice: PropTypes.func.isRequired,

@@ -7,18 +7,22 @@ import getShippingPrice from '../Shared/methods/getShippingPrice';
 import Paginator from '../Shared/Paginator';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 import getAllOrders from '../../api/allOrders';
+import postOrderPickedUp from '../../api/postOrderPickedUp';
 
 const OrdersAll = () => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const orders = useSelector((state) => state.allOrdersReducer.orders) || [];
   const [cartItems, setCartItems] = useState(orders);
-  const handleRemove = (id) => {
-    const newCartItems = cartItems.filter((item) => item.id !== id);
-    setCartItems(newCartItems);
+  const handleRemove = async (id) => {
+    const reponse = await postOrderPickedUp(dispatch, id);
+    if (reponse.status === 200) {
+      const newCartItems = cartItems.filter((item) => item.id !== id);
+      setCartItems(newCartItems);
+    }
   };
-  const dispatch = useDispatch();
   useEffect(() => {
     getAllOrders(dispatch, 1);
   }, []);
