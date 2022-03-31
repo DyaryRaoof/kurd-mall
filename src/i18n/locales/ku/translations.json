@@ -170,5 +170,7 @@
     "noItemsInCart": "هیچ کاڵایەک لە کارتەکەت دا نییە",
     "noBoughtItems": "هیچ کاڵایەکت ئێستا نەکڕیوە",
     "allCurrentOrders": "هەمووگەیاندنەکان",
-    "noDriverOrders": "هیچ داواکاریەکت هەڵنەگرتووە"
+    "noDriverOrders": "هیچ داواکاریەکت هەڵنەگرتووە",
+    "aleadyHaveAStore": "پێشتر کۆگات هەیە",
+    "deletePreviousStoreFirst": "پێویستە یەکەمجار ئەو کوگایە بسڕیتەوە بۆ دروسسترکردنی دانەیەکی نوێ"
 }

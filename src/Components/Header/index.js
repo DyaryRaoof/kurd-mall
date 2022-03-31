@@ -11,6 +11,7 @@ import Sidebar from './Sidebar';
 import { setUser } from '../../redux/user/user';
 import { signOutUser } from '../../api/user';
 import GeneralModal from '../Shared/GeneralModal';
+import getMyStore from '../../api/myStore';
 
 const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -31,12 +32,25 @@ const Header = () => {
 
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    localStorage.removeItem('store');
     dispatch(setUser(null));
     navigate('/');
     window.location.reload();
   };
 
   const user = JSON.parse(localStorage.getItem('user'));
+
+  const getStore = async () => {
+    let store = JSON.parse(localStorage.getItem('store'));
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!store) {
+      store = await getMyStore(dispatch, user.id);
+      store = store.data;
+      localStorage.setItem('store', JSON.stringify(store));
+    }
+
+    return store;
+  };
 
   return (
     <div>
@@ -148,14 +162,29 @@ const Header = () => {
       <nav>
         <ul className="d-flex justify-content-center list-style-none">
           <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/my-collection'); }}><u>{t('yourCollection')}</u></button></li>
-          <li className="px-1"><button className="icon-button orange" type="button" onClick={() => { navigate('/create-store'); }}><u>{t('createStore')}</u></button></li>
           <li className="px-1">
             <button
               className="icon-button orange"
               type="button"
               onClick={() => {
-                const store = JSON.parse(localStorage.getItem('store'));
-                const user = JSON.parse(localStorage.getItem('user'));
+                const store = getStore();
+                if (store) {
+                  const loginModal = new Modal(document.getElementById('have-a-store-modal'), {});
+                  loginModal.show();
+                  return;
+                }
+                navigate('/create-store');
+              }}
+            >
+              <u>{t('createStore')}</u>
+            </button>
+          </li>
+          <li className="px-1">
+            <button
+              className="icon-button orange"
+              type="button"
+              onClick={async () => {
+                const store = await getStore();
                 if (!store || store.user_id !== user.id) {
                   const loginModal = new Modal(document.getElementById('general-modal'), {});
                   loginModal.show();
@@ -171,7 +200,9 @@ const Header = () => {
       </nav>
       <hr className="nav-hr" />
       <Sidebar clicked={showSidebar} changeShowSidebar={changeShowSidebar} />
-      <GeneralModal modalTitle={t('noStore')} modalDescription={t('createStore')} actionButtonName={t('yes')} actionButtonFunction={() => { navigate('/create-store'); }} isActionButtonNeeded />
+      <GeneralModal modalTitle={t('noStore')} modalDescription={t('createStore')} actionButtonName={t('yes')} actionButtonFunction={() => { navigate('/create-store'); }} isActionButtonNeeded modalName="general-modal" />
+      <GeneralModal modalTitle={t('aleadyHaveAStore')} modalDescription={t('deletePreviousStoreFirst')} isActionButtonNeeded={false} modalName="have-a-store-modal" />
+
     </div>
 
   );

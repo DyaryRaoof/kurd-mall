@@ -22,7 +22,7 @@ const ItemCard = ({
         },
       });
     } else {
-      navigate('/item-detail', {
+      navigate(`/item-detail/${item.id}`, {
         state: {
           item,
         },

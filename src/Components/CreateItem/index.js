@@ -73,7 +73,7 @@ const CreateItem = () => {
       item.store = JSON.parse(localStorage.getItem('store'));
       const response = await postItem(dispatch, item, item.images);
       if (response.status === 201) {
-        navigate('/item-detail', { state: { item: response.data } });
+        navigate(`/item-detail/${item.id}`, { state: { item: response.data } });
       } else {
         setReturnedErrors(JSON.stringify(response.data));
       }

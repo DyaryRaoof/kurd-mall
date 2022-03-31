@@ -169,5 +169,7 @@
     "noItemsInCart": "You dont have any items in your cart",
     "noBoughtItems": "You dont have any bought items",
     "allCurrentOrders": "AllOrders",
-    "noDriverOrders": "You haven't picked up any orders"
+    "noDriverOrders": "You haven't picked up any orders",
+    "aleadyHaveAStore": "You already have a store",
+    "deletePreviousStoreFirst": "You need to delete your previous store first"
 }

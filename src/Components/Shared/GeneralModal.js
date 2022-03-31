@@ -2,9 +2,14 @@ import { t } from 'i18next';
 import PropTypes from 'prop-types';
 
 const GeneralModal = ({
-  modalTitle, modalDescription, isActionButtonNeeded, actionButtonFunction, actionButtonName,
+  modalTitle,
+  modalDescription,
+  isActionButtonNeeded,
+  actionButtonFunction,
+  actionButtonName,
+  modalName,
 }) => (
-  <div className="modal fade" id="general-modal" tabIndex="-1" aria-labelledby="general-modal" aria-hidden="true">
+  <div className="modal fade" id={modalName} tabIndex="-1" aria-labelledby={modalName} aria-hidden="true">
     <div className="modal-dialog">
       <div className="modal-content">
         <div className="modal-header">
@@ -29,5 +34,6 @@ GeneralModal.propTypes = {
   isActionButtonNeeded: PropTypes.bool.isRequired,
   actionButtonFunction: PropTypes.func.isRequired,
   actionButtonName: PropTypes.string.isRequired,
+  modalName: PropTypes.string.isRequired,
 };
 export default GeneralModal;

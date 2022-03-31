@@ -8,9 +8,9 @@ import MaterialIcon from '../Shared/MateriaIcon';
 import './Sidebar.css';
 
 const Sidebar = ({ clicked, changeShowSidebar }) => {
-  const categories = JSON.parse(localStorage.getItem('categories'));
+  const categories = JSON.parse(localStorage.getItem('categories')) || [];
   const language = localStorage.getItem('language') || 'ku';
-  const subcategories = JSON.parse(localStorage.getItem('subcategories'));
+  const subcategories = JSON.parse(localStorage.getItem('subcategories')) || [];
   const [showSubcategories, setShowSubcategories] = useState({ show: false, categoryId: 0 });
   const { t } = useTranslation();
   const navStoreOrItem = useSelector((state) => state.designReducer.navStoreOrItem);

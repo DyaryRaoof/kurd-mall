@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Collapse, Modal } from 'bootstrap';
@@ -16,20 +16,30 @@ import ItemCard from '../Shared/ItemCard';
 import CollapsableShare from '../Shared/CollapsableShare';
 import postAddItemToCart from '../../api/addItemToCart';
 import LoginConfirmationModal from '../Shared/LoginConfirmationModal';
+import getSingleItem from '../../api/singleItem';
 
 const ItemDetail = () => {
   const location = useLocation();
-  const { item } = location.state;
-  const [selectedVariant, setSelectedVariant] = useState(item.item_variants[0]);
+  const { item } = location.state || useSelector((state) => state.singleItemReducer) || null;
+  const { id } = useParams();
+  const [selectedVariant, setSelectedVariant] = useState(item
+    ? item.item_variants[0] : {});
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const shippingPrice = getShippingPrice(item.shipping_kg, item.currency);
+  const shippingPrice = item ? getShippingPrice(item.shipping_kg, item.currency) : 0;
   const dispatch = useDispatch();
   const relatedItems = useSelector((state) => state.relatedItemsReducer.items);
 
   useEffect(() => {
+    if (!item && id) {
+      getSingleItem(dispatch, id);
+    }
     getRelatedItems(dispatch, item);
   }, []);
+
+  useEffect(() => {
+    console.log(item);
+  }, [item]);
 
   const handleAddTocart = async () => {
     const token = JSON.parse(localStorage.getItem('token'));
@@ -65,7 +75,17 @@ const ItemDetail = () => {
     }
   };
 
-  return (
+  const getCurrency = () => {
+    if (!item) {
+      return '';
+    }
+    if (item.currency === 'IQD') {
+      return t('iqd');
+    }
+    return t('usd');
+  };
+
+  return item ? (
     <div>
       <div className="container">
         <div className="row">
@@ -99,11 +119,11 @@ const ItemDetail = () => {
                     <div className="orange">
                       <div className="d-flex">
                         <span>{item.price}</span>
-                        <span className="px-2">{item.currency === 'IQD' ? t('iqd') : t('usd')}</span>
+                        <span className="px-2">{getCurrency()}</span>
                       </div>
                       <div className="d-flex">
                         <span>{shippingPrice}</span>
-                        <span className="px-2">{item.currency === 'IQD' ? t('iqd') : t('usd')}</span>
+                        <span className="px-2">{getCurrency()}</span>
                         <span>{t('shipping')}</span>
                       </div>
                       <div className="d-flex">
@@ -159,8 +179,8 @@ const ItemDetail = () => {
           <button className="icon-button" type="button" onClick={() => { handleAddTocart(); }}>
             <RoundOrangeIconButton buttonText={t('addToCart')} iconName="add_shopping_cart" />
           </button>
-          <button type="button" className="icon-button mt-3">
-            <RoundOrangeIconButton buttonText={t('messageSupplier')} iconName="mode_comment" />
+          <button type="button" className="icon-button mt-3" onClick={() => window.open(`tel:${item.store_phone}`)}>
+            <RoundOrangeIconButton buttonText={t('callSupplier')} iconName="phone" />
           </button>
         </div>
 
@@ -189,7 +209,7 @@ const ItemDetail = () => {
       <LoginConfirmationModal />
 
     </div>
-  );
+  ) : <div />;
 };
 
 export default ItemDetail;
