@@ -56,7 +56,7 @@ const OrdersAll = () => {
           />
         ))}
       </div>
-      <div className="d-flex justify-content-end">
+      <div className="d-flex justify-content-center my-5">
         <RoundOrangeIconButton buttonText={t('myOrders')} onPressed={() => { navigate('/driver-orders'); }} iconName="local_shipping" />
       </div>
       <Paginator
