@@ -1,20 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Item from './Item';
 import getShippingPrice from '../Shared/methods/getShippingPrice';
-import importedCartItems from '../mock-data/cartItems';
-import Pagination from '../Shared/Pagination';
+import Paginator from '../Shared/Paginator';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
+import getAllOrders from '../../api/allOrders';
 
 const OrdersAll = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState(importedCartItems);
+  const [currentPage, setCurrentPage] = useState(1);
+  const orders = useSelector((state) => state.allOrdersReducer.orders) || [];
+  const [cartItems, setCartItems] = useState(orders);
   const handleRemove = (id) => {
     const newCartItems = cartItems.filter((item) => item.id !== id);
     setCartItems(newCartItems);
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getAllOrders(dispatch, 1);
+  }, []);
+
+  useEffect(() => {
+    setCartItems(orders);
+  }, [orders]);
+
+  useEffect(() => {
+    getAllOrders(dispatch, currentPage);
+  }, [currentPage]);
+
+  const priceForItem = (item) => {
+    if (item.variantOptions) {
+      if (item.variantOptions.length > 1) {
+        return item.quantity * item.variantOptions[0].price;
+      }
+      return item.quantity * item.price;
+    }
+    return item.quantity * item.price;
+  };
+
   return (
     <div>
       <h3>{t('allOrders')}</h3>
@@ -23,10 +49,9 @@ const OrdersAll = () => {
           <Item
             key={item.id}
             item={item}
-            priceForItem={item.variantOptions.length > 1
-              ? item.quantity * item.price : item.quantity * item.variantOptions[0].price}
-            shippingPrice={getShippingPrice(item.quantity * item.shippingWeight, item.currency)}
-            totalPrice={item.totalPrice}
+            priceForItem={priceForItem(item)}
+            shippingPrice={getShippingPrice(item.quantity * item.shipping_kg, item.currency)}
+            totalPrice={item.total_price}
             onRemove={() => { handleRemove(item.id); }}
           />
         ))}
@@ -34,8 +59,10 @@ const OrdersAll = () => {
       <div className="d-flex justify-content-end">
         <RoundOrangeIconButton buttonText={t('myOrders')} onPressed={() => { navigate('/driver-orders'); }} iconName="local_shipping" />
       </div>
-      <Pagination onPageChange={() => { }} currentPage={0} totalPages={10} />
-
+      <Paginator
+        onChange={(page) => setCurrentPage(page)}
+        wasLastpage={cartItems.length === 0 && currentPage !== 1}
+      />
     </div>
   );
 };

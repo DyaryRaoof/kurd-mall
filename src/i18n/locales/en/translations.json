@@ -134,7 +134,7 @@
     "chat": "Chat",
     "enterMessage": "Enter Message",
     "writeComment": "Write Comment",
-    "myOrders": "My Orders",
+    "myOrders": "MyOrders",
     "allOrders": "All Orders",
     "openStore": "Open Store",
     "pickUp": "Pick Up",
@@ -167,5 +167,7 @@
     "loading": "Loading your content...",
     "callDriver": "Call Driver",
     "noItemsInCart": "You dont have any items in your cart",
-    "noBoughtItems": "You dont have any bought items"
+    "noBoughtItems": "You dont have any bought items",
+    "allCurrentOrders": "AllOrders",
+    "noDriverOrders": "You haven't picked up any orders"
 }

@@ -79,17 +79,6 @@ const Header = () => {
                       <span>{t('cart')}</span>
                     </button>
                   </li>
-                  {user.is_driver && (
-                    <li className="ms-auto">
-                      <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/orders-all'); }}>
-                        <span>
-                          <MaterialIcon onClick={() => { }} orange text="local_shipping" />
-                        </span>
-                        {' '}
-                        <span>{t('myOrders')}</span>
-                      </button>
-                    </li>
-                  )}
                   <li className="ms-auto">
                     <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/owner-orders'); }}>
                       <span>
@@ -99,6 +88,29 @@ const Header = () => {
                       <span>{t('myWaitingOrders')}</span>
                     </button>
                   </li>
+                  {user.is_driver && (
+                    <li className="ms-auto">
+                      <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/driver-orders'); }}>
+                        <span>
+                          <MaterialIcon onClick={() => { }} orange text="local_shipping" />
+                        </span>
+                        {' '}
+                        <span>{t('myOrders')}</span>
+                      </button>
+                    </li>
+                  )}
+
+                  {user.is_driver && (
+                    <li className="ms-auto">
+                      <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/orders-all'); }}>
+                        <span>
+                          <MaterialIcon onClick={() => { }} orange text="local_shipping" />
+                        </span>
+                        {' '}
+                        <span className="">{t('allCurrentOrders')}</span>
+                      </button>
+                    </li>
+                  )}
                 </>
               ) : null}
             </ul>
