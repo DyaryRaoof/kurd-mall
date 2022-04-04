@@ -52,7 +52,7 @@ function App() {
             <Route path="/profile" exact element={<Profile />} />
             <Route path="/profile-edit" exact element={<ProfileEdit />} />
             <Route path="/driver" exact element={<Driver />} />
-            <Route path="/analytics" exact element={<Analytics storeId={1} />} />
+            <Route exact path="/analytics/:store_id" element={<PrivateRoute element={<Analytics />} />} />
             <Route path="/orders-all" exact element={<OrdersAll />} />
             <Route path="/driver-orders" exact element={<DriverOrders />} />
             <Route path="/owner-orders" exact element={<OwnerOrders />} />

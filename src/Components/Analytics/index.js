@@ -1,15 +1,19 @@
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import makeid from '../Shared/methods/makeid';
 import analytics from '../mock-data/analytics';
 import Item from './Item';
 import Pagination from '../Shared/Pagination';
+import getStoreAnalytics from '../../api/storeAnalytics';
 
-const Analytics = ({ storeId }) => {
+const Analytics = () => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
+  const storeAnalytics = useSelector((state) => state.storeAnalyticsReducer.storeAnalytic) || {};
+  const { store_id: storeId } = useParams();
 
-  const storeAnalytics = analytics.filter((analytic) => analytic.storeId === storeId
-    && analytic.isStore)[0];
   const itemAnalytics = analytics.filter((analytic) => !analytic.isStore);
 
   const analyticNames = [t('viewsThisWeek'),
@@ -18,6 +22,10 @@ const Analytics = ({ storeId }) => {
     t('totalRevenueUSD'), t('totalRevenueIQD'), t('totalItemsSold'),
   ];
 
+  useEffect(() => {
+    getStoreAnalytics(dispatch, storeId);
+  }, []);
+
   return (
     <main className="container">
       <h1 className="orange">{t('analytics')}</h1>
@@ -25,15 +33,28 @@ const Analytics = ({ storeId }) => {
         <div className="gray-background rouded p-2">
           <h3 className="orange">{t('store')}</h3>
           <div className="p-2 white-background">
-            {Object.values(storeAnalytics)
-              .slice(5, Object.values(storeAnalytics).length)
-              .map((analytic, index) => (
-                <Item
-                  key={makeid(10)}
-                  name={analyticNames[index]}
-                  value={analytic}
-                />
-              ))}
+            <Item
+              key={makeid(10)}
+              name={t('viewsLifetime')}
+              value={storeAnalytics.lifetime_views}
+            />
+            <Item
+              key={makeid(10)}
+              name={t('totalRevenueUSD')}
+              value="sss"
+
+            />
+            <Item
+              key={makeid(10)}
+              name={t('totalRevenueIQD')}
+              value="sss"
+
+            />
+            <Item
+              key={makeid(10)}
+              name={t('totalItemsSold')}
+              value="sss"
+            />
           </div>
         </div>
 
@@ -67,9 +88,4 @@ const Analytics = ({ storeId }) => {
     </main>
   );
 };
-
-Analytics.propTypes = {
-  storeId: PropTypes.number.isRequired,
-};
-
 export default Analytics;

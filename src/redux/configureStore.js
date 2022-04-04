@@ -28,6 +28,7 @@ import storeItemsReducer from './storeItems/storeItems';
 import driverOrdersReducer from './driverOrders/driverOrders';
 import allOrdersReducer from './allOrders/allOrders';
 import singleItemReducer from './singleItem/singleItem';
+import storeAnalyticsReducer from './getStoreAnalytics/getStoreAnalytics';
 
 const reducers = combineReducers({
   designReducer,
@@ -57,6 +58,7 @@ const reducers = combineReducers({
   driverOrdersReducer,
   allOrdersReducer,
   singleItemReducer,
+  storeAnalyticsReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 

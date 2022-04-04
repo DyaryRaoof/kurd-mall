@@ -37,7 +37,7 @@ const MyCollection = () => {
             isStore
           />
         </div>
-        <RoundOrangeIconButton iconName="trending_up" buttonText={t('analytics')} isLarge onPressed={() => navigate('/analytics')} />
+        <RoundOrangeIconButton iconName="trending_up" buttonText={t('analytics')} isLarge onPressed={() => navigate(`/analytics/${store.id}`)} />
 
       </div>
       <hr className="orange" />
