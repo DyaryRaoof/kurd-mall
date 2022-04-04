@@ -38,7 +38,6 @@ const ItemDetail = () => {
   }, []);
 
   useEffect(() => {
-    console.log(item);
   }, [item]);
 
   const handleAddTocart = async () => {

@@ -14,6 +14,7 @@ import getStoreDetail from '../../api/storeDetail';
 import getStoreItems from '../../api/storeItems';
 import ItemCard from '../Shared/ItemCard';
 import Paginator from '../Shared/Paginator';
+import postStoreView from '../../api/storeVIews';
 
 const StoreDetail = () => {
   let { store } = useLocation().state || {};
@@ -44,10 +45,12 @@ const StoreDetail = () => {
 
   const user = JSON.parse(localStorage.getItem('user'));
 
-  useEffect(() => {
+  useEffect(async () => {
     if ((store === {} || !store) && storeId) {
-      getStoreDetail(dispatch, storeId);
+      await getStoreDetail(dispatch, storeId);
     }
+
+    postStoreView(store.id, store.name);
 
     getStoreItems(dispatch, store ? store.id : storeId, 1);
   }, []);
