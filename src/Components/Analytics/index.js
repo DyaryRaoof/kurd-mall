@@ -41,19 +41,19 @@ const Analytics = () => {
             <Item
               key={makeid(10)}
               name={t('totalRevenueUSD')}
-              value="sss"
+              value={storeAnalytics.total_revenue_usd}
 
             />
             <Item
               key={makeid(10)}
               name={t('totalRevenueIQD')}
-              value="sss"
+              value={storeAnalytics.total_revenue_iqd}
 
             />
             <Item
               key={makeid(10)}
               name={t('totalItemsSold')}
-              value="sss"
+              value={storeAnalytics.total_item_sales}
             />
           </div>
         </div>
