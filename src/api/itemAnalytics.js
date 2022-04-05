@@ -1,6 +1,7 @@
 import backend from './backend';
+import { getItemAnalyticsSuccess, getItemAnalyticsFailure } from '../redux/itemAnalytics/itemAnalytics';
 
-const postItemView = async (itemId, itemName, storeId) => {
+export const postItemView = async (itemId, itemName, storeId) => {
   try {
     const response = await backend.post(`item_analytics/views?item_id=${itemId}&item_name=${itemName}&store_id=${storeId}`);
     return response;
@@ -9,4 +10,13 @@ const postItemView = async (itemId, itemName, storeId) => {
   }
 };
 
-export default postItemView;
+export const getItemAnalytics = async (dispatch, storeId, page) => {
+  try {
+    const response = await backend.get(`item_analytics?store_id=${storeId}&page=${page}`);
+    dispatch(getItemAnalyticsSuccess(response.data));
+    return response;
+  } catch (err) {
+    dispatch(getItemAnalyticsFailure(JSON.stringify(err.response.data)));
+    return err.response;
+  }
+};

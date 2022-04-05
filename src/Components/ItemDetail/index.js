@@ -17,7 +17,7 @@ import CollapsableShare from '../Shared/CollapsableShare';
 import postAddItemToCart from '../../api/addItemToCart';
 import LoginConfirmationModal from '../Shared/LoginConfirmationModal';
 import getSingleItem from '../../api/singleItem';
-import postItemView from '../../api/itemAnalytics';
+import { postItemView } from '../../api/itemAnalytics';
 
 const ItemDetail = () => {
   const location = useLocation();

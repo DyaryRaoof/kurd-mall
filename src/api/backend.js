@@ -20,6 +20,8 @@ const setAxiosHeaders = () => {
     axios.defaults.headers.common.Authorization = token;
   } else {
     axios.defaults.headers.common.Authorization = null;
+    localStorage.removeItem('user');
+    localStorage.removeItem('store');
   }
   axios.defaults.headers.common['Content-Type'] = 'application/json';
   axios.defaults.headers.common.Accept = 'application/json';

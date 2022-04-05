@@ -1,37 +1,43 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import makeid from '../Shared/methods/makeid';
-import analytics from '../mock-data/analytics';
 import Item from './Item';
-import Pagination from '../Shared/Pagination';
+import Paginator from '../Shared/Paginator';
 import getStoreAnalytics from '../../api/storeAnalytics';
+import { getItemAnalytics } from '../../api/itemAnalytics';
 
 const Analytics = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const storeAnalytics = useSelector((state) => state.storeAnalyticsReducer.storeAnalytic) || {};
   const { store_id: storeId } = useParams();
-
-  const itemAnalytics = analytics.filter((analytic) => !analytic.isStore);
-
-  const analyticNames = [t('viewsThisWeek'),
-    t('viewsToday'), t('viewsLifetime'), t('totalStars'),
-    t('totalReviews'), t('totalShares'), t('totalComments'),
-    t('totalRevenueUSD'), t('totalRevenueIQD'), t('totalItemsSold'),
-  ];
+  const [currentPage, setCurrentPage] = useState(1);
+  const items = useSelector((state) => state.itemAnalyticsReducer.items) || [];
 
   useEffect(() => {
     getStoreAnalytics(dispatch, storeId);
+    getItemAnalytics(dispatch, storeId, 1);
   }, []);
+
+  useEffect(() => {
+    getItemAnalytics(dispatch, storeId, currentPage);
+  }, [currentPage]);
 
   return (
     <main className="container">
       <h1 className="orange">{t('analytics')}</h1>
       <div>
         <div className="gray-background rouded p-2">
-          <h3 className="orange">{t('store')}</h3>
+          <div className="d-flex justify-content-between">
+            <h3 className="orange">{t('store')}</h3>
+            <h3 className="orange">{storeAnalytics.store_name}</h3>
+            <button type="button" className="icon-button" onClick={() => { navigate(`/store-detail/${storeAnalytics.store_id}`); }}>
+              <p><u className="orange">{t('openStore')}</u></p>
+            </button>
+          </div>
           <div className="p-2 white-background">
             <Item
               key={makeid(10)}
@@ -60,30 +66,60 @@ const Analytics = () => {
 
         <input type="email" className="form-control w-100 mt-5" aria-describedby="emailHelp" placeholder={t('searchForItem')} />
 
-        {itemAnalytics.map((analytic) => (
+        {items.map((analytic) => (
           <div key={analytic.id} className="gray-background rouded p-2 my-2">
             <div className="d-flex justify-content-between orange">
-              <h3 className="orange">{analytic.itemName}</h3>
-              <p><u>{t('seeItem')}</u></p>
-
+              <h3 className="orange">{analytic.item_name}</h3>
+              <button type="button" className="icon-button" onClick={() => { navigate(`/item-detail/${analytic.item_id}`); }}>
+                <p><u className="orange">{t('seeItem')}</u></p>
+              </button>
             </div>
             <div className="p-2 white-background">
-              {Object.values(analytic)
-                .slice(5, Object.values(analytic).length)
-                .map((analytic, index) => (
-                  <Item
-                    key={makeid(10)}
-                    name={analyticNames[index]}
-                    value={analytic}
-                  />
-                ))}
+              <Item
+                key={makeid(10)}
+                name={t('viewsLifetime')}
+                value={analytic.lifetime_views}
+              />
+              <Item
+                key={makeid(10)}
+                name={t('totalStars')}
+                value={analytic.total_stars}
+              />
+              <Item
+                key={makeid(10)}
+                name={t('totalReviews')}
+                value={analytic.total_reviews}
+              />
+              <Item
+                key={makeid(10)}
+                name={t('totalComments')}
+                value={analytic.total_comments}
+              />
+              <Item
+                key={makeid(10)}
+                name={t('totalRevenueUSD')}
+                value={analytic.total_revenue_usd}
+              />
+              <Item
+                key={makeid(10)}
+                name={t('totalRevenueIQD')}
+                value={analytic.total_revenue_iqd}
+              />
+              <Item
+                key={makeid(10)}
+                name={t('totalItemsSold')}
+                value={analytic.total_item_sales}
+              />
             </div>
           </div>
         ))}
 
       </div>
       <div className="d-flex justify-content-center">
-        <Pagination onPageChange={() => { }} currentPage={0} totalPages={3} />
+        <Paginator
+          onChange={(page) => setCurrentPage(page)}
+          wasLastpage={items.length === 0 && currentPage !== 1}
+        />
       </div>
     </main>
   );
