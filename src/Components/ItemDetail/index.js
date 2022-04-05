@@ -17,6 +17,7 @@ import CollapsableShare from '../Shared/CollapsableShare';
 import postAddItemToCart from '../../api/addItemToCart';
 import LoginConfirmationModal from '../Shared/LoginConfirmationModal';
 import getSingleItem from '../../api/singleItem';
+import postItemView from '../../api/itemAnalytics';
 
 const ItemDetail = () => {
   const location = useLocation();
@@ -30,10 +31,12 @@ const ItemDetail = () => {
   const dispatch = useDispatch();
   const relatedItems = useSelector((state) => state.relatedItemsReducer.items);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!item && id) {
-      getSingleItem(dispatch, id);
+      await getSingleItem(dispatch, id);
     }
+
+    postItemView(item.id, item.name, item.store_id);
     getRelatedItems(dispatch, item);
   }, []);
 
