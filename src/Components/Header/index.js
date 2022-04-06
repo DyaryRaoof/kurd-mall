@@ -43,10 +43,12 @@ const Header = () => {
   const getStore = async () => {
     let store = JSON.parse(localStorage.getItem('store'));
     const user = JSON.parse(localStorage.getItem('user'));
-    if (!store) {
-      store = await getMyStore(dispatch, user.id);
-      store = store.data;
-      localStorage.setItem('store', JSON.stringify(store));
+    if (!store && user) {
+      const response = await getMyStore(dispatch, user.id);
+      if (response.status === 200) {
+        store = response.data;
+        localStorage.setItem('store', JSON.stringify(store));
+      }
     }
 
     return store;
@@ -166,8 +168,8 @@ const Header = () => {
             <button
               className="icon-button orange"
               type="button"
-              onClick={() => {
-                const store = getStore();
+              onClick={async () => {
+                const store = await getStore();
                 if (store) {
                   const loginModal = new Modal(document.getElementById('have-a-store-modal'), {});
                   loginModal.show();

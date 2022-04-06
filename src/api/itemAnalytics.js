@@ -20,3 +20,14 @@ export const getItemAnalytics = async (dispatch, storeId, page) => {
     return err.response;
   }
 };
+
+export const getSearchItemAnalytics = async (dispatch, storeId, itemName) => {
+  try {
+    const response = await backend.get(`item_analytics/search?store_id=${storeId}&item_name=${itemName}`);
+    dispatch(getItemAnalyticsSuccess(response.data));
+    return response;
+  } catch (err) {
+    dispatch(getItemAnalyticsFailure(JSON.stringify(err.response.data)));
+    return err.response;
+  }
+};

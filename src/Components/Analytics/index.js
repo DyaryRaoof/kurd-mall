@@ -6,7 +6,7 @@ import makeid from '../Shared/methods/makeid';
 import Item from './Item';
 import Paginator from '../Shared/Paginator';
 import getStoreAnalytics from '../../api/storeAnalytics';
-import { getItemAnalytics } from '../../api/itemAnalytics';
+import { getItemAnalytics, getSearchItemAnalytics } from '../../api/itemAnalytics';
 
 const Analytics = () => {
   const navigate = useNavigate();
@@ -16,6 +16,16 @@ const Analytics = () => {
   const { store_id: storeId } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const items = useSelector((state) => state.itemAnalyticsReducer.items) || [];
+  const [searchText, setSearchText] = useState('');
+
+  const handleSearch = () => {
+    console.log(searchText);
+    if (!searchText) {
+      getItemAnalytics(dispatch, storeId, 1);
+      return;
+    }
+    getSearchItemAnalytics(dispatch, storeId, searchText);
+  };
 
   useEffect(() => {
     getStoreAnalytics(dispatch, storeId);
@@ -64,7 +74,15 @@ const Analytics = () => {
           </div>
         </div>
 
-        <input type="email" className="form-control w-100 mt-5" aria-describedby="emailHelp" placeholder={t('searchForItem')} />
+        <input
+          type="email"
+          className="form-control w-100 mt-5"
+          aria-describedby="emailHelp"
+          placeholder={t('searchForItem')}
+          value={searchText}
+          onChange={(e) => { setSearchText(e.target.value); }}
+          onKeyDown={(e) => { if (e.key === 'Enter') { handleSearch(); } }}
+        />
 
         {items.map((analytic) => (
           <div key={analytic.id} className="gray-background rouded p-2 my-2">
