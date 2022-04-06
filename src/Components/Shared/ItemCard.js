@@ -8,10 +8,11 @@ import MaterialIcon from './MateriaIcon';
 const ItemCard = ({
   item, isStore, isSearchItem,
 }) => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const { t } = useTranslation();
   const {
-    name, stars, price, quantity, image_urls: imageURLS, id, currency, reviewers,
+    name, stars, price, quantity, image_urls: imageURLS, id, currency, reviewers, user_id: userId,
   } = item;
 
   const handleClick = () => {
@@ -31,9 +32,19 @@ const ItemCard = ({
   };
 
   const checkIfUserHasStore = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (isStore && user.storeId === id) {
+    if (isStore && user.id === userId) {
       return true;
+    }
+    return false;
+  };
+
+  const checkIfUserHasItem = () => {
+    if (!isStore) {
+      if (user) {
+        if (userId === user.id) {
+          return true;
+        }
+      }
     }
     return false;
   };
@@ -76,7 +87,7 @@ const ItemCard = ({
         </button>
 
         {
-          (!isStore || checkIfUserHasStore()) && (
+          (checkIfUserHasItem() || checkIfUserHasStore()) && (
             <div className="d-flex justify-content-end">
 
               <button

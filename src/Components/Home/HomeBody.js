@@ -7,6 +7,7 @@ import fetchCategories from '../../api/categories';
 import fetchSubcategories from '../../api/subcategories';
 import getHomeItems from '../../api/homeItems';
 import getHomeStores from '../../api/homeStores';
+import getMyStoreAndSaveIt from '../Shared/methods/getMyStroeAndSaveIt';
 
 const HomeBody = () => {
   const navStoreOrItem = useSelector((state) => state.designReducer.navStoreOrItem);
@@ -24,6 +25,7 @@ const HomeBody = () => {
   useEffect(() => {
     dispatch(fetchCategories);
     fetchSubcategories(dispatch, 0);
+    getMyStoreAndSaveIt(dispatch);
   }, []);
 
   useEffect(() => {

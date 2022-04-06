@@ -19,7 +19,6 @@ const Analytics = () => {
   const [searchText, setSearchText] = useState('');
 
   const handleSearch = () => {
-    console.log(searchText);
     if (!searchText) {
       getItemAnalytics(dispatch, storeId, 1);
       return;
