@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import './DropDown.css';
 
 const DropDown = ({
-  categoryName, dropdownValues, bgColorClass, setParentValue,
+  categoryName, dropdownValues, bgColorClass, setParentValue, currentValue,
 }) => {
-  const [currentCategory, setCurrentCategory] = useState(null);
+  const [currentCategory, setCurrentCategory] = useState(currentValue);
   const { t } = useTranslation();
   const language = localStorage.getItem('language');
 
@@ -58,11 +58,13 @@ DropDown.propTypes = {
   dropdownValues: PropTypes.instanceOf(Array).isRequired,
   bgColorClass: PropTypes.string,
   setParentValue: PropTypes.func,
+  currentValue: PropTypes.instanceOf(Object),
 };
 
 DropDown.defaultProps = {
   bgColorClass: '',
   setParentValue: () => { },
+  currentValue: null,
 };
 
 export default DropDown;

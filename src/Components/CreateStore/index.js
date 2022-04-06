@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Field from '../Shared/Field';
 import createStore from '../../images/design/create-store.png';
@@ -27,6 +27,8 @@ const CreateStore = () => {
   const subcategories = useSelector((state) => state.subcategoriesReducer.subcategories) || [];
   const cities = useSelector((state) => state.citiesReducer.cities) || [];
   const [position, setPosition] = useState(null);
+  const location = useLocation();
+  const { store: currentStore, isUpdate } = location.state;
 
   useEffect(() => {
     dispatch(fetchCategories);
@@ -36,13 +38,16 @@ const CreateStore = () => {
   }, []);
 
   const [submitted, setSubmitted] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(categories
+    .find((category) => category.id === currentStore.category_id));
   const [fieldValues, setFieldValues] = useState(Array(6).fill(''));
+
   const [images, setImages] = useState({ urls: [], files: [] });
   const { t } = useTranslation();
 
-  const [subcategory, setSubcategory] = useState(null);
-  const [city, setCity] = useState(null);
+  const [subcategory, setSubcategory] = useState(subcategories
+    .find((sub) => sub.id === currentStore.subcategory_id));
+  const [city, setCity] = useState(cities.find((city) => city.id === currentStore.city_id));
 
   const formValidity = Array(4).fill(false);
 
@@ -95,9 +100,16 @@ const CreateStore = () => {
         phone: fieldValues[5],
         locaation_long: position.long,
         location_lat: position.lat,
-
+        id: isUpdate ? currentStore.id : null,
       };
-      const response = await postStore(dispatch, store, images.files);
+
+      let response = null;
+      if (!isUpdate) {
+        response = await postStore(dispatch, store, images.files);
+      } else {
+        response = await postStore(dispatch, store, images.files, true);
+      }
+
       if (response.status === 201) {
         localStorage.setItem('store', JSON.stringify(response.data));
         navigate(`/store-detail/${store.id}`, {
@@ -108,6 +120,17 @@ const CreateStore = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const newFieldValues = [...fieldValues];
+    newFieldValues[0] = currentStore.name;
+    newFieldValues[1] = currentStore.description;
+    newFieldValues[2] = currentStore.address;
+    newFieldValues[3] = currentStore.facebook;
+    newFieldValues[4] = currentStore.instagram;
+    newFieldValues[5] = currentStore.phone;
+    setFieldValues(newFieldValues);
+  }, []);
 
   return (
     <main className="create-store-main">
@@ -172,6 +195,7 @@ const CreateStore = () => {
                 dropdownValues={categories || []}
                 categoryName={t('category')}
                 setParentValue={(value) => { setSelectedCategoryNow(value); }}
+                currentValue={selectedCategory}
               />
               {!selectedCategory && submitted && <div className="text-danger">{t('errors.fieldRequired')}</div>}
               <DropDown
@@ -182,6 +206,7 @@ const CreateStore = () => {
                 }
                 categoryName={t('subcategory')}
                 setParentValue={(value) => { setSubcategory(value); }}
+                currentValue={subcategory}
               />
               {!subcategory && submitted && <div className="text-danger">{t('errors.fieldRequired')}</div>}
 
@@ -189,6 +214,7 @@ const CreateStore = () => {
                 dropdownValues={cities}
                 categoryName={t('city')}
                 setParentValue={(value) => { setCity(value); }}
+                currentValue={city}
               />
               {!city && submitted && <div className="text-danger">{t('errors.fieldRequired')}</div>}
 

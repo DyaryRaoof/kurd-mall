@@ -1,7 +1,7 @@
 import { postStoreFailure, postStoreLoading, postStoreSuccess } from '../redux/stores/stores';
 import backend from './backend';
 
-const postStore = async (dispatch, store, images) => {
+const postStore = async (dispatch, store, images, isUpdate = false) => {
   const data = new FormData();
   [...images].forEach((image) => {
     data.append('store[images][]', image, image.name);
@@ -23,7 +23,12 @@ const postStore = async (dispatch, store, images) => {
 
   try {
     dispatch(postStoreLoading());
-    const response = await backend.post(`users/${userId}/stores`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+    let response = null;
+    if (!isUpdate) {
+      response = await backend.post(`users/${userId}/stores`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+    } else {
+      response = await backend.put(`users/${userId}/stores/${store.id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+    }
     dispatch(postStoreSuccess(response.data));
     return response;
   } catch (err) {

@@ -12,7 +12,7 @@ const ItemCard = ({
   const navigate = useNavigate();
   const { t } = useTranslation();
   const {
-    name, stars, price, quantity, image_urls: imageURLS, id, currency, reviewers, user_id: userId,
+    name, price, quantity, image_urls: imageURLS, currency, user_id: userId,
   } = item;
 
   const handleClick = () => {
@@ -97,13 +97,15 @@ const ItemCard = ({
                   if (isStore) {
                     navigate('/create-store', {
                       state: {
-                        name, stars, reviewers, id,
+                        store: item,
+                        isUpdate: true,
                       },
                     });
                   } else {
                     navigate('/create-item', {
                       state: {
-                        name, stars, price, reviewers, quantity, id,
+                        item,
+                        isUpdate: true,
                       },
                     });
                   }
