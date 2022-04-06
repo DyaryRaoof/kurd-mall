@@ -66,26 +66,9 @@ const Header = () => {
             <li className="w-100 mx-auto d-sm-block d-none"><Search /></li>
 
             <ul className="navbar-nav">
-
-              <li className="ms-auto">
-                <button className="icon-text-pair icon-button" type="button" onClick={token ? handleLogout : () => { navigate('/log-in'); }}>
-                  <span className="d-flex justify-content-end width-100">{token ? t('logOut') : t('logIn')}</span>
-                  <div>
-                    <MaterialIcon onClick={() => { }} orange text="person" />
-                  </div>
-                </button>
-              </li>
               {token ? (
                 <>
-                  <li className="ms-auto">
-                    <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/profile'); }}>
-                      <span>
-                        <MaterialIcon onClick={() => { }} orange text="manage_accounts" />
-                      </span>
-                      {' '}
-                      <span>{t('profile')}</span>
-                    </button>
-                  </li>
+
                   <li className="ms-auto">
                     <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/cart'); }}>
                       <span>
@@ -127,8 +110,25 @@ const Header = () => {
                       </button>
                     </li>
                   )}
+                  <li className="ms-auto">
+                    <button className="icon-text-pair me-2 icon-button" type="button" onClick={() => { navigate('/profile'); }}>
+                      <span>
+                        <MaterialIcon onClick={() => { }} orange text="manage_accounts" />
+                      </span>
+                      {' '}
+                      <span>{t('profile')}</span>
+                    </button>
+                  </li>
                 </>
               ) : null}
+              <li className="ms-auto">
+                <button className="icon-text-pair icon-button" type="button" onClick={token ? handleLogout : () => { navigate('/log-in'); }}>
+                  <span>{token ? t('logOut') : t('logIn')}</span>
+                  <div>
+                    <MaterialIcon onClick={() => { }} orange text="person" />
+                  </div>
+                </button>
+              </li>
             </ul>
           </div>
         </div>

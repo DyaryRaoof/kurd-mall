@@ -25,7 +25,7 @@ const Cart = () => {
   const setTotals = (quantity, index) => {
     const newCartItems = [...cartItems];
     newCartItems[index].quantity = quantity;
-    newCartItems[index].totalPrice = quantity * newCartItems[index].price
+    newCartItems[index].total_price = quantity * newCartItems[index].price
       + getShippingPrice(quantity
         * newCartItems[index].shipping_kg, newCartItems[index].currency);
     setCartItems(newCartItems);
