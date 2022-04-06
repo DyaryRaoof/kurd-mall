@@ -146,7 +146,7 @@ const ItemDetail = () => {
                 </div>
               </div>
               <div className="mt-2 ms-1">{item.description}</div>
-              <div className="white-text pt-2">
+              <div className="white-text pt-2 d-flex flex-wrap">
                 {item.tags.map((tag) => (
                   <span key={tag.id} className="rounded orange-bg p-1 m-1">
                     {tag.name}

@@ -172,5 +172,6 @@
     "allCurrentOrders": "هەمووگەیاندنەکان",
     "noDriverOrders": "هیچ داواکاریەکت هەڵنەگرتووە",
     "aleadyHaveAStore": "پێشتر کۆگات هەیە",
-    "deletePreviousStoreFirst": "پێویستە یەکەمجار ئەو کوگایە بسڕیتەوە بۆ دروسسترکردنی دانەیەکی نوێ"
+    "deletePreviousStoreFirst": "پێویستە یەکەمجار ئەو کوگایە بسڕیتەوە بۆ دروسسترکردنی دانەیەکی نوێ",
+    "selectImage": "تکایە وێنەیەک دیاریبکە"
 }

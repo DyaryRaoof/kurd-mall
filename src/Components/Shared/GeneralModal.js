@@ -32,8 +32,14 @@ GeneralModal.propTypes = {
   modalTitle: PropTypes.string.isRequired,
   modalDescription: PropTypes.string.isRequired,
   isActionButtonNeeded: PropTypes.bool.isRequired,
-  actionButtonFunction: PropTypes.func.isRequired,
-  actionButtonName: PropTypes.string.isRequired,
+  actionButtonFunction: PropTypes.func,
+  actionButtonName: PropTypes.string,
   modalName: PropTypes.string.isRequired,
 };
+
+GeneralModal.defaultProps = {
+  actionButtonFunction: null,
+  actionButtonName: null,
+};
+
 export default GeneralModal;

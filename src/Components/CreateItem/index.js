@@ -11,31 +11,36 @@ import TagsField from './TagsField';
 import postItem from '../../api/items';
 import redirectOnTokenExipiration from '../Shared/methods/redirectOnTokenExipiration';
 
-const { useNavigate } = require('react-router-dom');
+const { useNavigate, useLocation } = require('react-router-dom');
 
 const CreateItem = () => {
+  const location = useLocation();
+  const { item: currentItem, isUpdate } = location.state ? location.state : {};
   const navigate = useNavigate();
   redirectOnTokenExipiration(navigate);
   const dispatch = useDispatch();
   const [returnedErrors, setReturnedErrors] = useState(null);
-  const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const [checkboxChecked, setCheckboxChecked] = useState(isUpdate
+    ? currentItem.item_variants.length > 0
+    : false);
   const [selectedImages, setSelectedImages] = useState({ urls: [], files: [] });
   const store = JSON.parse(localStorage.getItem('store'));
 
   const [item, setItem] = useState({
-    categoryId: '',
-    variants: [],
-    name: '',
-    currency: '',
-    description: '',
-    price: '',
-    cost: '',
-    quantity: '',
+    id: isUpdate ? currentItem.id : null,
+    categoryId: isUpdate ? currentItem.category_id : '',
+    variants: isUpdate ? currentItem.item_variants : [],
+    name: isUpdate ? currentItem.name : '',
+    currency: isUpdate ? currentItem.currency : '',
+    description: isUpdate ? currentItem.description : '',
+    price: isUpdate ? currentItem.price : '',
+    cost: isUpdate ? currentItem.cost : '',
+    quantity: isUpdate ? currentItem.quantity : '',
     images: [],
-    tags: [],
-    shipping_kg: '',
-    store_name: store.name,
-    store_phone: store.phone,
+    tags: isUpdate ? currentItem.tags.map((tag) => tag.name) : [],
+    shipping_kg: isUpdate ? currentItem.shipping_kg : '',
+    store_name: isUpdate ? currentItem.store_name : store.name,
+    store_phone: isUpdate ? currentItem.store_phone : store.phone,
   });
   const [submitted, setSubmitted] = useState(false);
   const [currentFieldIndex, setCurrentFieldIndex] = useState({ index: 0, field: 'name' });
@@ -45,6 +50,9 @@ const CreateItem = () => {
   const setVariantValues = (objectKey, value, variantIndex) => {
     const newVariants = [...item.variants];
     newVariants[variantIndex][objectKey] = value;
+    if (!newVariants[variantIndex].imageIndex) {
+      newVariants[variantIndex].imageIndex = 0;
+    }
     setItem({ ...item, variants: newVariants });
   };
 
@@ -65,15 +73,36 @@ const CreateItem = () => {
     setFormValidity(true);
   };
 
+  const checkAllItemVariantsHaveImages = () => {
+    const newVariants = [...item.variants];
+    let isAllHaveImages = true;
+    newVariants.forEach((variant) => {
+      if (variant.imageIndex === undefined) {
+        isAllHaveImages = false;
+        console.log('variant has no image');
+      }
+    });
+    return isAllHaveImages;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
 
-    if (formValidity && selectedImages.files.length > 0) {
+    if (formValidity && selectedImages.files.length > 0 && checkAllItemVariantsHaveImages()) {
       item.store = JSON.parse(localStorage.getItem('store'));
-      const response = await postItem(dispatch, item, item.images);
-      if (response.status === 201) {
-        navigate(`/item-detail/${item.id}`, { state: { item: response.data } });
+      let response = null;
+      if (!isUpdate) {
+        response = await postItem(dispatch, item, item.images);
+      } else {
+        response = await postItem(dispatch, item, item.images, true);
+      }
+      if (response.status === 201 || response.status === 200) {
+        if (!isUpdate) {
+          navigate(`/item-detail/${item.id}`, { state: { item: response.data } });
+        } else {
+          navigate(`/item-detail/${item.id}`);
+        }
       } else {
         setReturnedErrors(JSON.stringify(response.data));
       }
@@ -168,7 +197,12 @@ const CreateItem = () => {
             {t('currency')}
             {' '}
           </div>
-          <div className="w-100 d-flex justify-content-start"><CurrencyDropdown setParentValue={(value) => { item.currency = value; }} /></div>
+          <div className="w-100 d-flex justify-content-start">
+            <CurrencyDropdown
+              setParentValue={(value) => { item.currency = value; }}
+              currencyFromParent={item.currency}
+            />
+          </div>
           {!item.currency && submitted && <div className="text-danger text-start">{t('errors.fieldRequired')}</div>}
           <Field
             placeholder={t('numbersAvailableEg')}
@@ -190,7 +224,7 @@ const CreateItem = () => {
             {t('tags')}
             {' '}
           </div>
-          <TagsField setParentValue={(value) => { setItem({ ...item, tags: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} />
+          <TagsField setParentValue={(value) => { setItem({ ...item, tags: value }); setCurrentFieldIndex({ index: 0, field: 'other' }); }} tagsFromParent={item.tags} />
         </div>
 
         <div className="item-input-section gray-background">
@@ -286,6 +320,7 @@ const CreateItem = () => {
                       </button>
                     ))}
                   </div>
+                  {submitted && item.variants[indexOfVariant].imageIndex === undefined && <div className="text-danger text-start">{t('selectImage')}</div>}
                   <div className="text-end">
                     <button
                       type="button"
@@ -312,7 +347,7 @@ const CreateItem = () => {
                   value: '',
                   price: '',
                   cost: '',
-                  imageIndex: '',
+                  imageIndex: 0,
                 });
                 setItem({ ...item, variants: newVariants });
               }}
@@ -321,7 +356,7 @@ const CreateItem = () => {
             </button>
           </div>
         </div>
-        {((!formValidity && submitted) && selectedImages.files.length === 0) && <div className="alert alert-danger" role="alert">{t('fillInRequiredFields')}</div>}
+        {((!formValidity && submitted) || selectedImages.files.length === 0 || !checkAllItemVariantsHaveImages()) && <div className="alert alert-danger" role="alert">{t('fillInRequiredFields')}</div>}
         <div className="mt-5">
           <SubmitButton name="Create" />
         </div>

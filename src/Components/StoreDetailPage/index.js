@@ -84,7 +84,7 @@ const StoreDetail = () => {
               <LocationWidget position={{ long: locationLong, lat: locationLat }} />
             </div>
             <div className="d-flex justify-content-end">
-              <button type="button" className="icon-button" onClick={() => { navigate('/create-store', { state: { store } }); }}>
+              <button type="button" className="icon-button" onClick={() => { navigate('/create-store', { state: { store, isUpdate: true } }); }}>
                 <MaterialIcon text="create" orange />
               </button>
             </div>

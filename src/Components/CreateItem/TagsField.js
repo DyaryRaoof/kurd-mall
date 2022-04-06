@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import makeid from '../Shared/methods/makeid';
 import './TagsField.css';
 
-const TagsField = ({ setParentValue }) => {
+const TagsField = ({ setParentValue, tagsFromParent }) => {
   const [input, setInput] = useState('');
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(tagsFromParent || []);
   const [isKeyReleased, setIsKeyReleased] = useState(false);
   const { t } = useTranslation();
 
@@ -21,9 +21,9 @@ const TagsField = ({ setParentValue }) => {
 
     if ((key === ',' || key === '،') && trimmedInput.length && !tags.includes(trimmedInput)) {
       e.preventDefault();
-      const currentTags = (prevState) => [...prevState, trimmedInput];
+      const currentTags = [...tags, trimmedInput];
       setTags(currentTags);
-      setParentValue(tags);
+      setParentValue(currentTags);
       setInput('');
     }
 
@@ -69,6 +69,11 @@ const TagsField = ({ setParentValue }) => {
 
 TagsField.propTypes = {
   setParentValue: PropTypes.func.isRequired,
+  tagsFromParent: PropTypes.instanceOf(Array),
+};
+
+TagsField.defaultProps = {
+  tagsFromParent: [],
 };
 
 export default TagsField;

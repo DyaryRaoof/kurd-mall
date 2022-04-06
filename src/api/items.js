@@ -1,7 +1,7 @@
 import { postItemFailure, postItemLoading, postItemSuccess } from '../redux/items/items';
 import backend from './backend';
 
-const postItem = async (dispatch, item, images) => {
+const postItem = async (dispatch, item, images, isUpdate = false) => {
   const data = new FormData();
   [...images].forEach((image) => {
     data.append('item[images][]', image, image.name);
@@ -30,7 +30,12 @@ const postItem = async (dispatch, item, images) => {
 
   try {
     dispatch(postItemLoading());
-    const response = await backend.post(`users/${userId}/stores/${item.store.id}/items`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+    let response = null;
+    if (!isUpdate) {
+      response = await backend.post(`users/${userId}/stores/${item.store.id}/items`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+    } else {
+      response = await backend.put(`users/${userId}/stores/${item.store.id}/items/${item.id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+    }
     dispatch(postItemSuccess(response.data));
     return response;
   } catch (err) {

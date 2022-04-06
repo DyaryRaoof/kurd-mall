@@ -171,5 +171,6 @@
     "allCurrentOrders": "AllOrders",
     "noDriverOrders": "You haven't picked up any orders",
     "aleadyHaveAStore": "You already have a store",
-    "deletePreviousStoreFirst": "You need to delete your previous store first"
+    "deletePreviousStoreFirst": "You need to delete your previous store first",
+    "selectImage": "Please select an image"
 }

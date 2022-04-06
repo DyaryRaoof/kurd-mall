@@ -3,10 +3,10 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import makeid from './methods/makeid';
 
-const CurrencyDropdown = ({ setParentValue }) => {
+const CurrencyDropdown = ({ setParentValue, currencyFromParent }) => {
   const { t } = useTranslation();
   const dropdownValues = ['IQD', 'USD'];
-  const [currentCurrency, setCurrentCurrency] = useState(null);
+  const [currentCurrency, setCurrentCurrency] = useState(currencyFromParent);
 
   const setCurrencyLanguage = (currency) => {
     if (currency === 'IQD') {
@@ -50,6 +50,11 @@ const CurrencyDropdown = ({ setParentValue }) => {
 
 CurrencyDropdown.propTypes = {
   setParentValue: PropTypes.func.isRequired,
+  currencyFromParent: PropTypes.string,
+};
+
+CurrencyDropdown.defaultProps = {
+  currencyFromParent: null,
 };
 
 export default CurrencyDropdown;
