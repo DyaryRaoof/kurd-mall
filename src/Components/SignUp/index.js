@@ -52,6 +52,7 @@ const SignUp = () => {
       if (response.status === 200) {
         navigate('/log-in');
       } else {
+        window.location.reload();
         setReturnedErrors(JSON.stringify(response.data));
       }
     }
