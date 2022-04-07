@@ -79,7 +79,6 @@ const CreateItem = () => {
     newVariants.forEach((variant) => {
       if (variant.imageIndex === undefined) {
         isAllHaveImages = false;
-        console.log('variant has no image');
       }
     });
     return isAllHaveImages;

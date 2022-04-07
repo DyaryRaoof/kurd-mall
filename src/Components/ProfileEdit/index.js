@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Field from '../Shared/Field';
 import SubmitButton from '../Shared/SubmitButton';
+import { updateUserDetails } from '../../api/profile';
 
 const ProfileEdit = () => {
   const location = useLocation();
@@ -28,7 +29,15 @@ const ProfileEdit = () => {
         e.preventDefault();
         setSubmitted(true);
         if (!formValidity.includes(false)) {
-          navigate('/profile');
+          updateUserDetails({
+            user: {
+              name: fieldValues[0],
+              phone: fieldValues[1],
+            },
+          })
+            .then(() => {
+              navigate('/log-in');
+            });
         }
       }}
       >

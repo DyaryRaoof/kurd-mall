@@ -5,6 +5,7 @@ import MateriaIcon from '../Shared/MateriaIcon';
 import ImageSelector from './ImageSelector';
 import RoundOrangeIconButton from '../Shared/RoundOrangeIconButton';
 import './Profile.css';
+import { updateUserImage } from '../../api/profile';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Profile = () => {
   const [selectedImages, setSelectedImages] = useState({ urls: [], files: [] });
   const setSelectedImagesNow = (urls, files) => {
     setSelectedImages({ urls, files });
+    updateUserImage(files[0]);
   };
 
   return (
@@ -57,17 +59,8 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-md-6">
-          <div className="d-flex justify-content-center">
-            <RoundOrangeIconButton iconName="local_shipping" buttonText={t('becomeDriver')} isLarge onPressed={() => navigate('/driver')} />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="d-flex justify-content-center">
-            <RoundOrangeIconButton iconName="apps" buttonText={t('myCollection')} isLarge onPressed={() => navigate('/my-collection')} />
-          </div>
-        </div>
+      <div className="d-flex justify-content-center">
+        <RoundOrangeIconButton iconName="apps" buttonText={t('myCollection')} isLarge onPressed={() => navigate('/my-collection')} />
       </div>
     </div>
   );
