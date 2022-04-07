@@ -32,7 +32,7 @@ const ProfileEdit = () => {
           updateUserDetails({
             user: {
               name: fieldValues[0],
-              phone: fieldValues[1],
+              phone: fieldValues[1].toString(),
             },
           })
             .then(() => {
