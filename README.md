@@ -16,6 +16,9 @@ This is a responsive react web app that's build as an e-commerce platform. it al
 
 <!-- ![screenshot](./screenshot2.png) -->
 
+## Live Demo
+https://kurdmall-frontend-production.herokuapp.com/
+
 ## Built With
 
 - React js
