@@ -28,7 +28,7 @@ const CreateStore = () => {
   const cities = useSelector((state) => state.citiesReducer.cities) || [];
   const [position, setPosition] = useState(null);
   const location = useLocation();
-  const { store: currentStore, isUpdate } = location.state;
+  const { store: currentStore, isUpdate } = location.state || {};
 
   useEffect(() => {
     dispatch(fetchCategories);
@@ -38,16 +38,22 @@ const CreateStore = () => {
   }, []);
 
   const [submitted, setSubmitted] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(categories
-    .find((category) => category.id === currentStore.category_id));
+  const [selectedCategory, setSelectedCategory] = useState(currentStore
+    ? categories
+      .find((category) => category.id === currentStore.category_id)
+    : null);
   const [fieldValues, setFieldValues] = useState(Array(6).fill(''));
 
   const [images, setImages] = useState({ urls: [], files: [] });
   const { t } = useTranslation();
 
-  const [subcategory, setSubcategory] = useState(subcategories
-    .find((sub) => sub.id === currentStore.subcategory_id));
-  const [city, setCity] = useState(cities.find((city) => city.id === currentStore.city_id));
+  const [subcategory, setSubcategory] = useState(currentStore
+    ? subcategories
+      .find((sub) => sub.id === currentStore.subcategory_id)
+    : null);
+  const [city, setCity] = useState(currentStore
+    ? cities.find((city) => city.id === currentStore.city_id)
+    : null);
 
   const formValidity = Array(4).fill(false);
 
@@ -122,14 +128,16 @@ const CreateStore = () => {
   };
 
   useEffect(() => {
-    const newFieldValues = [...fieldValues];
-    newFieldValues[0] = currentStore.name;
-    newFieldValues[1] = currentStore.description;
-    newFieldValues[2] = currentStore.address;
-    newFieldValues[3] = currentStore.facebook;
-    newFieldValues[4] = currentStore.instagram;
-    newFieldValues[5] = currentStore.phone;
-    setFieldValues(newFieldValues);
+    if (currentStore) {
+      const newFieldValues = [...fieldValues];
+      newFieldValues[0] = currentStore.name;
+      newFieldValues[1] = currentStore.description;
+      newFieldValues[2] = currentStore.address;
+      newFieldValues[3] = currentStore.facebook;
+      newFieldValues[4] = currentStore.instagram;
+      newFieldValues[5] = currentStore.phone;
+      setFieldValues(newFieldValues);
+    }
   }, []);
 
   return (

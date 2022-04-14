@@ -169,8 +169,8 @@ const Header = () => {
               className="icon-button orange"
               type="button"
               onClick={async () => {
-                const store = await getStore();
-                if (store) {
+                const reponse = await getStore();
+                if (reponse.status === 200 && reponse.data) {
                   const loginModal = new Modal(document.getElementById('have-a-store-modal'), {});
                   loginModal.show();
                   return;

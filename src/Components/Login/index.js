@@ -45,7 +45,7 @@ const Login = () => {
         window.location.reload();
       } else {
         setReturnedErrors(JSON.stringify(response.data));
-        window.location.reload();
+        // window.location.reload();
       }
     }
   };
