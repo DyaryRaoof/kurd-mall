@@ -8,6 +8,7 @@ import fetchSubcategories from '../../api/subcategories';
 import getHomeItems from '../../api/homeItems';
 import getHomeStores from '../../api/homeStores';
 import getMyStoreAndSaveIt from '../Shared/methods/getMyStroeAndSaveIt';
+import fetchCities from '../../api/cities';
 
 const HomeBody = () => {
   const navStoreOrItem = useSelector((state) => state.designReducer.navStoreOrItem);
@@ -26,6 +27,9 @@ const HomeBody = () => {
     dispatch(fetchCategories);
     fetchSubcategories(dispatch, 0);
     getMyStoreAndSaveIt(dispatch);
+    if (!localStorage.getItem('cities')) {
+      fetchCities(dispatch);
+    }
   }, []);
 
   useEffect(() => {

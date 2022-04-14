@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import backendURL from './baseURL';
 
 const nullifyTokenIfExpired = (token) => {
   const nakedToken = token.split('Bearer ')[1];
@@ -13,7 +14,7 @@ const nullifyTokenIfExpired = (token) => {
 };
 
 const setAxiosHeaders = () => {
-  axios.defaults.baseURL = 'http://localhost:3001/';
+  axios.defaults.baseURL = backendURL;
   let token = JSON.parse(localStorage.getItem('token'));
   if (token) {
     token = nullifyTokenIfExpired(token);
