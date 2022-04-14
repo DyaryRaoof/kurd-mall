@@ -1,0 +1,9 @@
+.order-by-button {
+  border-color: black !important;
+  color: #e05e00 !important;
+}
+
+.vertical-line {
+  border-left: 3px solid #e05e00;
+  height: 100vh;
+}
