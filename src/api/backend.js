@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import backendURL from './backendURL';
+import backendURL from './baseURL';
 
 const nullifyTokenIfExpired = (token) => {
   const nakedToken = token.split('Bearer ')[1];
