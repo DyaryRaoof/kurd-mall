@@ -24,11 +24,18 @@ const StoreDetail = () => {
   const cities = JSON.parse(localStorage.getItem('cities')) || [];
   const fetchedStore = useSelector((state) => state.storeDetailReducer.store);
   const {
-    name, description,
-    address, phone, city_id: cityId,
-    category_id: cateogryId, subcategory_id: subcategoryId,
-    instagram, facebook, locaation_long: locationLong, location_lat: locationLat,
-    image_urls: imageURLs, user_id: userId,
+    name,
+    description,
+    address,
+    phone,
+    city_id: cityId,
+    category_id: cateogryId,
+    subcategory_id: subcategoryId,
+    instagram, facebook,
+    locaation_long: locationLong,
+    location_lat: locationLat,
+    image_urls: imageURLs,
+    user_id: userId,
   } = store || fetchedStore || {};
 
   const navigate = useNavigate();
@@ -63,6 +70,13 @@ const StoreDetail = () => {
     store = fetchedStore;
   }, [fetchedStore]);
 
+  const checkUserOwnsStore = () => {
+    if (user) {
+      return user.id === userId;
+    }
+    return false;
+  };
+
   return fetchedStore || store ? (
     <div className="container">
       <div className="row">
@@ -84,24 +98,37 @@ const StoreDetail = () => {
               <LocationWidget position={{ long: locationLong, lat: locationLat }} />
             </div>
             <div className="d-flex justify-content-end">
-              <button type="button" className="icon-button" onClick={() => { navigate('/create-store', { state: { store, isUpdate: true } }); }}>
+              <button
+                type="button"
+                className="icon-button"
+                onClick={() => {
+                  navigate('/create-store', { state: { store, isUpdate: true } });
+                }}
+              >
                 <MaterialIcon text="create" orange />
               </button>
             </div>
           </div>
         </div>
       </div>
-      {userId === user.id && <div className="d-flex justify-content-center"><RoundOrangeIconButton buttonText={t('addItem')} iconName="add_circle" onPressed={() => navigate('/create-item')} /></div>}
+      {checkUserOwnsStore && (
+        <div className="d-flex justify-content-center">
+          <RoundOrangeIconButton buttonText={t('addItem')} iconName="add_circle" onPressed={() => navigate('/create-item')} />
+        </div>
+      )}
       <div className="d-flex flex-wrap justify-content-center mt-5">
-        {storeItems.map((item) => (<ItemCard key={item.id} item={item} isStore={false} />))}
+        {storeItems.map((item) => (
+          <ItemCard key={item.id} item={item} isStore={false} />
+        ))}
       </div>
       <Paginator
         onChange={(page) => setCurrentPage(page)}
         wasLastpage={currentPage !== 1 && storeItems.length === 0}
       />
     </div>
-  )
-    : <div />;
+  ) : (
+    <div />
+  );
 };
 
 StoreDetail.propTypes = {
